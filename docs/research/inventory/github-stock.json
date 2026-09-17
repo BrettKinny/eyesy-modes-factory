@@ -1,0 +1,5228 @@
+{
+  "source": "github-stock",
+  "source_url": "https://github.com/critterandguitari",
+  "fetched_at": "2026-09-18",
+  "method": "gh api per-repo git/trees recursive on default branch, mode folders identified by entry file, plus branch/tag survey; license/licensed files read via contents API",
+  "counts": {
+    "total": 188,
+    "by_generation": {
+      "v3-pygame": 108,
+      "v2-pygame": 66,
+      "v1-of-lua": 14
+    },
+    "by_kind": {
+      "mode": 174,
+      "example": 14
+    },
+    "by_license": {
+      "BSD-2-Clause": 108,
+      "none": 80
+    }
+  },
+  "repos": [
+    {
+      "name": "EYESY_Modes_OSv3",
+      "metadata": {
+        "name": "EYESY_Modes_OSv3",
+        "default_branch": "main",
+        "archived": false,
+        "stars": 5,
+        "forks": 4,
+        "open_issues": 1,
+        "created_at": "2025-03-10",
+        "pushed_at": "2025-06-16",
+        "license_spdx": "BSD-2-Clause",
+        "license_name": "BSD 2-Clause \"Simplified\" License",
+        "description": "Modes for the EYESY OS v3",
+        "size_kb": 3594
+      },
+      "license": {
+        "file": "LICENSE"
+      },
+      "license_present": true,
+      "branches": [
+        "main"
+      ],
+      "tags": [],
+      "mode_count": 108,
+      "tree_entries": 279,
+      "entry_filenames": [
+        "main.py"
+      ]
+    },
+    {
+      "name": "EYESY_Modes_Pygame",
+      "metadata": {
+        "name": "EYESY_Modes_Pygame",
+        "default_branch": "master",
+        "archived": false,
+        "stars": 32,
+        "forks": 10,
+        "open_issues": 2,
+        "created_at": "2020-08-10",
+        "pushed_at": "2021-07-29",
+        "license_spdx": null,
+        "license_name": null,
+        "description": null,
+        "size_kb": 3142
+      },
+      "license": null,
+      "license_present": false,
+      "branches": [
+        "master"
+      ],
+      "tags": [],
+      "mode_count": 66,
+      "tree_entries": 170,
+      "entry_filenames": [
+        "main.py"
+      ]
+    },
+    {
+      "name": "EYESY_oFLua_Examples",
+      "metadata": {
+        "name": "EYESY_oFLua_Examples",
+        "default_branch": "main",
+        "archived": false,
+        "stars": 18,
+        "forks": 1,
+        "open_issues": 1,
+        "created_at": "2020-11-15",
+        "pushed_at": "2023-01-26",
+        "license_spdx": null,
+        "license_name": null,
+        "description": "openFrameworks / Lua examples for the EYESY",
+        "size_kb": 2346
+      },
+      "license": null,
+      "license_present": false,
+      "branches": [
+        "main"
+      ],
+      "tags": [],
+      "mode_count": 14,
+      "tree_entries": 38,
+      "entry_filenames": [
+        "main.lua",
+        "mode.lua",
+        "main.cpp"
+      ]
+    },
+    {
+      "name": "EYESY_OF",
+      "metadata": {
+        "name": "EYESY_OF",
+        "default_branch": "master",
+        "archived": false,
+        "stars": 4,
+        "forks": 2,
+        "open_issues": 2,
+        "created_at": "2020-04-04",
+        "pushed_at": "2022-08-08",
+        "license_spdx": "NOASSERTION",
+        "license_name": "Other",
+        "description": null,
+        "size_kb": 60664
+      },
+      "license": {
+        "file": "LICENSE.txt"
+      },
+      "license_present": true,
+      "branches": [
+        "master"
+      ],
+      "tags": [],
+      "mode_count": 0,
+      "tree_entries": 33,
+      "entry_filenames": [
+        "main.py",
+        "main.lua",
+        "mode.lua"
+      ]
+    },
+    {
+      "name": "EYESY_OS",
+      "metadata": {
+        "name": "EYESY_OS",
+        "default_branch": "master",
+        "archived": false,
+        "stars": 69,
+        "forks": 28,
+        "open_issues": 4,
+        "created_at": "2020-05-16",
+        "pushed_at": "2025-10-30",
+        "license_spdx": "NOASSERTION",
+        "license_name": "Other",
+        "description": null,
+        "size_kb": 6630
+      },
+      "license": {
+        "file": "LICENSE.txt"
+      },
+      "license_present": true,
+      "branches": [
+        "dependabot/pip/web-flask-test/flask-2.2.5",
+        "dependabot/pip/web-flask-test/jinja2-3.1.4",
+        "dependabot/pip/web-flask-test/werkzeug-3.0.3",
+        "dependabot/pip/web-flask-test/zipp-3.19.1",
+        "master",
+        "oflua"
+      ],
+      "tags": [
+        "v3.1",
+        "v2.3",
+        "v2.1",
+        "EYESY_v3.1.img",
+        "EYESY_v3.0_rc3.img",
+        "EYESY_v3.0_rc2.img",
+        "EYESY_v3.0_rc1.img",
+        "EYESY_v3.0.img",
+        "EY_v3_base_ro.img",
+        "EY_v3_base.img"
+      ],
+      "mode_count": 0,
+      "tree_entries": 488,
+      "entry_filenames": [
+        "main.py",
+        "main.lua",
+        "mode.lua"
+      ]
+    },
+    {
+      "name": "EYESY_Manual",
+      "metadata": {
+        "name": "EYESY_Manual",
+        "default_branch": "master",
+        "archived": false,
+        "stars": 2,
+        "forks": 0,
+        "open_issues": 0,
+        "created_at": "2020-06-26",
+        "pushed_at": "2022-04-08",
+        "license_spdx": null,
+        "license_name": null,
+        "description": "Manual for the Critter & Guitari EYESY Video Synthesizer",
+        "size_kb": 4017
+      },
+      "license": null,
+      "license_present": false,
+      "branches": [
+        "master"
+      ],
+      "tags": [],
+      "mode_count": 0,
+      "tree_entries": 17,
+      "entry_filenames": []
+    },
+    {
+      "name": "EYESY_Selector",
+      "metadata": {
+        "name": "EYESY_Selector",
+        "default_branch": "main",
+        "archived": false,
+        "stars": 1,
+        "forks": 0,
+        "open_issues": 0,
+        "created_at": "2022-08-08",
+        "pushed_at": "2022-08-08",
+        "license_spdx": "NOASSERTION",
+        "license_name": "Other",
+        "description": "OF app for selecting video engine",
+        "size_kb": 4107
+      },
+      "license": {
+        "file": "LICENSE.txt"
+      },
+      "license_present": true,
+      "branches": [
+        "main"
+      ],
+      "tags": [],
+      "mode_count": 0,
+      "tree_entries": 35,
+      "entry_filenames": [
+        "main.py",
+        "main.lua",
+        "mode.lua"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "key": "EYESY_Modes_OSv3/S - 0 Arrival Scope",
+      "title": "S - 0 Arrival Scope",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%200%20Arrival%20Scope/main.py",
+      "repo_path": "S - 0 Arrival Scope",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1856,
+        "filelist": [
+          "S - 0 Arrival Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - AA Selector",
+      "title": "S - AA Selector",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20AA%20Selector/main.py",
+      "repo_path": "S - AA Selector",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - AA Selector",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 8935,
+        "filelist": [
+          "S - AA Selector/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Amp Color",
+      "title": "S - Amp Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Amp%20Color/main.py",
+      "repo_path": "S - Amp Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2660,
+        "filelist": [
+          "S - Amp Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Amp Color - 5gon Filled",
+      "title": "S - Amp Color - 5gon Filled",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Amp%20Color%20-%205gon%20Filled/main.py",
+      "repo_path": "S - Amp Color - 5gon Filled",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 4750,
+        "filelist": [
+          "S - Amp Color - 5gon Filled/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Amp Color - 5gon Outlines",
+      "title": "S - Amp Color - 5gon Outlines",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Amp%20Color%20-%205gon%20Outlines/main.py",
+      "repo_path": "S - Amp Color - 5gon Outlines",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 4769,
+        "filelist": [
+          "S - Amp Color - 5gon Outlines/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Amp Color - Circles",
+      "title": "S - Amp Color - Circles",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Amp%20Color%20-%20Circles/main.py",
+      "repo_path": "S - Amp Color - Circles",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 5800,
+        "filelist": [
+          "S - Amp Color - Circles/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Amp Color - Rectangles",
+      "title": "S - Amp Color - Rectangles",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Amp%20Color%20-%20Rectangles/main.py",
+      "repo_path": "S - Amp Color - Rectangles",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3996,
+        "filelist": [
+          "S - Amp Color - Rectangles/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Aquarium",
+      "title": "S - Aquarium",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Aquarium/main.py",
+      "repo_path": "S - Aquarium",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Aquarium",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2823,
+        "filelist": [
+          "S - Aquarium/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Arcway",
+      "title": "S - Arcway",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Arcway/main.py",
+      "repo_path": "S - Arcway",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2676,
+        "filelist": [
+          "S - Arcway/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Arcway Black",
+      "title": "S - Arcway Black",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Arcway%20Black/main.py",
+      "repo_path": "S - Arcway Black",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2481,
+        "filelist": [
+          "S - Arcway Black/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Audio Printer",
+      "title": "S - Audio Printer",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Audio%20Printer/main.py",
+      "repo_path": "S - Audio Printer",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3059,
+        "filelist": [
+          "S - Audio Printer/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Bezier H Scope",
+      "title": "S - Bezier H Scope",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Bezier%20H%20Scope/main.py",
+      "repo_path": "S - Bezier H Scope",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 5007,
+        "filelist": [
+          "S - Bezier H Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Bezier V Scope",
+      "title": "S - Bezier V Scope",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Bezier%20V%20Scope/main.py",
+      "repo_path": "S - Bezier V Scope",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 5101,
+        "filelist": [
+          "S - Bezier V Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Bits Horizontal",
+      "title": "S - Bits Horizontal",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Bits%20Horizontal/main.py",
+      "repo_path": "S - Bits Horizontal",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Bits Horizontal",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1694,
+        "filelist": [
+          "S - Bits Horizontal/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Bits Vertical",
+      "title": "S - Bits Vertical",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Bits%20Vertical/main.py",
+      "repo_path": "S - Bits Vertical",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Bits Vertical",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1750,
+        "filelist": [
+          "S - Bits Vertical/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Boids",
+      "title": "S - Boids",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Boids/main.py",
+      "repo_path": "S - Boids",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 5175,
+        "filelist": [
+          "S - Boids/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Breezy Feather LFO",
+      "title": "S - Breezy Feather LFO",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Breezy%20Feather%20LFO/main.py",
+      "repo_path": "S - Breezy Feather LFO",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Breezy Feather LFO",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2048,
+        "filelist": [
+          "S - Breezy Feather LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Circle Row - LFO",
+      "title": "S - Circle Row - LFO",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Circle%20Row%20-%20LFO/main.py",
+      "repo_path": "S - Circle Row - LFO",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Circle Row - LFO",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1807,
+        "filelist": [
+          "S - Circle Row - LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Circle Scope",
+      "title": "S - Circle Scope",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Circle%20Scope/main.py",
+      "repo_path": "S - Circle Scope",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2393,
+        "filelist": [
+          "S - Circle Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Circle Scope - Image",
+      "title": "S - Circle Scope - Image",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Circle%20Scope%20-%20Image/main.py",
+      "repo_path": "S - Circle Scope - Image",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 5,
+        "bytes": 44902,
+        "filelist": [
+          "S - Circle Scope - Image/Images/README-Max_4_Images.txt",
+          "S - Circle Scope - Image/Images/bullets.png",
+          "S - Circle Scope - Image/Images/cloud.png",
+          "S - Circle Scope - Image/Images/clouds.png",
+          "S - Circle Scope - Image/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Circle Scope - Opposite Colors",
+      "title": "S - Circle Scope - Opposite Colors",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Circle%20Scope%20-%20Opposite%20Colors/main.py",
+      "repo_path": "S - Circle Scope - Opposite Colors",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2453,
+        "filelist": [
+          "S - Circle Scope - Opposite Colors/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Circular Trigon Field",
+      "title": "S - Circular Trigon Field",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Circular%20Trigon%20Field/main.py",
+      "repo_path": "S - Circular Trigon Field",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Circular Trigon Field",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1597,
+        "filelist": [
+          "S - Circular Trigon Field/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Classic Horizontal",
+      "title": "S - Classic Horizontal",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Classic%20Horizontal/main.py",
+      "repo_path": "S - Classic Horizontal",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Classic Horizontal",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 849,
+        "filelist": [
+          "S - Classic Horizontal/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Classic Vertical",
+      "title": "S - Classic Vertical",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Classic%20Vertical/main.py",
+      "repo_path": "S - Classic Vertical",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Classic Vertical",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 902,
+        "filelist": [
+          "S - Classic Vertical/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Concentric",
+      "title": "S - Concentric",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Concentric/main.py",
+      "repo_path": "S - Concentric",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Concentric",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 622,
+        "filelist": [
+          "S - Concentric/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Cone Scope",
+      "title": "S - Cone Scope",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Cone%20Scope/main.py",
+      "repo_path": "S - Cone Scope",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Cone Scope",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 930,
+        "filelist": [
+          "S - Cone Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Dancing Circle - Image",
+      "title": "S - Dancing Circle - Image",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Dancing%20Circle%20-%20Image/main.py",
+      "repo_path": "S - Dancing Circle - Image",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 3,
+        "bytes": 5673,
+        "filelist": [
+          "S - Dancing Circle - Image/Images/README-Max_4_Images.txt",
+          "S - Dancing Circle - Image/Images/bullets.png",
+          "S - Dancing Circle - Image/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Five Lines Spin",
+      "title": "S - Five Lines Spin",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Five%20Lines%20Spin/main.py",
+      "repo_path": "S - Five Lines Spin",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Five Lines Spin",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1729,
+        "filelist": [
+          "S - Five Lines Spin/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Folia Angles",
+      "title": "S - Folia Angles",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Folia%20Angles/main.py",
+      "repo_path": "S - Folia Angles",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 10408,
+        "filelist": [
+          "S - Folia Angles/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Folia Curves",
+      "title": "S - Folia Curves",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Folia%20Curves/main.py",
+      "repo_path": "S - Folia Curves",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 10210,
+        "filelist": [
+          "S - Folia Curves/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Football Scope",
+      "title": "S - Football Scope",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Football%20Scope/main.py",
+      "repo_path": "S - Football Scope",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Football Scope",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1134,
+        "filelist": [
+          "S - Football Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Googly Eyes",
+      "title": "S - Googly Eyes",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Googly%20Eyes/main.py",
+      "repo_path": "S - Googly Eyes",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Googly Eyes",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3487,
+        "filelist": [
+          "S - Googly Eyes/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Gradient Cloud",
+      "title": "S - Gradient Cloud",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Gradient%20Cloud/main.py",
+      "repo_path": "S - Gradient Cloud",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Gradient Cloud",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1136,
+        "filelist": [
+          "S - Gradient Cloud/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Gradient Column",
+      "title": "S - Gradient Column",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Gradient%20Column/main.py",
+      "repo_path": "S - Gradient Column",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Gradient Column",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1271,
+        "filelist": [
+          "S - Gradient Column/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Gradient Friend",
+      "title": "S - Gradient Friend",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Gradient%20Friend/main.py",
+      "repo_path": "S - Gradient Friend",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Gradient Friend",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 945,
+        "filelist": [
+          "S - Gradient Friend/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Circles - Column Color",
+      "title": "S - Grid Circles - Column Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Circles%20-%20Column%20Color/main.py",
+      "repo_path": "S - Grid Circles - Column Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1012,
+        "filelist": [
+          "S - Grid Circles - Column Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Circles - Outlined",
+      "title": "S - Grid Circles - Outlined",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Circles%20-%20Outlined/main.py",
+      "repo_path": "S - Grid Circles - Outlined",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1261,
+        "filelist": [
+          "S - Grid Circles - Outlined/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Circles - Outlined Column Color",
+      "title": "S - Grid Circles - Outlined Column Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Circles%20-%20Outlined%20Column%20Color/main.py",
+      "repo_path": "S - Grid Circles - Outlined Column Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1310,
+        "filelist": [
+          "S - Grid Circles - Outlined Column Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Circles - Patchwork Color",
+      "title": "S - Grid Circles - Patchwork Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Circles%20-%20Patchwork%20Color/main.py",
+      "repo_path": "S - Grid Circles - Patchwork Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1189,
+        "filelist": [
+          "S - Grid Circles - Patchwork Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Circles - Uniform Color",
+      "title": "S - Grid Circles - Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Circles%20-%20Uniform%20Color/main.py",
+      "repo_path": "S - Grid Circles - Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 965,
+        "filelist": [
+          "S - Grid Circles - Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Polygons - Column Color",
+      "title": "S - Grid Polygons - Column Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Polygons%20-%20Column%20Color/main.py",
+      "repo_path": "S - Grid Polygons - Column Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2264,
+        "filelist": [
+          "S - Grid Polygons - Column Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Polygons - Patchwork Color",
+      "title": "S - Grid Polygons - Patchwork Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Polygons%20-%20Patchwork%20Color/main.py",
+      "repo_path": "S - Grid Polygons - Patchwork Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2446,
+        "filelist": [
+          "S - Grid Polygons - Patchwork Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Polygons - Uniform Color",
+      "title": "S - Grid Polygons - Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Polygons%20-%20Uniform%20Color/main.py",
+      "repo_path": "S - Grid Polygons - Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2197,
+        "filelist": [
+          "S - Grid Polygons - Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Slide Square - Filled Column Color",
+      "title": "S - Grid Slide Square - Filled Column Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Slide%20Square%20-%20Filled%20Column%20Color/main.py",
+      "repo_path": "S - Grid Slide Square - Filled Column Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2310,
+        "filelist": [
+          "S - Grid Slide Square - Filled Column Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Slide Square - Filled Patchwork Color",
+      "title": "S - Grid Slide Square - Filled Patchwork Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Slide%20Square%20-%20Filled%20Patchwork%20Color/main.py",
+      "repo_path": "S - Grid Slide Square - Filled Patchwork Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2504,
+        "filelist": [
+          "S - Grid Slide Square - Filled Patchwork Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Slide Square - Filled Uniform Color",
+      "title": "S - Grid Slide Square - Filled Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Slide%20Square%20-%20Filled%20Uniform%20Color/main.py",
+      "repo_path": "S - Grid Slide Square - Filled Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2185,
+        "filelist": [
+          "S - Grid Slide Square - Filled Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Slide Square - Unfilled Column Color",
+      "title": "S - Grid Slide Square - Unfilled Column Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Slide%20Square%20-%20Unfilled%20Column%20Color/main.py",
+      "repo_path": "S - Grid Slide Square - Unfilled Column Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2339,
+        "filelist": [
+          "S - Grid Slide Square - Unfilled Column Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Slide Square - Unfilled Patchwork Color",
+      "title": "S - Grid Slide Square - Unfilled Patchwork Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Slide%20Square%20-%20Unfilled%20Patchwork%20Color/main.py",
+      "repo_path": "S - Grid Slide Square - Unfilled Patchwork Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2544,
+        "filelist": [
+          "S - Grid Slide Square - Unfilled Patchwork Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Slide Square - Unfilled Uniform Color",
+      "title": "S - Grid Slide Square - Unfilled Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Slide%20Square%20-%20Unfilled%20Uniform%20Color/main.py",
+      "repo_path": "S - Grid Slide Square - Unfilled Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2309,
+        "filelist": [
+          "S - Grid Slide Square - Unfilled Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Triangles - Filled Column Color",
+      "title": "S - Grid Triangles - Filled Column Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Triangles%20-%20Filled%20Column%20Color/main.py",
+      "repo_path": "S - Grid Triangles - Filled Column Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1103,
+        "filelist": [
+          "S - Grid Triangles - Filled Column Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Triangles - Filled Patchwork Color",
+      "title": "S - Grid Triangles - Filled Patchwork Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Triangles%20-%20Filled%20Patchwork%20Color/main.py",
+      "repo_path": "S - Grid Triangles - Filled Patchwork Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1296,
+        "filelist": [
+          "S - Grid Triangles - Filled Patchwork Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Triangles - Filled Uniform Color",
+      "title": "S - Grid Triangles - Filled Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Triangles%20-%20Filled%20Uniform%20Color/main.py",
+      "repo_path": "S - Grid Triangles - Filled Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1068,
+        "filelist": [
+          "S - Grid Triangles - Filled Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Triangles - Unfilled Column Color",
+      "title": "S - Grid Triangles - Unfilled Column Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Triangles%20-%20Unfilled%20Column%20Color/main.py",
+      "repo_path": "S - Grid Triangles - Unfilled Column Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1169,
+        "filelist": [
+          "S - Grid Triangles - Unfilled Column Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Triangles - Unfilled Patchwork Color",
+      "title": "S - Grid Triangles - Unfilled Patchwork Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Triangles%20-%20Unfilled%20Patchwork%20Color/main.py",
+      "repo_path": "S - Grid Triangles - Unfilled Patchwork Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1362,
+        "filelist": [
+          "S - Grid Triangles - Unfilled Patchwork Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Grid Triangles - Unfilled Uniform Color",
+      "title": "S - Grid Triangles - Unfilled Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Grid%20Triangles%20-%20Unfilled%20Uniform%20Color/main.py",
+      "repo_path": "S - Grid Triangles - Unfilled Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1131,
+        "filelist": [
+          "S - Grid Triangles - Unfilled Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - H Circles - Image",
+      "title": "S - H Circles - Image",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20H%20Circles%20-%20Image/main.py",
+      "repo_path": "S - H Circles - Image",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 3,
+        "bytes": 5358,
+        "filelist": [
+          "S - H Circles - Image/Images/README-Max_4_Images.txt",
+          "S - H Circles - Image/Images/bullets.png",
+          "S - H Circles - Image/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Horizontal + Trails",
+      "title": "S - Horizontal + Trails",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Horizontal%20%2B%20Trails/main.py",
+      "repo_path": "S - Horizontal + Trails",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2069,
+        "filelist": [
+          "S - Horizontal + Trails/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Line Bounce Four - LFO Alternate",
+      "title": "S - Line Bounce Four - LFO Alternate",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Line%20Bounce%20Four%20-%20LFO%20Alternate/main.py",
+      "repo_path": "S - Line Bounce Four - LFO Alternate",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3583,
+        "filelist": [
+          "S - Line Bounce Four - LFO Alternate/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Line Bounce Two - LFO Alternate",
+      "title": "S - Line Bounce Two - LFO Alternate",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Line%20Bounce%20Two%20-%20LFO%20Alternate/main.py",
+      "repo_path": "S - Line Bounce Two - LFO Alternate",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2477,
+        "filelist": [
+          "S - Line Bounce Two - LFO Alternate/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Line Traveller",
+      "title": "S - Line Traveller",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Line%20Traveller/main.py",
+      "repo_path": "S - Line Traveller",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Line Traveller",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 851,
+        "filelist": [
+          "S - Line Traveller/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Mirror Grid",
+      "title": "S - Mirror Grid",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Mirror%20Grid/main.py",
+      "repo_path": "S - Mirror Grid",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Mirror Grid",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2879,
+        "filelist": [
+          "S - Mirror Grid/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Mirror Grid - Inverse",
+      "title": "S - Mirror Grid - Inverse",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Mirror%20Grid%20-%20Inverse/main.py",
+      "repo_path": "S - Mirror Grid - Inverse",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2714,
+        "filelist": [
+          "S - Mirror Grid - Inverse/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Nested Ellipses - Filled",
+      "title": "S - Nested Ellipses - Filled",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Nested%20Ellipses%20-%20Filled/main.py",
+      "repo_path": "S - Nested Ellipses - Filled",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2739,
+        "filelist": [
+          "S - Nested Ellipses - Filled/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Nested Ellipses - Outlines",
+      "title": "S - Nested Ellipses - Outlines",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Nested%20Ellipses%20-%20Outlines/main.py",
+      "repo_path": "S - Nested Ellipses - Outlines",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2761,
+        "filelist": [
+          "S - Nested Ellipses - Outlines/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Oscilloscope",
+      "title": "S - Oscilloscope",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Oscilloscope/main.py",
+      "repo_path": "S - Oscilloscope",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Oscilloscope",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2598,
+        "filelist": [
+          "S - Oscilloscope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Perspective Lines",
+      "title": "S - Perspective Lines",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Perspective%20Lines/main.py",
+      "repo_path": "S - Perspective Lines",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Perspective Lines",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1007,
+        "filelist": [
+          "S - Perspective Lines/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Radial Scope - Rotate Stepped Color",
+      "title": "S - Radial Scope - Rotate Stepped Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Radial%20Scope%20-%20Rotate%20Stepped%20Color/main.py",
+      "repo_path": "S - Radial Scope - Rotate Stepped Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2501,
+        "filelist": [
+          "S - Radial Scope - Rotate Stepped Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Radial Scope - Rotate Uniform Color",
+      "title": "S - Radial Scope - Rotate Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Radial%20Scope%20-%20Rotate%20Uniform%20Color/main.py",
+      "repo_path": "S - Radial Scope - Rotate Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2193,
+        "filelist": [
+          "S - Radial Scope - Rotate Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Radiating Square - Stepped Color",
+      "title": "S - Radiating Square - Stepped Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Radiating%20Square%20-%20Stepped%20Color/main.py",
+      "repo_path": "S - Radiating Square - Stepped Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3273,
+        "filelist": [
+          "S - Radiating Square - Stepped Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Radiating Square - Uniform Color",
+      "title": "S - Radiating Square - Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Radiating%20Square%20-%20Uniform%20Color/main.py",
+      "repo_path": "S - Radiating Square - Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3196,
+        "filelist": [
+          "S - Radiating Square - Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Sound Jaws - Stepped Color",
+      "title": "S - Sound Jaws - Stepped Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Sound%20Jaws%20-%20Stepped%20Color/main.py",
+      "repo_path": "S - Sound Jaws - Stepped Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2760,
+        "filelist": [
+          "S - Sound Jaws - Stepped Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Sound Jaws - Uniform Color",
+      "title": "S - Sound Jaws - Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Sound%20Jaws%20-%20Uniform%20Color/main.py",
+      "repo_path": "S - Sound Jaws - Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2519,
+        "filelist": [
+          "S - Sound Jaws - Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Spinning Discs",
+      "title": "S - Spinning Discs",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Spinning%20Discs/main.py",
+      "repo_path": "S - Spinning Discs",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 24,
+        "bytes": 1820447,
+        "filelist": [
+          "S - Spinning Discs/Images/MackayRay-640-2col.png",
+          "S - Spinning Discs/Images/arrrgeeebee-640-index32.png",
+          "S - Spinning Discs/Images/black-star-acid-640-index32.png",
+          "S - Spinning Discs/Images/blue-red-blade-640-4col.png",
+          "S - Spinning Discs/Images/contrazt-01-640-2col.png",
+          "S - Spinning Discs/Images/contrazt-02-640-2col.png",
+          "S - Spinning Discs/Images/helmholtz-640-2col.png",
+          "S - Spinning Discs/Images/machina-640-4col.png",
+          "S - Spinning Discs/Images/mackayduchamp-640-4col.png",
+          "S - Spinning Discs/Images/mazegeah-640-2col.png",
+          "S - Spinning Discs/Images/ouchi_640-3col.png",
+          "S - Spinning Discs/Images/strobe-colorz-01-640-4col.png",
+          "S - Spinning Discs/Images/strobe-sun-640-index32.png",
+          "S - Spinning Discs/Images/strobe-twirl-640-4col.png",
+          "S - Spinning Discs/Images/swirl-640-4col.png",
+          "S - Spinning Discs/Images/warp-rays-640-2col.png",
+          "S - Spinning Discs/Images/warp-rows-640-2col.png",
+          "S - Spinning Discs/Images/wheelz-01-640-2col.png",
+          "S - Spinning Discs/Images/ziggy-640-2col.png",
+          "S - Spinning Discs/Images/zing-whirl-640-4col.png",
+          "S - Spinning Discs/Images/zizzagulent-640-2col.png",
+          "S - Spinning Discs/Images/zoomzag-640-2col.png",
+          "S - Spinning Discs/font.ttf",
+          "S - Spinning Discs/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Square Shadows - Uniform Color",
+      "title": "S - Square Shadows - Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Square%20Shadows%20-%20Uniform%20Color/main.py",
+      "repo_path": "S - Square Shadows - Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1061,
+        "filelist": [
+          "S - Square Shadows - Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Three Scopes",
+      "title": "S - Three Scopes",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Three%20Scopes/main.py",
+      "repo_path": "S - Three Scopes",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Three Scopes",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1493,
+        "filelist": [
+          "S - Three Scopes/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Two Scopes",
+      "title": "S - Two Scopes",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Two%20Scopes/main.py",
+      "repo_path": "S - Two Scopes",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Two Scopes",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1009,
+        "filelist": [
+          "S - Two Scopes/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - X Scope",
+      "title": "S - X Scope",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20X%20Scope/main.py",
+      "repo_path": "S - X Scope",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3961,
+        "filelist": [
+          "S - X Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/S - Zoom Scope",
+      "title": "S - Zoom Scope",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Zoom%20Scope/main.py",
+      "repo_path": "S - Zoom Scope",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Zoom Scope",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 952,
+        "filelist": [
+          "S - Zoom Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Ball of Mirrors",
+      "title": "T - Ball of Mirrors",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Ball%20of%20Mirrors/main.py",
+      "repo_path": "T - Ball of Mirrors",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as T - Ball of Mirrors",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 949,
+        "filelist": [
+          "T - Ball of Mirrors/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Ball of Mirrors - Trails",
+      "title": "T - Ball of Mirrors - Trails",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Ball%20of%20Mirrors%20-%20Trails/main.py",
+      "repo_path": "T - Ball of Mirrors - Trails",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1278,
+        "filelist": [
+          "T - Ball of Mirrors - Trails/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Basic Image",
+      "title": "T - Basic Image",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Basic%20Image/main.py",
+      "repo_path": "T - Basic Image",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as T - Basic Image",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 6,
+        "bytes": 879372,
+        "filelist": [
+          "T - Basic Image/Images/README-Max_4_Images.txt",
+          "T - Basic Image/Images/airport.png",
+          "T - Basic Image/Images/monitors.png",
+          "T - Basic Image/Images/mushroom.png",
+          "T - Basic Image/Images/plant.png",
+          "T - Basic Image/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Bezier Cousins - Trails",
+      "title": "T - Bezier Cousins - Trails",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Bezier%20Cousins%20-%20Trails/main.py",
+      "repo_path": "T - Bezier Cousins - Trails",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2637,
+        "filelist": [
+          "T - Bezier Cousins - Trails/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Bits H - Row Color",
+      "title": "T - Bits H - Row Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Bits%20H%20-%20Row%20Color/main.py",
+      "repo_path": "T - Bits H - Row Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2013,
+        "filelist": [
+          "T - Bits H - Row Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Bits H - Uniform Color",
+      "title": "T - Bits H - Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Bits%20H%20-%20Uniform%20Color/main.py",
+      "repo_path": "T - Bits H - Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1955,
+        "filelist": [
+          "T - Bits H - Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Bits V - Column Color",
+      "title": "T - Bits V - Column Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Bits%20V%20-%20Column%20Color/main.py",
+      "repo_path": "T - Bits V - Column Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1931,
+        "filelist": [
+          "T - Bits V - Column Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Bits V - Uniform Color",
+      "title": "T - Bits V - Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Bits%20V%20-%20Uniform%20Color/main.py",
+      "repo_path": "T - Bits V - Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1922,
+        "filelist": [
+          "T - Bits V - Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Density Units",
+      "title": "T - Density Units",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Density%20Units/main.py",
+      "repo_path": "T - Density Units",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1611,
+        "filelist": [
+          "T - Density Units/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Draws Hashmarks - Angled Stepped Color",
+      "title": "T - Draws Hashmarks - Angled Stepped Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Draws%20Hashmarks%20-%20Angled%20Stepped%20Color/main.py",
+      "repo_path": "T - Draws Hashmarks - Angled Stepped Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2135,
+        "filelist": [
+          "T - Draws Hashmarks - Angled Stepped Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Draws Hashmarks - Angled Uniform Color",
+      "title": "T - Draws Hashmarks - Angled Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Draws%20Hashmarks%20-%20Angled%20Uniform%20Color/main.py",
+      "repo_path": "T - Draws Hashmarks - Angled Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2058,
+        "filelist": [
+          "T - Draws Hashmarks - Angled Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Draws Hashmarks - Stepped Color",
+      "title": "T - Draws Hashmarks - Stepped Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Draws%20Hashmarks%20-%20Stepped%20Color/main.py",
+      "repo_path": "T - Draws Hashmarks - Stepped Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2095,
+        "filelist": [
+          "T - Draws Hashmarks - Stepped Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Draws Hashmarks - Uniform Color",
+      "title": "T - Draws Hashmarks - Uniform Color",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Draws%20Hashmarks%20-%20Uniform%20Color/main.py",
+      "repo_path": "T - Draws Hashmarks - Uniform Color",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2020,
+        "filelist": [
+          "T - Draws Hashmarks - Uniform Color/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Font Patterns",
+      "title": "T - Font Patterns",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Font%20Patterns/main.py",
+      "repo_path": "T - Font Patterns",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as T - Font Patterns",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 2,
+        "bytes": 1427459,
+        "filelist": [
+          "T - Font Patterns/font.ttf",
+          "T - Font Patterns/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Font Recedes",
+      "title": "T - Font Recedes",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Font%20Recedes/main.py",
+      "repo_path": "T - Font Recedes",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as T - Font Recedes",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 2,
+        "bytes": 1425924,
+        "filelist": [
+          "T - Font Recedes/font.ttf",
+          "T - Font Recedes/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Image + Circle",
+      "title": "T - Image + Circle",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Image%20%2B%20Circle/main.py",
+      "repo_path": "T - Image + Circle",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 6,
+        "bytes": 929878,
+        "filelist": [
+          "T - Image + Circle/Images/README-Max_4_Images.txt",
+          "T - Image + Circle/Images/bridge_quarter.png",
+          "T - Image + Circle/Images/collage_quarter.png",
+          "T - Image + Circle/Images/grind_quarter.png",
+          "T - Image + Circle/Images/waterfall_quarter.png",
+          "T - Image + Circle/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Line Rotate - Trails",
+      "title": "T - Line Rotate - Trails",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Line%20Rotate%20-%20Trails/main.py",
+      "repo_path": "T - Line Rotate - Trails",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1450,
+        "filelist": [
+          "T - Line Rotate - Trails/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - MIDI Grid",
+      "title": "T - MIDI Grid",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20MIDI%20Grid/main.py",
+      "repo_path": "T - MIDI Grid",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 4888,
+        "filelist": [
+          "T - MIDI Grid/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - MIDI Note Printer",
+      "title": "T - MIDI Note Printer",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20MIDI%20Note%20Printer/main.py",
+      "repo_path": "T - MIDI Note Printer",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3397,
+        "filelist": [
+          "T - MIDI Note Printer/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Magnify Cloud - LFO",
+      "title": "T - Magnify Cloud - LFO",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Magnify%20Cloud%20-%20LFO/main.py",
+      "repo_path": "T - Magnify Cloud - LFO",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as T - Magnify Cloud - LFO",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1949,
+        "filelist": [
+          "T - Magnify Cloud - LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Marching Four - Image",
+      "title": "T - Marching Four - Image",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Marching%20Four%20-%20Image/main.py",
+      "repo_path": "T - Marching Four - Image",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 6,
+        "bytes": 10634,
+        "filelist": [
+          "T - Marching Four - Image/Images/README-Max_4_Images.txt",
+          "T - Marching Four - Image/Images/shape1.png",
+          "T - Marching Four - Image/Images/shape2.png",
+          "T - Marching Four - Image/Images/shape3.png",
+          "T - Marching Four - Image/Images/shape4.png",
+          "T - Marching Four - Image/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Migrating Circle Grids",
+      "title": "T - Migrating Circle Grids",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Migrating%20Circle%20Grids/main.py",
+      "repo_path": "T - Migrating Circle Grids",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as T - Migrating Circle Grids",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 4538,
+        "filelist": [
+          "T - Migrating Circle Grids/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Origami Triangles",
+      "title": "T - Origami Triangles",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Origami%20Triangles/main.py",
+      "repo_path": "T - Origami Triangles",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as T - Origami Triangles",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 950,
+        "filelist": [
+          "T - Origami Triangles/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Reckie",
+      "title": "T - Reckie",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Reckie/main.py",
+      "repo_path": "T - Reckie",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as T - Reckie",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2801,
+        "filelist": [
+          "T - Reckie/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Slideshow Grid-AG-Alpha",
+      "title": "T - Slideshow Grid-AG-Alpha",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Slideshow%20Grid-AG-Alpha/main.py",
+      "repo_path": "T - Slideshow Grid-AG-Alpha",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as T - Slideshow Grid-AG-Alpha",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 5,
+        "bytes": 726196,
+        "filelist": [
+          "T - Slideshow Grid-AG-Alpha/Images/angledbuilding.png",
+          "T - Slideshow Grid-AG-Alpha/Images/ballplant.png",
+          "T - Slideshow Grid-AG-Alpha/Images/diamondpipes.png",
+          "T - Slideshow Grid-AG-Alpha/Images/trianglelights.png",
+          "T - Slideshow Grid-AG-Alpha/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Tiles - Filled",
+      "title": "T - Tiles - Filled",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Tiles%20-%20Filled/main.py",
+      "repo_path": "T - Tiles - Filled",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 10341,
+        "filelist": [
+          "T - Tiles - Filled/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Tiles - Outlines",
+      "title": "T - Tiles - Outlines",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Tiles%20-%20Outlines/main.py",
+      "repo_path": "T - Tiles - Outlines",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 10341,
+        "filelist": [
+          "T - Tiles - Outlines/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Trigon Traveller",
+      "title": "T - Trigon Traveller",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Trigon%20Traveller/main.py",
+      "repo_path": "T - Trigon Traveller",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1596,
+        "filelist": [
+          "T - Trigon Traveller/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/T - Woven Feedback",
+      "title": "T - Woven Feedback",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/T%20-%20Woven%20Feedback/main.py",
+      "repo_path": "T - Woven Feedback",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2761,
+        "filelist": [
+          "T - Woven Feedback/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_OSv3/U - Timer",
+      "title": "U - Timer",
+      "author": "Critter & Guitari",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/U%20-%20Timer/main.py",
+      "repo_path": "U - Timer",
+      "license": "BSD-2-Clause",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file)",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 8436,
+        "filelist": [
+          "U - Timer/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - AA Selector",
+      "title": "S - AA Selector",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20AA%20Selector/main.py",
+      "repo_path": "S - AA Selector",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - AA Selector",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 10358,
+        "filelist": [
+          "S - AA Selector/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Aquarium",
+      "title": "S - Aquarium",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Aquarium/main.py",
+      "repo_path": "S - Aquarium",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Aquarium",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1752,
+        "filelist": [
+          "S - Aquarium/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Big City Scroll",
+      "title": "S - Big City Scroll",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Big%20City%20Scroll/main.py",
+      "repo_path": "S - Big City Scroll",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2363,
+        "filelist": [
+          "S - Big City Scroll/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Binary Star",
+      "title": "S - Binary Star",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Binary%20Star/main.py",
+      "repo_path": "S - Binary Star",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 6697,
+        "filelist": [
+          "S - Binary Star/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Bits Horizontal",
+      "title": "S - Bits Horizontal",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Bits%20Horizontal/main.py",
+      "repo_path": "S - Bits Horizontal",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Bits Horizontal",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1314,
+        "filelist": [
+          "S - Bits Horizontal/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Bits Vertical",
+      "title": "S - Bits Vertical",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Bits%20Vertical/main.py",
+      "repo_path": "S - Bits Vertical",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Bits Vertical",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1298,
+        "filelist": [
+          "S - Bits Vertical/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Breezy Feather LFO",
+      "title": "S - Breezy Feather LFO",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Breezy%20Feather%20LFO/main.py",
+      "repo_path": "S - Breezy Feather LFO",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Breezy Feather LFO",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1452,
+        "filelist": [
+          "S - Breezy Feather LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Circle Row - LFO",
+      "title": "S - Circle Row - LFO",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Circle%20Row%20-%20LFO/main.py",
+      "repo_path": "S - Circle Row - LFO",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Circle Row - LFO",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1420,
+        "filelist": [
+          "S - Circle Row - LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Circle Scope - Img",
+      "title": "S - Circle Scope - Img",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Circle%20Scope%20-%20Img/main.py",
+      "repo_path": "S - Circle Scope - Img",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 4,
+        "bytes": 38438,
+        "filelist": [
+          "S - Circle Scope - Img/Images/README-Max_4_Images.txt",
+          "S - Circle Scope - Img/Images/bullets.png",
+          "S - Circle Scope - Img/Images/cloud.png",
+          "S - Circle Scope - Img/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Circle Scope Connected",
+      "title": "S - Circle Scope Connected",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Circle%20Scope%20Connected/main.py",
+      "repo_path": "S - Circle Scope Connected",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 856,
+        "filelist": [
+          "S - Circle Scope Connected/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Circular Trigon Field",
+      "title": "S - Circular Trigon Field",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Circular%20Trigon%20Field/main.py",
+      "repo_path": "S - Circular Trigon Field",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Circular Trigon Field",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1266,
+        "filelist": [
+          "S - Circular Trigon Field/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Classic Horizontal",
+      "title": "S - Classic Horizontal",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Classic%20Horizontal/main.py",
+      "repo_path": "S - Classic Horizontal",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Classic Horizontal",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1932,
+        "filelist": [
+          "S - Classic Horizontal/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Classic Vertical",
+      "title": "S - Classic Vertical",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Classic%20Vertical/main.py",
+      "repo_path": "S - Classic Vertical",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Classic Vertical",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1951,
+        "filelist": [
+          "S - Classic Vertical/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Concentric",
+      "title": "S - Concentric",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Concentric/main.py",
+      "repo_path": "S - Concentric",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Concentric",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1806,
+        "filelist": [
+          "S - Concentric/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Cone Scope",
+      "title": "S - Cone Scope",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Cone%20Scope/main.py",
+      "repo_path": "S - Cone Scope",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Cone Scope",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 704,
+        "filelist": [
+          "S - Cone Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Dancing Circle - Img",
+      "title": "S - Dancing Circle - Img",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Dancing%20Circle%20-%20Img/main.py",
+      "repo_path": "S - Dancing Circle - Img",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 3,
+        "bytes": 5336,
+        "filelist": [
+          "S - Dancing Circle - Img/Images/README-Max_4_Images.txt",
+          "S - Dancing Circle - Img/Images/bullets.png",
+          "S - Dancing Circle - Img/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Five Lines Spin",
+      "title": "S - Five Lines Spin",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Five%20Lines%20Spin/main.py",
+      "repo_path": "S - Five Lines Spin",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Five Lines Spin",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2062,
+        "filelist": [
+          "S - Five Lines Spin/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Floating Ball",
+      "title": "S - Floating Ball",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Floating%20Ball/main.py",
+      "repo_path": "S - Floating Ball",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2186,
+        "filelist": [
+          "S - Floating Ball/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Football Scope",
+      "title": "S - Football Scope",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Football%20Scope/main.py",
+      "repo_path": "S - Football Scope",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Football Scope",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 701,
+        "filelist": [
+          "S - Football Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Googly Eyes",
+      "title": "S - Googly Eyes",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Googly%20Eyes/main.py",
+      "repo_path": "S - Googly Eyes",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Googly Eyes",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3076,
+        "filelist": [
+          "S - Googly Eyes/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Gradient Cloud",
+      "title": "S - Gradient Cloud",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Gradient%20Cloud/main.py",
+      "repo_path": "S - Gradient Cloud",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Gradient Cloud",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3179,
+        "filelist": [
+          "S - Gradient Cloud/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Gradient Column",
+      "title": "S - Gradient Column",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Gradient%20Column/main.py",
+      "repo_path": "S - Gradient Column",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Gradient Column",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3406,
+        "filelist": [
+          "S - Gradient Column/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Gradient Friend",
+      "title": "S - Gradient Friend",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Gradient%20Friend/main.py",
+      "repo_path": "S - Gradient Friend",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Gradient Friend",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3746,
+        "filelist": [
+          "S - Gradient Friend/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Grid Circles - Filled",
+      "title": "S - Grid Circles - Filled",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Grid%20Circles%20-%20Filled/main.py",
+      "repo_path": "S - Grid Circles - Filled",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 732,
+        "filelist": [
+          "S - Grid Circles - Filled/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Grid Polygons",
+      "title": "S - Grid Polygons",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Grid%20Polygons/main.py",
+      "repo_path": "S - Grid Polygons",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1995,
+        "filelist": [
+          "S - Grid Polygons/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Grid Slide Square",
+      "title": "S - Grid Slide Square",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Grid%20Slide%20Square/main.py",
+      "repo_path": "S - Grid Slide Square",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3296,
+        "filelist": [
+          "S - Grid Slide Square/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Grid Slide Square - Filled",
+      "title": "S - Grid Slide Square - Filled",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Grid%20Slide%20Square%20-%20Filled/main.py",
+      "repo_path": "S - Grid Slide Square - Filled",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3312,
+        "filelist": [
+          "S - Grid Slide Square - Filled/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Grid Triangles",
+      "title": "S - Grid Triangles",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Grid%20Triangles/main.py",
+      "repo_path": "S - Grid Triangles",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 974,
+        "filelist": [
+          "S - Grid Triangles/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - H Circles - Img",
+      "title": "S - H Circles - Img",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20H%20Circles%20-%20Img/main.py",
+      "repo_path": "S - H Circles - Img",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 3,
+        "bytes": 5172,
+        "filelist": [
+          "S - H Circles - Img/Images/README-Max_4_Images.txt",
+          "S - H Circles - Img/Images/bullets.png",
+          "S - H Circles - Img/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Interference - LFO",
+      "title": "S - Interference - LFO",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Interference%20-%20LFO/main.py",
+      "repo_path": "S - Interference - LFO",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2045,
+        "filelist": [
+          "S - Interference - LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Line Bounce Four - LFO",
+      "title": "S - Line Bounce Four - LFO",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Line%20Bounce%20Four%20-%20LFO/main.py",
+      "repo_path": "S - Line Bounce Four - LFO",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1941,
+        "filelist": [
+          "S - Line Bounce Four - LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Line Bounce Two - LFO",
+      "title": "S - Line Bounce Two - LFO",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Line%20Bounce%20Two%20-%20LFO/main.py",
+      "repo_path": "S - Line Bounce Two - LFO",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1550,
+        "filelist": [
+          "S - Line Bounce Two - LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Line Traveller",
+      "title": "S - Line Traveller",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Line%20Traveller/main.py",
+      "repo_path": "S - Line Traveller",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Line Traveller",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1967,
+        "filelist": [
+          "S - Line Traveller/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Mirror Grid",
+      "title": "S - Mirror Grid",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Mirror%20Grid/main.py",
+      "repo_path": "S - Mirror Grid",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Mirror Grid",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 5008,
+        "filelist": [
+          "S - Mirror Grid/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Mirror Grid Inverse",
+      "title": "S - Mirror Grid Inverse",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Mirror%20Grid%20Inverse/main.py",
+      "repo_path": "S - Mirror Grid Inverse",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 4932,
+        "filelist": [
+          "S - Mirror Grid Inverse/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Oscilloscope",
+      "title": "S - Oscilloscope",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Oscilloscope/main.py",
+      "repo_path": "S - Oscilloscope",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Oscilloscope",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1200,
+        "filelist": [
+          "S - Oscilloscope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Perspective Lines",
+      "title": "S - Perspective Lines",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Perspective%20Lines/main.py",
+      "repo_path": "S - Perspective Lines",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Perspective Lines",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 854,
+        "filelist": [
+          "S - Perspective Lines/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Perspective Lines LFO",
+      "title": "S - Perspective Lines LFO",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Perspective%20Lines%20LFO/main.py",
+      "repo_path": "S - Perspective Lines LFO",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3190,
+        "filelist": [
+          "S - Perspective Lines LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Radial Scope",
+      "title": "S - Radial Scope",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Radial%20Scope/main.py",
+      "repo_path": "S - Radial Scope",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 822,
+        "filelist": [
+          "S - Radial Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Radiating Square",
+      "title": "S - Radiating Square",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Radiating%20Square/main.py",
+      "repo_path": "S - Radiating Square",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3655,
+        "filelist": [
+          "S - Radiating Square/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Slinky Clock Text",
+      "title": "S - Slinky Clock Text",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Slinky%20Clock%20Text/main.py",
+      "repo_path": "S - Slinky Clock Text",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 2,
+        "bytes": 1426538,
+        "filelist": [
+          "S - Slinky Clock Text/font.ttf",
+          "S - Slinky Clock Text/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Sound Jaws-AG",
+      "title": "S - Sound Jaws-AG",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Sound%20Jaws-AG/main.py",
+      "repo_path": "S - Sound Jaws-AG",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2424,
+        "filelist": [
+          "S - Sound Jaws-AG/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Square Shadows",
+      "title": "S - Square Shadows",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Square%20Shadows/main.py",
+      "repo_path": "S - Square Shadows",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1859,
+        "filelist": [
+          "S - Square Shadows/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Three Scopes",
+      "title": "S - Three Scopes",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Three%20Scopes/main.py",
+      "repo_path": "S - Three Scopes",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Three Scopes",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1233,
+        "filelist": [
+          "S - Three Scopes/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Two Scopes",
+      "title": "S - Two Scopes",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Two%20Scopes/main.py",
+      "repo_path": "S - Two Scopes",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Two Scopes",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1114,
+        "filelist": [
+          "S - Two Scopes/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - X Scope New",
+      "title": "S - X Scope New",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20X%20Scope%20New/main.py",
+      "repo_path": "S - X Scope New",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 3714,
+        "filelist": [
+          "S - X Scope New/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/S - Zoom Scope",
+      "title": "S - Zoom Scope",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Zoom%20Scope/main.py",
+      "repo_path": "S - Zoom Scope",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Zoom Scope",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1670,
+        "filelist": [
+          "S - Zoom Scope/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Ball of Mirrors",
+      "title": "T - Ball of Mirrors",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Ball%20of%20Mirrors/main.py",
+      "repo_path": "T - Ball of Mirrors",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as T - Ball of Mirrors",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 922,
+        "filelist": [
+          "T - Ball of Mirrors/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Basic Image",
+      "title": "T - Basic Image",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Basic%20Image/main.py",
+      "repo_path": "T - Basic Image",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as T - Basic Image",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 6,
+        "bytes": 879601,
+        "filelist": [
+          "T - Basic Image/Images/README-Max_4_Images.txt",
+          "T - Basic Image/Images/airport.png",
+          "T - Basic Image/Images/monitors.png",
+          "T - Basic Image/Images/mushroom.png",
+          "T - Basic Image/Images/plant.png",
+          "T - Basic Image/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Bezier Cousins-Trails",
+      "title": "T - Bezier Cousins-Trails",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Bezier%20Cousins-Trails/main.py",
+      "repo_path": "T - Bezier Cousins-Trails",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2645,
+        "filelist": [
+          "T - Bezier Cousins-Trails/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Bits H",
+      "title": "T - Bits H",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Bits%20H/main.py",
+      "repo_path": "T - Bits H",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1899,
+        "filelist": [
+          "T - Bits H/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Bits V",
+      "title": "T - Bits V",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Bits%20V/main.py",
+      "repo_path": "T - Bits V",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1945,
+        "filelist": [
+          "T - Bits V/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - BoM OG Trans",
+      "title": "T - BoM OG Trans",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20BoM%20OG%20Trans/main.py",
+      "repo_path": "T - BoM OG Trans",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1371,
+        "filelist": [
+          "T - BoM OG Trans/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Density Squares",
+      "title": "T - Density Squares",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Density%20Squares/main.py",
+      "repo_path": "T - Density Squares",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1162,
+        "filelist": [
+          "T - Density Squares/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Draws Hashmarks New",
+      "title": "T - Draws Hashmarks New",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Draws%20Hashmarks%20New/main.py",
+      "repo_path": "T - Draws Hashmarks New",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2757,
+        "filelist": [
+          "T - Draws Hashmarks New/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Font Patterns",
+      "title": "T - Font Patterns",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Font%20Patterns/main.py",
+      "repo_path": "T - Font Patterns",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as T - Font Patterns",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 2,
+        "bytes": 1427042,
+        "filelist": [
+          "T - Font Patterns/font.ttf",
+          "T - Font Patterns/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Font Recedes",
+      "title": "T - Font Recedes",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Font%20Recedes/main.py",
+      "repo_path": "T - Font Recedes",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as T - Font Recedes",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 2,
+        "bytes": 1425540,
+        "filelist": [
+          "T - Font Recedes/font.ttf",
+          "T - Font Recedes/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Image + Circle - Img",
+      "title": "T - Image + Circle - Img",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Image%20%2B%20Circle%20-%20Img/main.py",
+      "repo_path": "T - Image + Circle - Img",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 6,
+        "bytes": 929728,
+        "filelist": [
+          "T - Image + Circle - Img/Images/README-Max_4_Images.txt",
+          "T - Image + Circle - Img/Images/bridge_quarter.png",
+          "T - Image + Circle - Img/Images/collage_quarter.png",
+          "T - Image + Circle - Img/Images/grind_quarter.png",
+          "T - Image + Circle - Img/Images/waterfall_quarter.png",
+          "T - Image + Circle - Img/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Line Rotate-Trails",
+      "title": "T - Line Rotate-Trails",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Line%20Rotate-Trails/main.py",
+      "repo_path": "T - Line Rotate-Trails",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1318,
+        "filelist": [
+          "T - Line Rotate-Trails/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Magnify Cloud - LFO",
+      "title": "T - Magnify Cloud - LFO",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Magnify%20Cloud%20-%20LFO/main.py",
+      "repo_path": "T - Magnify Cloud - LFO",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as T - Magnify Cloud - LFO",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1853,
+        "filelist": [
+          "T - Magnify Cloud - LFO/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Marching Four - Img",
+      "title": "T - Marching Four - Img",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Marching%20Four%20-%20Img/main.py",
+      "repo_path": "T - Marching Four - Img",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 6,
+        "bytes": 36263,
+        "filelist": [
+          "T - Marching Four - Img/Images/README-Max_4_Images.txt",
+          "T - Marching Four - Img/Images/car1.png",
+          "T - Marching Four - Img/Images/car2.png",
+          "T - Marching Four - Img/Images/car3.png",
+          "T - Marching Four - Img/Images/car4.png",
+          "T - Marching Four - Img/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Migrating Circle Grids",
+      "title": "T - Migrating Circle Grids",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Migrating%20Circle%20Grids/main.py",
+      "repo_path": "T - Migrating Circle Grids",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as T - Migrating Circle Grids",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 4267,
+        "filelist": [
+          "T - Migrating Circle Grids/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Origami Triangles",
+      "title": "T - Origami Triangles",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Origami%20Triangles/main.py",
+      "repo_path": "T - Origami Triangles",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as T - Origami Triangles",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 893,
+        "filelist": [
+          "T - Origami Triangles/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Reckie",
+      "title": "T - Reckie",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Reckie/main.py",
+      "repo_path": "T - Reckie",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as T - Reckie",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 1839,
+        "filelist": [
+          "T - Reckie/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T - Slideshow Grid-AG-Alpha",
+      "title": "T - Slideshow Grid-AG-Alpha",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T%20-%20Slideshow%20Grid-AG-Alpha/main.py",
+      "repo_path": "T - Slideshow Grid-AG-Alpha",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as T - Slideshow Grid-AG-Alpha",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 5,
+        "bytes": 726185,
+        "filelist": [
+          "T - Slideshow Grid-AG-Alpha/Images/angledbuilding.png",
+          "T - Slideshow Grid-AG-Alpha/Images/ballplant.png",
+          "T - Slideshow Grid-AG-Alpha/Images/diamondpipes.png",
+          "T - Slideshow Grid-AG-Alpha/Images/trianglelights.png",
+          "T - Slideshow Grid-AG-Alpha/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_Modes_Pygame/T- Trigon Traveller",
+      "title": "T- Trigon Traveller",
+      "author": "Critter & Guitari",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/T-%20Trigon%20Traveller/main.py",
+      "repo_path": "T- Trigon Traveller",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "v2.3 pygame mode set; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.py",
+        "files": 1,
+        "bytes": 2677,
+        "filelist": [
+          "T- Trigon Traveller/main.py"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/Color",
+      "title": "Color",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/Color/main.lua",
+      "repo_path": "Color",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 10574,
+        "filelist": [
+          "Color/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/Image",
+      "title": "Image",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/Image/main.lua",
+      "repo_path": "Image",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 6,
+        "bytes": 969007,
+        "filelist": [
+          "Image/Images/1.png",
+          "Image/Images/bridge_quarter.png",
+          "Image/Images/collage_quarter.png",
+          "Image/Images/grind_quarter.png",
+          "Image/Images/waterfall_quarter.png",
+          "Image/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/Mono_2_Stereo",
+      "title": "Mono_2_Stereo",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/Mono_2_Stereo/main.lua",
+      "repo_path": "Mono_2_Stereo",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 2718,
+        "filelist": [
+          "Mono_2_Stereo/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/Path",
+      "title": "Path",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/Path/main.lua",
+      "repo_path": "Path",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 8350,
+        "filelist": [
+          "Path/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/Polyline",
+      "title": "Polyline",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/Polyline/main.lua",
+      "repo_path": "Polyline",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 9029,
+        "filelist": [
+          "Polyline/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/Primitives",
+      "title": "Primitives",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/Primitives/main.lua",
+      "repo_path": "Primitives",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 5164,
+        "filelist": [
+          "Primitives/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/Rect",
+      "title": "Rect",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/Rect/main.lua",
+      "repo_path": "Rect",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 3962,
+        "filelist": [
+          "Rect/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/RectGrid",
+      "title": "RectGrid",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/RectGrid/main.lua",
+      "repo_path": "RectGrid",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 4529,
+        "filelist": [
+          "RectGrid/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/RectGridSOUND",
+      "title": "RectGridSOUND",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/RectGridSOUND/main.lua",
+      "repo_path": "RectGridSOUND",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 5219,
+        "filelist": [
+          "RectGridSOUND/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/TEXT",
+      "title": "TEXT",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/TEXT/main.lua",
+      "repo_path": "TEXT",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 7899,
+        "filelist": [
+          "TEXT/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/Textures",
+      "title": "Textures",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/Textures/main.lua",
+      "repo_path": "Textures",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 7196,
+        "filelist": [
+          "Textures/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/TriangleMesh",
+      "title": "TriangleMesh",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/TriangleMesh/main.lua",
+      "repo_path": "TriangleMesh",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 9975,
+        "filelist": [
+          "TriangleMesh/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/VIDEO",
+      "title": "VIDEO",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/VIDEO/main.lua",
+      "repo_path": "VIDEO",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 3,
+        "bytes": 2026771,
+        "filelist": [
+          "VIDEO/example_1_1280.mov",
+          "VIDEO/example_1_compressed.mp4",
+          "VIDEO/main.lua"
+        ]
+      }
+    },
+    {
+      "key": "EYESY_oFLua_Examples/Vectors",
+      "title": "Vectors",
+      "author": "Critter & Guitari",
+      "generation": "v1-of-lua",
+      "kind": "example",
+      "url": "https://github.com/critterandguitari/EYESY_oFLua_Examples/blob/main/Vectors/main.lua",
+      "repo_path": "Vectors",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "early openFrameworks/Lua example; NO LICENSE FILE - porting blocker",
+      "raw": {
+        "entry_file": "main.lua",
+        "files": 1,
+        "bytes": 9721,
+        "filelist": [
+          "Vectors/main.lua"
+        ]
+      }
+    }
+  ]
+}

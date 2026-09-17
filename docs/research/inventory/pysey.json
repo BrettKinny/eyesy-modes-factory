@@ -1,0 +1,1065 @@
+{
+  "source": "pysey",
+  "source_url": "https://github.com/martindefatte/pysey",
+  "fetched_at": "2026-09-18",
+  "method": "gh api tree of martindefatte/pysey@master; a patch is modes/<V2|V3>/<name>/ with main.py; per-patch README.md parsed for Author/License/version",
+  "counts": {
+    "total": 36,
+    "by_generation": {
+      "v2-pygame": 18,
+      "v3-pygame": 18
+    },
+    "by_kind": {
+      "mode": 36
+    },
+    "by_license": {
+      "BSD 2-Clause (new code) / BSD 3-Clause (Randomizer base by Critter & Guitari)": 2,
+      "BSD 2-Clause (see LICENSE in project root)": 31,
+      "unknown": 3
+    }
+  },
+  "items": [
+    {
+      "key": "modes/V2/Randumbizer LFO SWEEP O+-TR",
+      "title": "Randumbizer LFO SWEEP O+-TR",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/Randumbizer%20LFO%20SWEEP%20O%2B-TR/main.py",
+      "repo_path": "modes/V2/Randumbizer LFO SWEEP O+-TR",
+      "license": "BSD 2-Clause (new code) / BSD 3-Clause (Randomizer base by Critter & Guitari)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/Randumbizer LFO SWEEP O+-TR/README.md",
+        "files": [
+          "modes/V2/Randumbizer LFO SWEEP O+-TR/README.md",
+          "modes/V2/Randumbizer LFO SWEEP O+-TR/claude.md",
+          "modes/V2/Randumbizer LFO SWEEP O+-TR/main.py"
+        ],
+        "entry_bytes": 11220,
+        "patchstorage_slug": "randomizer-o-tr",
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/Randumbizer VCR O+-TR",
+      "title": "Randumbizer VCR O+-TR",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/Randumbizer%20VCR%20O%2B-TR/main.py",
+      "repo_path": "modes/V2/Randumbizer VCR O+-TR",
+      "license": "BSD 2-Clause (new code) / BSD 3-Clause (Randomizer base by Critter & Guitari)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/Randumbizer VCR O+-TR/README.md",
+        "files": [
+          "modes/V2/Randumbizer VCR O+-TR/README.md",
+          "modes/V2/Randumbizer VCR O+-TR/claude.md",
+          "modes/V2/Randumbizer VCR O+-TR/font/VCR_OSD_MONO_1.001.ttf",
+          "modes/V2/Randumbizer VCR O+-TR/main.py"
+        ],
+        "entry_bytes": 18041,
+        "patchstorage_slug": "randomizer-o-tr",
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/S - Audio Waveform",
+      "title": "S - Audio Waveform",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/S%20-%20Audio%20Waveform/main.py",
+      "repo_path": "modes/V2/S - Audio Waveform",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/S - Audio Waveform/README.md",
+        "files": [
+          "modes/V2/S - Audio Waveform/README.md",
+          "modes/V2/S - Audio Waveform/main.py"
+        ],
+        "entry_bytes": 3028,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/S - Chladni Resonance",
+      "title": "S - Chladni Resonance",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/S%20-%20Chladni%20Resonance/main.py",
+      "repo_path": "modes/V2/S - Chladni Resonance",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/S - Chladni Resonance/README.md",
+        "files": [
+          "modes/V2/S - Chladni Resonance/README.md",
+          "modes/V2/S - Chladni Resonance/main.py"
+        ],
+        "entry_bytes": 9319,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/S - Circle Grid",
+      "title": "S - Circle Grid",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/S%20-%20Circle%20Grid/main.py",
+      "repo_path": "modes/V2/S - Circle Grid",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/S - Circle Grid/README.md",
+        "files": [
+          "modes/V2/S - Circle Grid/README.md",
+          "modes/V2/S - Circle Grid/main.py"
+        ],
+        "entry_bytes": 3797,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/S - Cymbal Cymatics",
+      "title": "S - Cymbal Cymatics",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/S%20-%20Cymbal%20Cymatics/main.py",
+      "repo_path": "modes/V2/S - Cymbal Cymatics",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/S - Cymbal Cymatics/README.md",
+        "files": [
+          "modes/V2/S - Cymbal Cymatics/README.md",
+          "modes/V2/S - Cymbal Cymatics/main.py"
+        ],
+        "entry_bytes": 11288,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/S - Dual Attractor Garden",
+      "title": "S - Dual Attractor Garden",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/S%20-%20Dual%20Attractor%20Garden/main.py",
+      "repo_path": "modes/V2/S - Dual Attractor Garden",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/S - Dual Attractor Garden/README.md",
+        "files": [
+          "modes/V2/S - Dual Attractor Garden/README.md",
+          "modes/V2/S - Dual Attractor Garden/main.py"
+        ],
+        "entry_bytes": 7096,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/S - Lissajous Weaver",
+      "title": "S - Lissajous Weaver",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/S%20-%20Lissajous%20Weaver/main.py",
+      "repo_path": "modes/V2/S - Lissajous Weaver",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/S - Lissajous Weaver/README.md",
+        "files": [
+          "modes/V2/S - Lissajous Weaver/README.md",
+          "modes/V2/S - Lissajous Weaver/main.py"
+        ],
+        "entry_bytes": 7052,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/S - Stereo Interference",
+      "title": "S - Stereo Interference",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/S%20-%20Stereo%20Interference/main.py",
+      "repo_path": "modes/V2/S - Stereo Interference",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/S - Stereo Interference/README.md",
+        "files": [
+          "modes/V2/S - Stereo Interference/README.md",
+          "modes/V2/S - Stereo Interference/main.py"
+        ],
+        "entry_bytes": 7663,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/S - Strange Attractor",
+      "title": "S - Strange Attractor",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/S%20-%20Strange%20Attractor/main.py",
+      "repo_path": "modes/V2/S - Strange Attractor",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/S - Strange Attractor/README.md",
+        "files": [
+          "modes/V2/S - Strange Attractor/README.md",
+          "modes/V2/S - Strange Attractor/main.py"
+        ],
+        "entry_bytes": 7284,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/S - Whitney Fans",
+      "title": "S - Whitney Fans",
+      "author": "Wavefiler",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/S%20-%20Whitney%20Fans/main.py",
+      "repo_path": "modes/V2/S - Whitney Fans",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/S - Whitney Fans/README.md",
+        "files": [
+          "modes/V2/S - Whitney Fans/README.md",
+          "modes/V2/S - Whitney Fans/main.py"
+        ],
+        "entry_bytes": 7276,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/T - Barnsley Fern",
+      "title": "T - Barnsley Fern",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/T%20-%20Barnsley%20Fern/main.py",
+      "repo_path": "modes/V2/T - Barnsley Fern",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/T - Barnsley Fern/README.md",
+        "files": [
+          "modes/V2/T - Barnsley Fern/README.md",
+          "modes/V2/T - Barnsley Fern/main.py"
+        ],
+        "entry_bytes": 7496,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/T - Branded Backdrop",
+      "title": "T - Branded Backdrop",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/T%20-%20Branded%20Backdrop/main.py",
+      "repo_path": "modes/V2/T - Branded Backdrop",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/T - Branded Backdrop/README.md",
+        "files": [
+          "modes/V2/T - Branded Backdrop/Backgrounds/img-1-960x540.jpg",
+          "modes/V2/T - Branded Backdrop/Backgrounds/img-2-960x540.jpg",
+          "modes/V2/T - Branded Backdrop/Backgrounds/img-3-960x540.jpg",
+          "modes/V2/T - Branded Backdrop/Backgrounds/img-4-960x540.jpg",
+          "modes/V2/T - Branded Backdrop/Backgrounds/img-5-960x540.jpg",
+          "modes/V2/T - Branded Backdrop/Backgrounds/img-6-960x540.jpg",
+          "modes/V2/T - Branded Backdrop/Font/BlackOpsOne-Regular.ttf",
+          "modes/V2/T - Branded Backdrop/Font/OFL.txt",
+          "modes/V2/T - Branded Backdrop/Logo/yourBandLogo-960x540.png",
+          "modes/V2/T - Branded Backdrop/README.md",
+          "modes/V2/T - Branded Backdrop/claude.md",
+          "modes/V2/T - Branded Backdrop/main.py",
+          "modes/V2/T - Branded Backdrop/words.txt"
+        ],
+        "entry_bytes": 12839,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/T - Flow Field Drift",
+      "title": "T - Flow Field Drift",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/T%20-%20Flow%20Field%20Drift/main.py",
+      "repo_path": "modes/V2/T - Flow Field Drift",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/T - Flow Field Drift/README.md",
+        "files": [
+          "modes/V2/T - Flow Field Drift/README.md",
+          "modes/V2/T - Flow Field Drift/main.py"
+        ],
+        "entry_bytes": 8561,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/T - Living Voronoi",
+      "title": "T - Living Voronoi",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/T%20-%20Living%20Voronoi/main.py",
+      "repo_path": "modes/V2/T - Living Voronoi",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/T - Living Voronoi/README.md",
+        "files": [
+          "modes/V2/T - Living Voronoi/README.md",
+          "modes/V2/T - Living Voronoi/main.py"
+        ],
+        "entry_bytes": 8364,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/T - Reaction Diffusion",
+      "title": "T - Reaction Diffusion",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/T%20-%20Reaction%20Diffusion/main.py",
+      "repo_path": "modes/V2/T - Reaction Diffusion",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/T - Reaction Diffusion/README.md",
+        "files": [
+          "modes/V2/T - Reaction Diffusion/README.md",
+          "modes/V2/T - Reaction Diffusion/main.py"
+        ],
+        "entry_bytes": 11969,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/T - SMPTE Standby",
+      "title": "T - SMPTE Standby",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/T%20-%20SMPTE%20Standby/main.py",
+      "repo_path": "modes/V2/T - SMPTE Standby",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/T - SMPTE Standby/README.md",
+        "files": [
+          "modes/V2/T - SMPTE Standby/README.md",
+          "modes/V2/T - SMPTE Standby/claude.md",
+          "modes/V2/T - SMPTE Standby/font/VCR_OSD_MONO_1.001.ttf",
+          "modes/V2/T - SMPTE Standby/main.py",
+          "modes/V2/T - SMPTE Standby/words.txt"
+        ],
+        "entry_bytes": 12290,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V2/T - Words",
+      "title": "T - Words",
+      "author": "Martin Defatte",
+      "generation": "v2-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V2/T%20-%20Words/main.py",
+      "repo_path": "modes/V2/T - Words",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V2/T - Words/README.md",
+        "files": [
+          "modes/V2/T - Words/Font/OFL.txt",
+          "modes/V2/T - Words/Font/StardosStencil-Bold.ttf",
+          "modes/V2/T - Words/README.md",
+          "modes/V2/T - Words/claude.md",
+          "modes/V2/T - Words/main.py",
+          "modes/V2/T - Words/words.txt"
+        ],
+        "entry_bytes": 4060,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/Randumbizer LFO SWEEP O+-TR",
+      "title": "Randumbizer LFO SWEEP O+-TR",
+      "author": null,
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/Randumbizer%20LFO%20SWEEP%20O%2B-TR/main.py",
+      "repo_path": "modes/V3/Randumbizer LFO SWEEP O+-TR",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: None; ported-from note: n/a",
+      "raw": {
+        "readme": null,
+        "files": [
+          "modes/V3/Randumbizer LFO SWEEP O+-TR/main.py"
+        ],
+        "entry_bytes": 11915,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/Randumbizer VCR O+-TR",
+      "title": "Randumbizer VCR O+-TR",
+      "author": null,
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/Randumbizer%20VCR%20O%2B-TR/main.py",
+      "repo_path": "modes/V3/Randumbizer VCR O+-TR",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: None; ported-from note: n/a",
+      "raw": {
+        "readme": null,
+        "files": [
+          "modes/V3/Randumbizer VCR O+-TR/font/VCR_OSD_MONO_1.001.ttf",
+          "modes/V3/Randumbizer VCR O+-TR/main.py"
+        ],
+        "entry_bytes": 19514,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/S - Audio Waveform",
+      "title": "S - Audio Waveform",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/S%20-%20Audio%20Waveform/main.py",
+      "repo_path": "modes/V3/S - Audio Waveform",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/S - Audio Waveform/README.md",
+        "files": [
+          "modes/V3/S - Audio Waveform/README.md",
+          "modes/V3/S - Audio Waveform/main.py"
+        ],
+        "entry_bytes": 3021,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/S - Chladni Resonance",
+      "title": "S - Chladni Resonance",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/S%20-%20Chladni%20Resonance/main.py",
+      "repo_path": "modes/V3/S - Chladni Resonance",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/S - Chladni Resonance/README.md",
+        "files": [
+          "modes/V3/S - Chladni Resonance/README.md",
+          "modes/V3/S - Chladni Resonance/main.py"
+        ],
+        "entry_bytes": 8008,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/S - Circle Grid",
+      "title": "S - Circle Grid",
+      "author": null,
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/S%20-%20Circle%20Grid/main.py",
+      "repo_path": "modes/V3/S - Circle Grid",
+      "license": null,
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: None; ported-from note: n/a",
+      "raw": {
+        "readme": null,
+        "files": [
+          "modes/V3/S - Circle Grid/main.py"
+        ],
+        "entry_bytes": 2402,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/S - Cymbal Cymatics",
+      "title": "S - Cymbal Cymatics",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/S%20-%20Cymbal%20Cymatics/main.py",
+      "repo_path": "modes/V3/S - Cymbal Cymatics",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/S - Cymbal Cymatics/README.md",
+        "files": [
+          "modes/V3/S - Cymbal Cymatics/README.md",
+          "modes/V3/S - Cymbal Cymatics/main.py"
+        ],
+        "entry_bytes": 11621,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/S - Dual Attractor Garden",
+      "title": "S - Dual Attractor Garden",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/S%20-%20Dual%20Attractor%20Garden/main.py",
+      "repo_path": "modes/V3/S - Dual Attractor Garden",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/S - Dual Attractor Garden/README.md",
+        "files": [
+          "modes/V3/S - Dual Attractor Garden/README.md",
+          "modes/V3/S - Dual Attractor Garden/main.py"
+        ],
+        "entry_bytes": 7411,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/S - Lissajous Weaver",
+      "title": "S - Lissajous Weaver",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/S%20-%20Lissajous%20Weaver/main.py",
+      "repo_path": "modes/V3/S - Lissajous Weaver",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/S - Lissajous Weaver/README.md",
+        "files": [
+          "modes/V3/S - Lissajous Weaver/README.md",
+          "modes/V3/S - Lissajous Weaver/main.py"
+        ],
+        "entry_bytes": 7326,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/S - Stereo Interference",
+      "title": "S - Stereo Interference",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/S%20-%20Stereo%20Interference/main.py",
+      "repo_path": "modes/V3/S - Stereo Interference",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/S - Stereo Interference/README.md",
+        "files": [
+          "modes/V3/S - Stereo Interference/README.md",
+          "modes/V3/S - Stereo Interference/main.py"
+        ],
+        "entry_bytes": 7663,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/S - Strange Attractor",
+      "title": "S - Strange Attractor",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/S%20-%20Strange%20Attractor/main.py",
+      "repo_path": "modes/V3/S - Strange Attractor",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/S - Strange Attractor/README.md",
+        "files": [
+          "modes/V3/S - Strange Attractor/README.md",
+          "modes/V3/S - Strange Attractor/main.py"
+        ],
+        "entry_bytes": 7574,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/S - Whitney Fans",
+      "title": "S - Whitney Fans",
+      "author": "Wavefiler",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/S%20-%20Whitney%20Fans/main.py",
+      "repo_path": "modes/V3/S - Whitney Fans",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v2.3 / v3.1 (cross-version compatible); ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/S - Whitney Fans/README.md",
+        "files": [
+          "modes/V3/S - Whitney Fans/README.md",
+          "modes/V3/S - Whitney Fans/main.py"
+        ],
+        "entry_bytes": 7935,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/T - Barnsley Fern",
+      "title": "T - Barnsley Fern",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/T%20-%20Barnsley%20Fern/main.py",
+      "repo_path": "modes/V3/T - Barnsley Fern",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/T - Barnsley Fern/README.md",
+        "files": [
+          "modes/V3/T - Barnsley Fern/README.md",
+          "modes/V3/T - Barnsley Fern/main.py"
+        ],
+        "entry_bytes": 7874,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/T - Branded Backdrop",
+      "title": "T - Branded Backdrop",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/T%20-%20Branded%20Backdrop/main.py",
+      "repo_path": "modes/V3/T - Branded Backdrop",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/T - Branded Backdrop/README.md",
+        "files": [
+          "modes/V3/T - Branded Backdrop/Backgrounds/img-1-960x540.jpg",
+          "modes/V3/T - Branded Backdrop/Backgrounds/img-2-960x540.jpg",
+          "modes/V3/T - Branded Backdrop/Backgrounds/img-3-960x540.jpg",
+          "modes/V3/T - Branded Backdrop/Backgrounds/img-4-960x540.jpg",
+          "modes/V3/T - Branded Backdrop/Backgrounds/img-5-960x540.jpg",
+          "modes/V3/T - Branded Backdrop/Backgrounds/img-6-960x540.jpg",
+          "modes/V3/T - Branded Backdrop/Font/BlackOpsOne-Regular.ttf",
+          "modes/V3/T - Branded Backdrop/Font/OFL.txt",
+          "modes/V3/T - Branded Backdrop/Logo/yourBandLogo-960x540.png",
+          "modes/V3/T - Branded Backdrop/README.md",
+          "modes/V3/T - Branded Backdrop/main.py",
+          "modes/V3/T - Branded Backdrop/words.txt"
+        ],
+        "entry_bytes": 12883,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/T - Flow Field Drift",
+      "title": "T - Flow Field Drift",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/T%20-%20Flow%20Field%20Drift/main.py",
+      "repo_path": "modes/V3/T - Flow Field Drift",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/T - Flow Field Drift/README.md",
+        "files": [
+          "modes/V3/T - Flow Field Drift/README.md",
+          "modes/V3/T - Flow Field Drift/main.py"
+        ],
+        "entry_bytes": 8847,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/T - Living Voronoi",
+      "title": "T - Living Voronoi",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/T%20-%20Living%20Voronoi/main.py",
+      "repo_path": "modes/V3/T - Living Voronoi",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/T - Living Voronoi/README.md",
+        "files": [
+          "modes/V3/T - Living Voronoi/README.md",
+          "modes/V3/T - Living Voronoi/main.py"
+        ],
+        "entry_bytes": 8821,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/T - Reaction Diffusion",
+      "title": "T - Reaction Diffusion",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/T%20-%20Reaction%20Diffusion/main.py",
+      "repo_path": "modes/V3/T - Reaction Diffusion",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/T - Reaction Diffusion/README.md",
+        "files": [
+          "modes/V3/T - Reaction Diffusion/README.md",
+          "modes/V3/T - Reaction Diffusion/main.py"
+        ],
+        "entry_bytes": 10595,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/T - SMPTE Standby",
+      "title": "T - SMPTE Standby",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/T%20-%20SMPTE%20Standby/main.py",
+      "repo_path": "modes/V3/T - SMPTE Standby",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/T - SMPTE Standby/README.md",
+        "files": [
+          "modes/V3/T - SMPTE Standby/README.md",
+          "modes/V3/T - SMPTE Standby/font/VCR_OSD_MONO_1.001.ttf",
+          "modes/V3/T - SMPTE Standby/main.py",
+          "modes/V3/T - SMPTE Standby/words.txt"
+        ],
+        "entry_bytes": 12334,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    },
+    {
+      "key": "modes/V3/T - Words",
+      "title": "T - Words",
+      "author": "Martin Defatte",
+      "generation": "v3-pygame",
+      "kind": "mode",
+      "url": "https://github.com/martindefatte/pysey/blob/master/modes/V3/T%20-%20Words/main.py",
+      "repo_path": "modes/V3/T - Words",
+      "license": "BSD 2-Clause (see LICENSE in project root)",
+      "created": null,
+      "metrics": {
+        "views": null,
+        "likes": null,
+        "downloads": null
+      },
+      "technique": null,
+      "notes": "EYESY OS version: v3.1; ported-from note: n/a",
+      "raw": {
+        "readme": "modes/V3/T - Words/README.md",
+        "files": [
+          "modes/V3/T - Words/Font/OFL.txt",
+          "modes/V3/T - Words/Font/StardosStencil-Bold.ttf",
+          "modes/V3/T - Words/README.md",
+          "modes/V3/T - Words/main.py",
+          "modes/V3/T - Words/words.txt"
+        ],
+        "entry_bytes": 4111,
+        "patchstorage_slug": null,
+        "repo_license": "NOASSERTION"
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "_doc": "Curated portability verdicts that a mechanical sweep cannot derive: the technique triage already recorded in docs/research/PatchStorageBestOf.md, plus licence facts that live outside the repo metadata. Key = normalised coverage key (see README.md). build_coverage.py reads this file if present and adds `verdict`/`verdict_reason` to every row.",
+  "verdicts": {
+    "words": {
+      "verdict": "not-worth",
+      "reason": "label-only text mode, no technique to port (docs/research/PatchStorageBestOf.md: not worth porting)"
+    },
+    "branded-backdrop": {
+      "verdict": "not-worth",
+      "reason": "cycling text phrases / branding, not a procedural scene (docs/research/PatchStorageBestOf.md)"
+    },
+    "smpte-standby": {
+      "verdict": "not-worth",
+      "reason": "SMPTE colour-bar test pattern; date/broadcast-specific, not a library scene (docs/research/PatchStorageBestOf.md)"
+    },
+    "hertsi": {
+      "verdict": "ok",
+      "reason": "source of record is Codeberg twang69/hertsi, EUPL-1.2 (the PatchStorage upload states no licence text); copyleft — a port inherits EUPL"
+    },
+    "strange-attractor": {
+      "have_as": "lorenz-trail",
+      "reason": "bespoke scene lorenz-trail is the Lorenz attractor already in our library (eyesy-modes-bespoke README batch-1 table); a stock-library port of the pysey patch is still owed"
+    },
+    "whitney-fans": {
+      "have_as": "whitney-kaleido",
+      "reason": "bespoke scene whitney-kaleido covers the Whitney fan technique (eyesy-modes-bespoke README batch-1 table)"
+    },
+    "chladni-resonance": {
+      "have_as": "chladni-plate",
+      "reason": "bespoke scene chladni-plate covers the Chladni cymatics technique (eyesy-modes-bespoke README batch-1 table)"
+    }
+  }
+}

@@ -6,7 +6,9 @@ Lua/GLES2 engine. Sibling repos: `eyesy` (engine/OS), `eyesy-modes-bespoke`
 
 **This repo holds no modes yet.** Nothing from `EYESY_Modes_OSv3` or
 `EYESY_oFLua_Examples` has been ported. The directory is the agreed home for
-them; the contract they must be ported *into* is below.
+them; the contract they must be ported *into* is below, and the live inventory
+of what is out there — 406 distinct modes, 401 of them not covered yet — is
+`docs/research/CoverageMatrix.md`.
 
 ## Coverage goal
 
@@ -17,12 +19,18 @@ it should never be blocked on engine work or confuse the engine's history.
 
 | Source | Generation | Scale | Status |
 | --- | --- | --- | --- |
-| `critterandguitari/EYESY_Modes_OSv3` | OS v3, Python/pygame | ~100 stock modes | not started |
-| `critterandguitari/EYESY_Modes_Pygame` | OS v2-era, Python/pygame | earlier set, superseded by OSv3 (size unrecorded) | not started |
-| `critterandguitari/EYESY_oFLua_Examples` | v1, Lua/openFrameworks | 14 examples | not started |
-| PatchStorage EYESY platform | all of the above + community | 209 entries | not started |
-| `martindefatte/pysey` | v2 + v3 community engine | includes guerrilladigital's 18 documented BSD-2 patches | not started |
-| community repos (`caljup/eyesy-modes`, `degiere/eyesy-simulator`, Codeberg `twang69/hertsi`) | v3-era | unrecorded | not started |
+| `critterandguitari/EYESY_Modes_OSv3` | OS v3, Python/pygame | 108 modes (BSD-2-Clause) | 0 ported |
+| `critterandguitari/EYESY_Modes_Pygame` | OS v2-era, Python/pygame | 66 modes; 37 carried into OSv3, 29 v2-only (**no licence file**) | 0 ported |
+| `critterandguitari/EYESY_oFLua_Examples` | v1, Lua/openFrameworks | 14 examples (**no licence file**) | 0 ported |
+| PatchStorage EYESY platform | all of the above + community | 209 entries (live-verified) | 0 ported |
+| `martindefatte/pysey` | v2 + v3 community engine | 36 patches (33 documented BSD-2, 3 undocumented) | 0 ported |
+| community repos (GitHub + Codeberg) | all generations | 472 modes across 18 repos, mostly unlicensed | 0 ported |
+
+Those counts are live-verified, not estimates; the merged have/missing verdict —
+406 distinct modes, 401 of them not covered — is
+[`docs/research/CoverageMatrix.md`](docs/research/CoverageMatrix.md), with the
+per-source inventories and the gap list (`coverage.csv`) in
+`docs/research/inventory/`.
 
 Read `docs/research/EyesyEcosystemMiner.md` first: it maps the whole ecosystem,
 identifies the three API generations, and assesses port viability per technique.
