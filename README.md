@@ -65,15 +65,20 @@ ported faithfully until that lands. Status and the pilot plan:
 
 ## Port specifications
 
-The ranked, sourced port specs live in the engine repo:
+The two dossiers in `docs/research/` (see its README) carry the port specs:
 
 - `docs/research/EyesyEcosystemMiner.md` — the whole ecosystem mapped
   (`EYESY_OS`, `EYESY_Modes_OSv3`, `EYESY_Modes_Pygame`, `EYESY_OF`,
   `EYESY_oFLua_Examples`, pysey, PatchStorage), with port viability per technique.
 - `docs/research/PatchStorageBestOf.md` — ranked best-of-community spec, with
   popularity data and the shared pygame idiom worked out.
+
+These two stay in the `eyesy` engine repo — they document the platform a port
+has to land on:
+
 - `01-architecture.md` at the engine repo root — how the stock engine, mode API,
   and hardware layer actually work.
+- `docs/API.md` and `docs/SCENE-LIBRARY.md` — the contract a port must satisfy.
 - `docs/EYESY-OS-V3-PARITY-PLAN.md` — the instrument-interface gap analysis
   (trigger audio synthesis, shift shortcuts, knob sequencer, OSD, menu).
 
