@@ -8,6 +8,45 @@ Lua/GLES2 engine. Sibling repos: `eyesy` (engine/OS), `eyesy-modes-bespoke`
 `EYESY_oFLua_Examples` has been ported. The directory is the agreed home for
 them; the contract they must be ported *into* is below.
 
+## Coverage goal
+
+Port **every** EYESY mode that exists in the wild, across all three OS
+generations, plus the community work on PatchStorage. That is the point of this
+repo existing separately: it is a library-coverage effort with a long tail, and
+it should never be blocked on engine work or confuse the engine's history.
+
+| Source | Generation | Scale | Status |
+| --- | --- | --- | --- |
+| `critterandguitari/EYESY_Modes_OSv3` | OS v3, Python/pygame | ~100 stock modes | not started |
+| `critterandguitari/EYESY_Modes_Pygame` | OS v2-era, Python/pygame | earlier set, superseded by OSv3 (size unrecorded) | not started |
+| `critterandguitari/EYESY_oFLua_Examples` | v1, Lua/openFrameworks | 14 examples | not started |
+| PatchStorage EYESY platform | all of the above + community | 209 entries | not started |
+| `martindefatte/pysey` | v2 + v3 community engine | includes guerrilladigital's 18 documented BSD-2 patches | not started |
+| community repos (`caljup/eyesy-modes`, `degiere/eyesy-simulator`, Codeberg `twang69/hertsi`) | v3-era | unrecorded | not started |
+
+Read `docs/research/EyesyEcosystemMiner.md` first: it maps the whole ecosystem,
+identifies the three API generations, and assesses port viability per technique.
+`docs/research/PatchStorageBestOf.md` then ranks the community material and says
+which candidates were judged *not* worth porting, so the long tail is triaged by
+technique rather than worked alphabetically.
+
+Practical notes for a coverage effort at this scale:
+
+- **Ports are not rewrites.** A pygame mode's `pygame.draw` idiom maps onto the
+  immediate primitives almost one-to-one; the interesting work is the five rules
+  below (frame rate, persistence, audio buffer shape, palette registration, tier
+  budget), not the drawing calls.
+- **Keep the upstream name** where it means something to users, and record the
+  source repo, generation and licence in the mode header. Ported modes are
+  derivative works.
+- **Tier C is a hard gate.** A faithful port that misses it is not shippable —
+  the levers that delivered on VC4 are in the engine repo's
+  `docs/SCENE-LIBRARY.md`.
+- **Check the API-generation gap before committing to a port.** Some modes reach
+  for things our API does not have yet (persistence via `auto_clear` is the
+  known one — see the parity plan in the engine repo). Those are blocked on
+  engine work, not on porting effort.
+
 ## What a port has to bridge
 
 Stock modes come from two API generations, neither of which is our engine's.
