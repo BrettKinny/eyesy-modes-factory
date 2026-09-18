@@ -435,7 +435,13 @@ answer**: unblocked rows keep moving while a blocked row waits.
   floor. The protocol is now floor → mode → floor, accepting a marginal only when
   the two floors agree within 2 ms. Receipt updated:
   `docs/device-tier/2026-09-18.md`.
-- 2026-09-18: the 11-mode grid family is under way (row 1,
-  `s-grid-circles-column-color`, passed on the agent's first iteration from the
-  family brief). Thirteen modes are verified in total (3 P0 + 10 P1), each with a
-  port report and a queue row.
+- 2026-09-18: the 11-mode grid family is complete (`s-grid-circles-*` and
+  `s-grid-triangles-*`): every row verified at 300 frames, seven of them on the
+  agent's first iteration from the shared family brief. The brief earned its keep
+  twice over — the per-mode delta table removed the per-mode design work, and the
+  two mesh warnings (32-handle cap, index table must match its own mesh) were
+  learned once and applied to the remaining rows.
+- 2026-09-18: twenty-three modes verified in total (3 P0 + 20 P1). The pack's own
+  cost profile is now clear: the filled-uniform rows are one draw call, the
+  outline rows are 210 immediate `e.line` calls, and only the two quadrant rows
+  need meshes beyond the triangles.
