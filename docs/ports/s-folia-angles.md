@@ -69,18 +69,60 @@ produces the trails.
 | luma bounds | **mean 4.12–26.1**, min stddev 1.61 |
 | `p50_ms` (software GL) | 16.7 (resources 6) |
 
+## Device tier: fixed, measured
+
+| Revision | device p50 | marginal (floor ~24.2) | tier C (≤ 33.3 ms) |
+| --- | --- | --- | --- |
+| full-res bridge | 45.20 | +21.0 | outside |
+| half-res bridge | 35.82 | +11.7 | outside |
+| quarter-res bridge | 32.96 | +8.8 | inside (marginal proxy +0.8 over) |
+| **quarter-res + batched quads** | **29.86** | **+5.7** | **inside** |
+
+The decisive lever was **draw calls, not resolution**: the polylines are now one
+preallocated mesh per frame (every segment a 4-vertex quad with static 1-based
+triangle indices), one `e.update_mesh` + one `e.draw_mesh` per frame, worst case 504
+segments / 2016 vertices / 3024 indices. The agent also caught a real overflow in its
+own first batching attempt — `MAX_SEGS` was sized `BOXES*5` while the star branch emits
+8 segments per box, so the verifier's default shape (0.5, "bird beak") overflowed on
+frame 0 — and validated the fix with a standalone `lua5.1` harness across every shape
+branch.
+
+## Determinism: the veil floor
+
+At the baseline every knob is 0, so the veil alpha is `knob3*45/255 = 0` — stock's
+baseline veil does nothing, the trail never decays, and the engine's audio analysis
+arrives from a separate thread, so a first-frames snapshot difference becomes
+**permanent**. The port floors the alpha at **8/255** (~3 %, a ~30-frame time
+constant), which attenuates a startup difference to ~1e-4 by frame 300 while the trail
+still reads as a trail.
+
+## Verification — 2026-09-18
+
+`python3 tools/verify_port.py s-folia-angles --frames 300` → `"verdict": "pass"` (two
+consecutive runs). Software GL (llvmpipe), engine sha256 `454ece7aafe7…`.
+
+| Check | Result |
+| --- | --- |
+| determinism | mean 0.0, frac 0.0 (both 300-frame runs) |
+| knob 1 `shape` | mid 0.2224, max 0.2565 |
+| knob 2 `spin` | mid 0.1375, max 0.1042 |
+| knob 3 `trail` | mid 0.9676, max 0.9997 |
+| knob 4 `fg` | mid 0.0000, max 0.0484 |
+| knob 5 `bg` | mid 1.0000, max 0.9808 |
+| audio | quiet 0.0786, loud 0.2056, freq 0.1879 (threshold 0.001) |
+| luma bounds | mean 4.19–59.86, min stddev 1.04 |
+| `p50_ms` (software GL) | 16.7 (resources 6) |
+
 ## Residual risk
 
-- **The frame is very dark** (mean luma as low as 4.12 of 255): the veil fades
-  everything toward a near-black background at the baseline, so the mode sits close
-  to the verifier's "blank" bound (0.0255). It passes, but a gate with a stricter
-  brightness floor — or a device with a different gamma — would need the trail
-  colour lifted.
-- **`knob3`'s probes read 1.0000** (the whole frame changes): the veil and the clear
-  both key off the trail knob, so its states are maximally different from the
-  baseline. Correct, but it means the knob's *subtle* range is not exercised.
-- **The persistence bridge is new machinery for this pack** — two render targets,
-  an alpha fade and a blit per frame. Device tier owed; `resources 6` is the highest
-  count in the pack so far.
-- **`s-folia-curves` is its sibling** (sampled beziers instead of polylines, a
-  7-frame history window) and should land as a copy.
+- **The frame is very dark at the baseline** (mean luma 4.19 at its lowest): the veil
+  fades toward a near-black background, so the mode sits close to the verifier's blank
+  bound. A gate with a stricter brightness floor would need the trail colour lifted.
+- **The veil floor changes the baseline look**: stock's trail is permanent at
+  `knob3 = 0`; the port's always decays — which is what makes the mode deterministic.
+- **The quads are solid 1-target-pixel rectangles** where the strips were width-1
+  lines: the same footprint, no anti-aliasing either way (the `aalines` AA was already
+  dropped).
+- **The persistence bridge's cost is structural**: ~9 ms of fixed per-pass overhead on
+  this device, now offset by the batching. Recorded in ladder §3.2 for the next
+  persist-dependent mode.

@@ -820,9 +820,9 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-folia-angles.md",
-   "device_p50_ms": "32.96 (floor 24.18, marginal +8.8, absolute within tier C 33.3)",
-   "device_tier": "pass (absolute tier C; marginal proxy +0.8 over, bridge overhead)",
-   "device_note": "quarter-res feedback targets (320x180); progression +21.0/+11.7/+8.8 at full/half/quarter identifies fixed per-pass bridge overhead"
+   "device_p50_ms": "29.86 (floor 24.17, marginal +5.7, absolute inside tier C 33.3)",
+   "device_tier": "pass",
+   "device_note": "quarter-res bridge + batched quads; progression 45.20 -> 35.82 -> 32.96 -> 29.86"
   },
   {
    "stock_name": "S - Folia Curves",
