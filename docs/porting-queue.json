@@ -548,7 +548,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-amp-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "26.01 (floor 24.18, marginal +1.8)"
   },
   {
    "stock_name": "S - Amp Color - 5gon Filled",
@@ -650,7 +650,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-arcway.md",
-   "device_p50_ms": null
+   "device_p50_ms": "24.31 (floor 24.18, marginal +0.1)"
   },
   {
    "stock_name": "S - Audio Printer",
@@ -667,7 +667,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-audio-printer.md",
-   "device_p50_ms": null
+   "device_p50_ms": "25.97 (floor 24.18, marginal +1.8)"
   },
   {
    "stock_name": "S - Bezier H Scope",
@@ -718,7 +718,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-bits-horizontal.md",
-   "device_p50_ms": null
+   "device_p50_ms": "24.28 (floor 24.18, marginal +0.1)"
   },
   {
    "stock_name": "S - Boids",
@@ -752,7 +752,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-breezy-feather-lfo.md",
-   "device_p50_ms": null
+   "device_p50_ms": "24.52 (floor 24.18, marginal +0.3)"
   },
   {
    "stock_name": "S - Circle Row - LFO",
