@@ -21,16 +21,24 @@
 -- background colour at alpha knob3*45/255 is blended toward the background,
 -- which is what makes the trails.
 --
--- Documented deviations from stock:
 -- 1. Frame rate: stock ticks at a hard 30 fps; this port runs at 60, so every
 --    per-frame increment (rotation, LFO phase) is re-timed by 30 * ctx.dt.
+--    The feedback targets are quarter resolution (320x180, presented
+--    upscaled): the full-resolution bridge measured 45.20 ms against a
+--    24.18 ms same-session engine floor on the CM3+ (+21.0 ms, gate is
+--    +8.0 ms), and half resolution (640x360) still measured +11.7 ms over a
+--    24.17 ms floor. Quarter resolution is the tier lever the shipped
+--    bespoke library uses (whitney-kaleido's 640x360 targets, one step
+--    further); the trail is marginally softer.
 -- 2. Persistence: stock's veil is a literal full-screen alpha blit over the
 --    previous framebuffer. The port renders into a ping-pong pair of render
 --    targets instead: each frame the new boxes are drawn on top of last
 --    frame's target, then a full-screen e.rect in the background colour at
 --    alpha knob3 * 45 / 255 fades that result toward the background, and the
---    faded target is presented. The trail's *look* is preserved; the blit is
---    not ported literally (PORTING-LADDER.md section 3.2).
+--    faded target is presented. The scene is drawn in target coordinates
+--    (half resolution) and the target is blit upscaled to the screen; the
+--    trail's *look* is preserved, the blit is not ported literally
+--    (PORTING-LADDER.md section 3.2).
 -- 3. Anti-aliasing: pygame.draw.aalines is anti-aliased; the engine's lines
 --    are not. The AA is dropped; stroke width stays 1 and the polylines stay
 --    open (non-closed strips).
@@ -59,8 +67,30 @@
 --    of the window, 10-sample stride) denormalized by * 32768.
 -- 8. Per-box history: stock pops/appends a 10-entry list per box per frame.
 --    Here the 63x10 history and the 63 rotation angles are preallocated in
---    setup and mutated in place (write-index ring); the per-frame vertex
---    tables are the only allocations in draw.
+--    setup and mutated in place (write-index ring); draw never allocates.
+-- 9. Veil alpha floor: stock's baseline veil is zero (knob3 = 0 makes
+--    alpha = 0), which makes the trail and any startup audio jitter
+--    permanent — with a non-decaying trail, a first-frame audio snapshot
+--    difference between identical replays never attenuates and the
+--    frame-300 A/B grabs differ. The port floors the alpha at 8/255 (~3 %),
+--    giving a ~30-frame time constant so a startup difference is attenuated
+--    by ~1e-4 by frame 300, far below the harness's 0.001 changed-pixel
+--    threshold, while the trail still looks like a trail at every knob
+--    position.
+-- 10. Mesh batching: the unbatched port issued up to 4 update_mesh +
+--     draw_mesh pairs per box (up to 252 per frame). This port batches
+--     every polyline segment of the whole frame into ONE indexed triangle
+--     mesh: each segment becomes one width-1 target-pixel quad (4 vertices,
+--     2 triangles, 6 indices); because each segment is its own quad,
+--     disconnected polylines within a box and the 63 boxes never gain a
+--     joining strip segment. Worst case (star, shape >= 0.9) is 63 boxes
+--     x 8 segments = 504 segments -> 2016 vertices / 3024 indices, inside
+--     the 8192 / 49152 caps (limit 32 handles: 1 here). Vertices and the
+--     static index table are
+--     preallocated in setup and mutated in place (house idiom:
+--     flow-field-drift / kalachakra-stupa); unused segment slots stay
+--     all-zero degenerate quads, which rasterise to nothing. A zero-length
+--     segment is emitted degenerate as well.
 
 local e = eyesy
 local PI = math.pi
@@ -69,6 +99,8 @@ local GRID_W = 9
 local GRID_H = 7
 local BOXES = GRID_W * GRID_H
 local HIST = 10
+local TW = 320  -- feedback target width (quarter of ctx.width, see deviation 1)
+local TH = 180  -- feedback target height (quarter of ctx.height)
 
 -- Deterministic middle branch of the stock picker.
 local function picker(c)
@@ -87,6 +119,10 @@ local function rotate_point(cx, cy, x, y, angle)
   local ty = y - cy
   return tx * cos - ty * sin + cx, tx * sin + ty * cos + cy
 end
+-- Worst-case segment count: 63 boxes x 8 segments (the star branch is the
+-- widest; single / broken lozenge / angle / bird beak / house / lozenge use
+-- 2, 4, 4, 7, 5 and 7).
+local MAX_SEGS = BOXES * 8
 
 -- Preallocated state: mutated in place per frame, never reallocated.
 local audio_history = {}
@@ -97,26 +133,61 @@ local lfoInc = 0
 local fbA = nil
 local fbB = nil
 local mesh1 = nil
-local mesh2 = nil
-local mesh3 = nil
-local mesh4 = nil
 
--- One mesh handle per concurrent polyline (max 4, far under the 32-handle
--- cap); each is mutated and redrawn in place every frame. The small per-frame
--- vertex tables are the only allocations in draw (see header deviations 2,
--- 3 and 8); the audio ring and the rotation accumulator are pure in-place
--- mutation.
-local v1 = {}
-local v2 = {}
-local v3 = {}
-local v4 = {}
+-- Batched triangle-mesh buffers (header deviation 10). One width-1-pixel
+-- quad (4 vertices, 6 static indices) per polyline segment, preallocated at
+-- the worst case and mutated in place; draw never allocates. Unused segment
+-- slots stay all-zero degenerate quads (v[3] is set once here).
+local verts = {}
+for i = 1, MAX_SEGS * 4 do
+  verts[i] = { 0, 0, 0 }
+end
+local idx = {}
+for q = 0, MAX_SEGS - 1 do
+  local b6 = q * 6
+  local b4 = q * 4
+  idx[b6 + 1] = b4 + 1
+  idx[b6 + 2] = b4 + 2
+  idx[b6 + 3] = b4 + 3
+  idx[b6 + 4] = b4 + 1
+  idx[b6 + 5] = b4 + 3
+  idx[b6 + 6] = b4 + 4
+end
+local seg_n = 0  -- number of segments written this frame
 
-local function emit(handle, vt, p1x, p1y, p2x, p2y, p3x, p3y, count)
-  vt[1] = { p1x, p1y, 0 }
-  vt[2] = { p2x, p2y, 0 }
-  if count == 3 then vt[3] = { p3x, p3y, 0 } end
-  e.update_mesh(handle, vt)
-  e.draw_mesh(handle)
+-- Append one segment as its quad: perpendicular offset of half a target
+-- pixel on each side, matching the sibling's width-1 line strips. A
+-- zero-length segment emits a degenerate (zero-area) quad, which the GPU
+-- rasterises to nothing.
+local function push_seg(x1, y1, x2, y2)
+  seg_n = seg_n + 1
+  local b4 = (seg_n - 1) * 4
+  local dx = x2 - x1
+  local dy = y2 - y1
+  local len2 = dx * dx + dy * dy
+  if len2 < 1e-9 then
+    for k = 1, 4 do
+      local v = verts[b4 + k]
+      v[1] = x1
+      v[2] = y1
+    end
+    return
+  end
+  local half = 0.5 / math.sqrt(len2)
+  local nx = -dy * half
+  local ny = dx * half
+  local v1 = verts[b4 + 1]
+  v1[1] = x1 + nx
+  v1[2] = y1 + ny
+  local v2 = verts[b4 + 2]
+  v2[1] = x1 - nx
+  v2[2] = y1 - ny
+  local v3 = verts[b4 + 3]
+  v3[1] = x2 + nx
+  v3[2] = y2 + ny
+  local v4 = verts[b4 + 4]
+  v4[1] = x2 - nx
+  v4[2] = y2 - ny
 end
 
 return {
@@ -132,12 +203,9 @@ return {
       hist_pos[i] = 0
       rotation_angles[i] = 0
     end
-    fbA = e.target(ctx.width, ctx.height)
-    fbB = e.target(ctx.width, ctx.height)
+    fbA = e.target(TW, TH)
+    fbB = e.target(TW, TH)
     mesh1 = e.new_mesh()
-    mesh2 = e.new_mesh()
-    mesh3 = e.new_mesh()
-    mesh4 = e.new_mesh()
   end,
   draw = function(ctx)
     local shape = ctx.params.shape
@@ -172,10 +240,14 @@ return {
     end
     e.color(cr, cg, cb)
 
-    -- Grid geometry (stock lines 43-48).
-    local l100 = W * 0.037
-    local hspacing = (W - GRID_W * l100) / (GRID_W + 1)
-    local vspacing = (H - GRID_H * l100) / (GRID_H + 1)
+    -- Grid geometry (stock lines 43-48), in target coordinates: the
+    -- feedback target is quarter resolution (deviation 1), so every length the
+    -- scene draws there is quartered. l100, the spacings and the box offsets
+    -- are computed from the target size; the audio offset a1 stays on the
+    -- stock full-res scale (normalization and rotation use the full-res H).
+    local l100 = TW * 0.037
+    local hspacing = (TW - GRID_W * l100) / (GRID_W + 1)
+    local vspacing = (TH - GRID_H * l100) / (GRID_H + 1)
 
     local left = ctx.audio and ctx.audio.left
     local reset_spin = (spin == 1)
@@ -185,7 +257,9 @@ return {
     local src = fbA
     local dst = fbB
     e.begin_target(dst)
-    e.draw_target(src, 0, 0, W, H)
+    e.draw_target(src, 0, 0, TW, TH)
+    -- Build the frame's geometry into the quad buffers (deviation 10).
+    seg_n = 0
     for row = 0, GRID_H - 1 do
       for col = 0, GRID_W - 1 do
         local x = hspacing * (col + 1) + col * l100
@@ -225,65 +299,96 @@ return {
         -- stock: T (top, peak at y + a1), U (bottom, peak at y + l100 - a1),
         -- W (left, peak at x + a1), Z (right, peak at x - a1 + l100).
         local t1x, t1y = rotate_point(cx, cy, x + l100, y, angle)
-        local t2x, t2y = rotate_point(cx, cy, x + l100 / 2, y + a1, angle)
+        local t2x, t2y = rotate_point(cx, cy, x + l100 / 2, y + a1 * 0.25, angle)
         local t3x, t3y = rotate_point(cx, cy, x, y, angle)
 
         local u1x, u1y = rotate_point(cx, cy, x + l100, y + l100, angle)
-        local u2x, u2y = rotate_point(cx, cy, x + l100 / 2, y + l100 - a1, angle)
+        local u2x, u2y = rotate_point(cx, cy, x + l100 / 2, y + l100 - a1 * 0.25, angle)
         local u3x, u3y = rotate_point(cx, cy, x, y + l100, angle)
 
         local w1x, w1y = rotate_point(cx, cy, x, y + l100, angle)
-        local w2x, w2y = rotate_point(cx, cy, x + a1, y + l100 / 2, angle)
+        local w2x, w2y = rotate_point(cx, cy, x + a1 * 0.25, y + l100 / 2, angle)
         local w3x, w3y = rotate_point(cx, cy, x, y, angle)
 
         local z1x, z1y = rotate_point(cx, cy, x + l100, y + l100, angle)
-        local z2x, z2y = rotate_point(cx, cy, x - a1 + l100, y + l100 / 2, angle)
+        local z2x, z2y = rotate_point(cx, cy, x - a1 * 0.25 + l100, y + l100 / 2, angle)
         local z3x, z3y = rotate_point(cx, cy, x + l100, y, angle)
 
         -- The top polyline with peak at y - a1 (bird-beak branch only).
-        local b2x, b2y = rotate_point(cx, cy, x + l100 / 2, y - a1, angle)
+        local b2x, b2y = rotate_point(cx, cy, x + l100 / 2, y - a1 * 0.25, angle)
 
         if shape < 0.15 then
           -- 1 - single
-          emit(mesh1, v1, t1x, t1y, t2x, t2y, t3x, t3y, 3)
+          push_seg(t1x, t1y, t2x, t2y)
+          push_seg(t2x, t2y, t3x, t3y)
         elseif shape < 0.3 then
           -- 2 - broken lozenge
-          emit(mesh1, v1, t1x, t1y, t2x, t2y, t3x, t3y, 3)
-          emit(mesh2, v2, u1x, u1y, u2x, u2y, u3x, u3y, 3)
+          push_seg(t1x, t1y, t2x, t2y)
+          push_seg(t2x, t2y, t3x, t3y)
+          push_seg(u1x, u1y, u2x, u2y)
+          push_seg(u2x, u2y, u3x, u3y)
         elseif shape < 0.45 then
           -- 3 - angle
-          emit(mesh1, v1, t1x, t1y, t2x, t2y, t3x, t3y, 3)
-          emit(mesh2, v2, w1x, w1y, w2x, w2y, w3x, w3y, 3)
+          push_seg(t1x, t1y, t2x, t2y)
+          push_seg(t2x, t2y, t3x, t3y)
+          push_seg(w1x, w1y, w2x, w2y)
+          push_seg(w2x, w2y, w3x, w3y)
         elseif shape < 0.6 then
           -- 4 - bird beak
-          emit(mesh1, v1, rv0x, rv0y, rv1x, rv1y, 0, 0, 2)
-          emit(mesh2, v2, rv2x, rv2y, rv3x, rv3y, 0, 0, 2)
-          emit(mesh3, v3, t1x, t1y, t2x, t2y, t3x, t3y, 3)
-          emit(mesh4, v4, t1x, t1y, b2x, b2y, t3x, t3y, 3)
+          push_seg(rv0x, rv0y, rv1x, rv1y)
+          push_seg(rv1x, rv1y, rv2x, rv2y)
+          push_seg(rv2x, rv2y, rv3x, rv3y)
+          push_seg(t1x, t1y, t2x, t2y)
+          push_seg(t2x, t2y, t3x, t3y)
+          push_seg(t1x, t1y, b2x, b2y)
+          push_seg(b2x, b2y, t3x, t3y)
         elseif shape < 0.75 then
           -- 5 - house: stock's aalines(rotated_vertices) is OPEN (not
           -- closed), so the strip runs TL -> BL -> BR -> TR.
-          emit(mesh1, v1, rv0x, rv0y, rv1x, rv1y, 0, 0, 2)
-          emit(mesh2, v2, rv2x, rv2y, rv3x, rv3y, 0, 0, 2)
-          emit(mesh3, v3, t1x, t1y, t2x, t2y, t3x, t3y, 3)
+          push_seg(rv0x, rv0y, rv1x, rv1y)
+          push_seg(rv1x, rv1y, rv2x, rv2y)
+          push_seg(rv2x, rv2y, rv3x, rv3y)
+          push_seg(t1x, t1y, t2x, t2y)
+          push_seg(t2x, t2y, t3x, t3y)
         elseif shape < 0.9 then
           -- 6 - lozenge
-          emit(mesh1, v1, rv0x, rv0y, rv1x, rv1y, 0, 0, 2)
-          emit(mesh2, v2, rv2x, rv2y, rv3x, rv3y, 0, 0, 2)
-          emit(mesh3, v3, t1x, t1y, t2x, t2y, t3x, t3y, 3)
-          emit(mesh4, v4, u1x, u1y, u2x, u2y, u3x, u3y, 3)
+          push_seg(rv0x, rv0y, rv1x, rv1y)
+          push_seg(rv1x, rv1y, rv2x, rv2y)
+          push_seg(rv2x, rv2y, rv3x, rv3y)
+          push_seg(t1x, t1y, t2x, t2y)
+          push_seg(t2x, t2y, t3x, t3y)
+          push_seg(u1x, u1y, u2x, u2y)
+          push_seg(u2x, u2y, u3x, u3y)
         else
           -- 7 - star
-          emit(mesh1, v1, t1x, t1y, t2x, t2y, t3x, t3y, 3)
-          emit(mesh2, v2, u1x, u1y, u2x, u2y, u3x, u3y, 3)
-          emit(mesh3, v3, w1x, w1y, w2x, w2y, w3x, w3y, 3)
-          emit(mesh4, v4, z1x, z1y, z2x, z2y, z3x, z3y, 3)
+          push_seg(t1x, t1y, t2x, t2y)
+          push_seg(t2x, t2y, t3x, t3y)
+          push_seg(u1x, u1y, u2x, u2y)
+          push_seg(u2x, u2y, u3x, u3y)
+          push_seg(w1x, w1y, w2x, w2y)
+          push_seg(w2x, w2y, w3x, w3y)
+          push_seg(z1x, z1y, z2x, z2y)
+          push_seg(z2x, z2y, z3x, z3y)
         end
       end
     end
+    -- One update_mesh + one draw_mesh for the whole frame (deviation 10).
+    -- Zero any segment slots left over from a previous, larger frame so
+    -- they stay degenerate (invisible); unused slots rasterise to nothing.
+    for k = seg_n * 4 + 1, MAX_SEGS * 4 do
+      local v = verts[k]
+      v[1] = 0
+      v[2] = 0
+    end
+    e.update_mesh(mesh1, verts, idx)
+    e.draw_mesh(mesh1)
+
     -- Veil: fade toward the background (stock: veil alpha knob3 * 45 of 255).
-    e.color(br, bgc, bb, trail * 45 / 255)
-    e.rect(0, 0, W, H)
+    -- Floor at 8/255 so the trail always decays (deviation 9).
+    local alpha = trail * 45 / 255
+    if alpha < 8 / 255 then alpha = 8 / 255 end
+    e.color(br, bgc, bb, alpha)
+    e.rect(0, 0, TW, TH)
     e.end_target()
 
     e.clear(br, bgc, bb)
