@@ -22,6 +22,8 @@
 -- Scene: 12 vertical bezier scope curves. Curve i passes through 24 points
 -- at x = audio + 640 - 6*hoffset + i*hoffset, y = i*36 - 72 + i*yoff, with
 -- the x of every point additionally offset by i*hoffset (deviation 6).
+-- Coordinates are the presentation surface's (screen when knob3 = 0, the
+-- 640x360 target when trails are on; deviation 9).
 --
 -- Documented deviations from stock:
 -- 1. Foreground palette: stock color_picker_lfo uses the legacy picker,
@@ -96,6 +98,18 @@
 --    joining segments (a single line strip would connect them). Zero-
 --    length strokes (possible when audio collapses a bezier) are emitted
 --    degenerate (zero-area), which the GPU rasterises to nothing.
+-- 9. Presentation coordinates: the scene is drawn either to the screen
+--    or into the 640x360 target, and the engine uses the target's
+--    dimensions for the in-target coordinate space (docs/API.md:
+--    "Drawing inside a target uses that target's dimensions"), so the
+--    geometry is computed from the presentation surface's dimensions:
+--    the target's (TW x TH) when trails are on, the screen's (W x H) at
+--    knob3 = 0. Every length that stock derives from xres/yres is
+--    derived from the same surface here, so the framing is
+--    stock-proportional at the target's resolution (pointInterval 18,
+--    margin 36, xhalf 320 in-target vs 36/72/640 on screen) and the
+--    curves fill the frame instead of being clipped to a corner by a
+--    screen-sized geometry drawn into a half-size target.
 
 local e = eyesy
 local PI = math.pi
@@ -105,6 +119,11 @@ local POINTS = 24
 local STEPS = 12        -- cubic substeps per segment
 local SEGMENTS = POINTS - 1
 local STRIDES = SEGMENTS * STEPS + 1  -- points per curve (277)
+
+-- Feedback target size (deviation 5): the scene is drawn into the target
+-- and blit upscaled to the screen, so in-target lengths are half-res.
+local TW = 640
+local TH = 360
 
 -- Batching budget (deviation 8): the frame emits
 -- CURVES * SEGMENTS * STEPS = 3312 strokes, i.e. 13248 quad vertices —
@@ -309,18 +328,23 @@ local function draw(ctx)
   end
   local fr, fg, fb = picker(fgval)
 
-  -- Stock geometry (deviation 6: kept exact, off-screen extents included).
-  local pointInterval = trunc(H / (POINTS - 4))  -- int(yres / 20) = 36
-  local yr = pointInterval * POINTS                -- 864
-  local margin = trunc(yr / POINTS) * 2            -- 72
-  local xhalf = trunc(W / 2)                       -- 640
-  local hoffset = k1 * (xhalf / 10)                -- knob1 * 64
+  -- Stock geometry (deviation 6: kept exact, off-screen extents
+  -- included), computed in the presentation surface's dimensions
+  -- (deviation 9): the target's when trails are on, the screen's when
+  -- knob3 = 0.
+  local alpha = trunc(k3 * 20)
+  local GW, GH = (alpha > 0) and TW or W, (alpha > 0) and TH or H
+  local pointInterval = trunc(GH / (POINTS - 4))  -- int(yres / 20)
+  local yr = pointInterval * POINTS
+  local margin = trunc(yr / POINTS) * 2
+  local xhalf = trunc(GW / 2)
+  local hoffset = k1 * (xhalf / 10)
   local centering = (hoffset * 12) / 2             -- 6 * hoffset
   local yoff = 0
   if k2 < 0.48 then
-    yoff = (0.48 - k2) * (H * -0.078)
+    yoff = (0.48 - k2) * (GH * -0.078)
   elseif k2 > 0.52 then
-    yoff = (k2 - 0.52) * (H * 0.078)
+    yoff = (k2 - 0.52) * (GH * 0.078)
   end
 
   -- Fill the 12 curves' control points (audio sampled once per point).
@@ -328,7 +352,7 @@ local function draw(ctx)
     local row = pts[i]
     for p = 0, SEGMENTS do
       local s = left and left[1 + p * 20] or 0
-      local width = trunc(s * 32768 * (W / 32768))  -- int(A * W / 32768) (deviation 4)
+      local width = trunc(s * 32768 * (GW / 32768))  -- int(A * GW / 32768) (deviation 4)
       local spot = pointInterval * p - margin
       row[p * 2 + 1] = width + xhalf - centering + hoffset * i
       row[p * 2 + 2] = spot + yoff * i
@@ -338,7 +362,6 @@ local function draw(ctx)
   -- One foreground colour for the whole frame (deviation 7).
   e.color(fr, fg, fb)
 
-  local alpha = trunc(k3 * 20)
   if alpha > 0 then
     -- Persistence bridge (deviation 5).
     if not targets then

@@ -75,12 +75,21 @@ Per-probe A/B, fraction of pixels changed:
 
 ## Residual risk
 
+- **FIXED 2026-09-18: the geometry was clipped inside the feedback target.** Same defect as
+  the H sibling: `docs/API.md` states that *"drawing inside a target uses that target's
+  dimensions"*, so geometry emitted inside the 640×360 target must be in **640×360
+  coordinates** — this mode computed it from `ctx.width`/`ctx.height` and drew it inside the
+  target anyway. The mode now derives its geometry from the presentation surface's
+  dimensions (`TW`/`TH` = 640×360 when the trail is on, `W`/`H` when `knob3 = 0`), recorded
+  as header deviation 9.
+  **Verification of the fix is by frame comparison, not by the luma summary:** the base and
+  `knob5`-mid probes are byte-identical before and after (correctly — both have `knob3 = 0`,
+  so they take the screen path and nothing should change), while the **trail-on probes
+  changed**: `knob3-mid` 27,961 → 20,364 bytes and `knob3-max` 29,033 → 21,121 bytes,
+  the smaller files reflecting the darker, fuller-frame trail picture. The luma-range summary
+  barely moves because its maximum comes from the bright-background probe.
 - **knob 4's mid probe is exactly 0**, and this is **stock-faithful**: stock's static branch
-  maps `knob4 = 0.5` to `picker(0.0)` — the same colour as `knob4 = 0`. It is live at its max
-  (0.01549), and with no trigger path the gate cannot be banking a false liveness. No floor
-  applied, correctly.
+  maps `knob4 = 0.5` to `picker(0.0)` — the same colour as `knob4 = 0`. Live at its max
+  (0.01549), and with no trigger path the gate cannot be banking a false liveness.
 - **The trail is softer than stock's** because the feedback targets are half resolution.
-- **`min stddev 3.77` is low** (luma 15.44–64.98): a dark frame with thin 1 px strokes.
-- **The device cost is now the two mesh draws** rather than 3312 strokes, but the
-  half-resolution feedback pair still costs the pack's measured ~9 ms bridge overhead on
-  hardware.
+- **`min stddev 3.77`** belongs to the dark-veil trail frame, unchanged by the fix.
