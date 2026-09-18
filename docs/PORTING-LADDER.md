@@ -73,10 +73,11 @@ back-to-back from the *same* release in the same session and compare:
 
 | | |
 | --- | --- |
-| Floor (`starter`, same session) | recorded with every measurement |
-| Pass condition | `p50(mode) − p50(starter) ≤ 8.0 ms` |
+| Floor (`starter`, same session) | measured at least twice, interleaved with the modes; the **minimum** is the reference |
+| Pass condition | `p50(mode) ≤ min(p50(starter)) + 8.0 ms` |
 | Rationale | half a tier-A frame (16.7 ms). If the engine's unloaded floor is ~8 ms, a mode with ≤ 8 ms of its own work still lands in tier A; on the loaded device the same marginal cost keeps the mode in the same band as the shipped library |
 | Reference | the shipped bespoke scene `aurora` measures +8.1 ms over the floor — a port should not be materially heavier than that |
+| Caveat | the shared load swings by 4–13 ms over tens of seconds, so a mode that measures *below* the floor is recorded as "at the floor, load-limited"; only a mode *above* `min(floor) + 8 ms` is a real failure |
 
 Record the floor, the mode's absolute p50 and the marginal cost in the port
 report and in the queue row's `device_p50_ms` (as `"<marginal> over <floor> ms"`).
