@@ -12,12 +12,13 @@ plus provenance).
 | --- | --- |
 | Upstream mode/patch items enumerated | **905** (across 4 upstream sources; +38 local) |
 | Distinct upstream modes after name-normalisation | **406** |
+| Covered by a port in this repo | **3** (P0 pilot: `s-concentric`, `s-gradient-friend`, `s-cone-scope`) |
 | Covered by a scene we already ship | **5** (all *derived* — a bespoke original, not a stock port) |
-| **Not covered** | **401** |
-| — of those, licence-clear enough to port | 295 |
+| **Not covered** | **398** |
+| — of those, licence-clear enough to port | 292 |
 | — of those, copyleft-only (port inherits the licence) | 21 |
 | — of those, **no licence at all** (technique-only, needs permission) | 85 |
-| Modes in this repo (`eyesy-modes-factory`) | **0** |
+| Modes in this repo (`eyesy-modes-factory`) | **3** ports (the pack's own count comes from the port scan below, not from this snapshot) |
 
 Read "not covered" precisely: no mode in the factory pack ports it. Several
 missing rows *are* reachable as technique because a bespoke scene already covers
@@ -25,6 +26,24 @@ the same algorithm (the five `have-derived` rows below) or because the mode is a
 mirror of another source we do have.
 
 ## What we have
+
+### Ported in this repo (3)
+
+Stock modes ported into `eyesy-modes-factory`, each a derivative work under the
+upstream licence and each carrying the upstream citation in its mode header. The
+merge step scans this repo's mode folders for that citation, so a landed port
+moves its upstream row from `missing` to `have-ported` automatically.
+
+| Upstream row | Upstream title | Our mode | Verification |
+| --- | --- | --- | --- |
+| `concentric` | S - Concentric (OSv3) | `s-concentric` | 300-frame contract run: pass (`docs/ports/s-concentric.md`) |
+| `gradient-friend` | S - Gradient Friend (OSv3) | `s-gradient-friend` | 300-frame contract run: pass (`docs/ports/s-gradient-friend.md`) |
+| `cone-scope` | S - Cone Scope (OSv3) | `s-cone-scope` | 300-frame contract run: pass (`docs/ports/s-cone-scope.md`) |
+
+These are the pilot tranche (P0) of `docs/porting-queue.json`; the device tier
+gate is still owed for all three.
+
+### Derived (5)
 
 The 37 scenes we ship live in `eyesy-modes-bespoke` (36) and
 `eyesy-modes-milkdrop` (1), plus the engine-owned `starter`. Five of them line up
@@ -152,8 +171,12 @@ python3 tools/inventory/fetch_patchstorage.py     # 209 EYESY patches
 python3 tools/inventory/fetch_github_stock.py     # critterandguitari account
 python3 tools/inventory/fetch_pysey.py            # pysey patch set
 python3 tools/inventory/fetch_community.py        # community repos + discovery
-python3 tools/inventory/build_coverage.py         # merge -> coverage.json/.csv
+python3 tools/inventory/build_coverage.py     # merge -> coverage.json/.csv
 ```
+
+`build_coverage.py` is offline: it merges the committed per-source JSONs and
+scans this repo's own mode folders for the upstream citation a port carries
+(`raw` provenance for those rows lands under `ports` in `coverage.json`).
 
 Raw HTTP responses cache under `/tmp/eyesy-inventory/`; nothing fetched is
 committed. Each `inventory/*.md` documents its own method, counts, spot-checks

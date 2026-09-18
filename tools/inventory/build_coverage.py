@@ -2,8 +2,9 @@
 """Merge the per-source inventory files into one coverage matrix.
 
 Inputs (docs/research/inventory/): patchstorage.json, github-stock.json,
-pysey.json, community.json, local.json. Outputs: coverage.json (full merged
-rows) and coverage.csv (spreadsheet view, gap list first).
+pysey.json, community.json, local.json — plus this repo's own mode folders,
+scanned for the upstream citation a port must carry. Outputs: coverage.json
+(full merged rows) and coverage.csv (spreadsheet view, gap list first).
 
 Offline and deterministic: no network, no clock, no ordering drift.
 """
@@ -16,9 +17,6 @@ ROOT = Path(__file__).resolve().parents[2]
 INVENTORY = ROOT / 'docs/research/inventory'
 SOURCES = ['patchstorage', 'github-stock', 'pysey', 'community']
 LOCAL = 'local'
-
-# A mode we author is not a port of the upstream it shares a technique with.
-LOCAL_STATUS = {'ours': 'have-derived', 'engine': 'have-engine'}
 
 # Licence verdicts: permissive = derivative port may carry the upstream
 # attribution; copyleft = port is allowed but binds the derived mode; 'none' =
@@ -61,6 +59,35 @@ def load_verdicts():
     return json.loads(path.read_text()).get('verdicts', {})
 
 
+# This repo is the factory port pack: every mode folder whose header cites an
+# upstream source (the citation the porting ladder requires) is a *port* of that
+# upstream mode, which is coverage — unlike a bespoke scene that merely shares a
+# technique. Scanned from the pack itself, so it cannot go stale.
+PORT_CITATION = re.compile(
+    r'^--\s*Upstream(?:\s+repo)?\s*:\s*([\w.-]+/[\w.-]+)\s*(?:,\s*path\s*"([^"]+)")?',
+    re.MULTILINE)
+
+
+def load_ports():
+    """{merge key: port record} for every mode folder in this repo that cites an
+    upstream source in its `main.lua` header."""
+    ports = {}
+    for entry in sorted(ROOT.iterdir()):
+        main = entry / 'main.lua'
+        if entry.name.startswith('.') or not (entry.is_dir() and main.is_file()):
+            continue
+        citation = PORT_CITATION.search(main.read_text()[:4096])
+        if not citation:
+            continue
+        ports[norm(entry.name)] = {
+            'local_key': entry.name,
+            'local_path': entry.name,
+            'upstream': citation.group(1),
+            'upstream_path': citation.group(2),
+        }
+    return ports
+
+
 def load(name):
     path = INVENTORY / f'{name}.json'
     if not path.is_file():
@@ -73,6 +100,7 @@ def load(name):
 def main():
     sources = {name: load(name) for name in SOURCES}
     local = load(LOCAL)
+    ports = load_ports()
 
     have, have_engine = {}, {}
     for item in local['items']:
@@ -118,9 +146,12 @@ def main():
     for row in rows:
         licenses = sorted(row['licenses'])
         verdicts = sorted({license_verdict(text) for text in licenses}) or ['none']
-        match = have.get(row['key'])
+        match = ports.get(row['key'])
         if match:
+            status = 'have-ported'
+        elif have.get(row['key']):
             status = 'have-derived'
+            match = have[row['key']]
         elif have_engine.get(row['key']):
             status = 'have-engine'
             match = have_engine[row['key']]
@@ -159,6 +190,7 @@ def main():
     payload = {
         'sources': {name: sources[name]['counts'] for name in SOURCES},
         'counts': {},
+        'ports': [ports[key] for key in sorted(ports)],
         'rows': matrix,
     }
     counts = {}

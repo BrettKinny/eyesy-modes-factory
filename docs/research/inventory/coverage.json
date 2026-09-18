@@ -82,10 +82,31 @@
   },
   "counts": {
     "have-derived": 5,
-    "missing": 295,
+    "have-ported": 3,
+    "missing": 292,
     "missing-copyleft": 21,
     "missing-no-licence": 85
   },
+  "ports": [
+    {
+      "local_key": "s-concentric",
+      "local_path": "s-concentric",
+      "upstream": "critterandguitari/EYESY_Modes_OSv3",
+      "upstream_path": "S - Concentric/main.py"
+    },
+    {
+      "local_key": "s-cone-scope",
+      "local_path": "s-cone-scope",
+      "upstream": "critterandguitari/EYESY_Modes_OSv3",
+      "upstream_path": "S - Cone Scope/main.py"
+    },
+    {
+      "local_key": "s-gradient-friend",
+      "local_path": "s-gradient-friend",
+      "upstream": "critterandguitari/EYESY_Modes_OSv3",
+      "upstream_path": "S - Gradient Friend/main.py"
+    }
+  ],
   "rows": [
     {
       "key": "reaction-diffusion",
@@ -325,6 +346,183 @@
       "notes": [
         "pysey: EYESY OS version: v2.3; ported-from note: n/a",
         "pysey: EYESY OS version: v3.1; ported-from note: n/a"
+      ]
+    },
+    {
+      "key": "concentric",
+      "title": "S - Concentric",
+      "status": "have-ported",
+      "verdict": null,
+      "verdict_reason": null,
+      "have_as": "s-concentric",
+      "local_path": "s-concentric",
+      "sources": [
+        "community:Arimuri/SHRTY/S - Concentric",
+        "community:hdesoyres/eyesy-modes/S - Concentric",
+        "community:jeromedagustin/eyesy_projects/S - Concentric",
+        "community:pmerienne/eyesy-modes/S - Concentric",
+        "github-stock:EYESY_Modes_OSv3/S - Concentric",
+        "github-stock:EYESY_Modes_Pygame/S - Concentric"
+      ],
+      "generations": [
+        "unknown",
+        "v2-pygame",
+        "v3-pygame"
+      ],
+      "kinds": [
+        "mode"
+      ],
+      "authors": [
+        "Arimuri",
+        "Critter & Guitari",
+        "hdesoyres",
+        "jeromedagustin",
+        "pmerienne"
+      ],
+      "licenses": [
+        "BSD-2-Clause",
+        "NOASSERTION"
+      ],
+      "license_verdict": [
+        "check",
+        "permissive"
+      ],
+      "downloads": null,
+      "views": null,
+      "likes": null,
+      "urls": [
+        "https://github.com/Arimuri/SHRTY/blob/main/data/Modes/S%20-%20Concentric/main.py",
+        "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Concentric/main.py",
+        "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Concentric/main.py",
+        "https://github.com/hdesoyres/eyesy-modes/blob/master/Modes/Python/S%20-%20Concentric/main.py",
+        "https://github.com/jeromedagustin/eyesy_projects/blob/main/examples/scopes/S%20-%20Concentric/main.py",
+        "https://github.com/pmerienne/eyesy-modes/blob/main/Modes/Python/S%20-%20Concentric/main.py"
+      ],
+      "notes": [
+        "github-stock: official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Concentric",
+        "github-stock: v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Concentric",
+        "community: fork=False; upstream=n/a; last push 2026-03-31",
+        "community: fork=False; upstream=n/a; last push 2024-05-24",
+        "community: fork=False; upstream=n/a; last push 2026-06-12",
+        "community: fork=False; upstream=n/a; last push 2021-12-02"
+      ]
+    },
+    {
+      "key": "cone-scope",
+      "title": "S - Cone Scope",
+      "status": "have-ported",
+      "verdict": null,
+      "verdict_reason": null,
+      "have_as": "s-cone-scope",
+      "local_path": "s-cone-scope",
+      "sources": [
+        "community:Arimuri/SHRTY/S - Cone Scope",
+        "community:hdesoyres/eyesy-modes/S - Cone Scope",
+        "community:jeromedagustin/eyesy_projects/S - Cone Scope",
+        "community:pmerienne/eyesy-modes/S - Cone Scope",
+        "github-stock:EYESY_Modes_OSv3/S - Cone Scope",
+        "github-stock:EYESY_Modes_Pygame/S - Cone Scope"
+      ],
+      "generations": [
+        "unknown",
+        "v2-pygame",
+        "v3-pygame"
+      ],
+      "kinds": [
+        "mode"
+      ],
+      "authors": [
+        "Arimuri",
+        "Critter & Guitari",
+        "hdesoyres",
+        "jeromedagustin",
+        "pmerienne"
+      ],
+      "licenses": [
+        "BSD-2-Clause",
+        "NOASSERTION"
+      ],
+      "license_verdict": [
+        "check",
+        "permissive"
+      ],
+      "downloads": null,
+      "views": null,
+      "likes": null,
+      "urls": [
+        "https://github.com/Arimuri/SHRTY/blob/main/data/Modes/S%20-%20Cone%20Scope/main.py",
+        "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Cone%20Scope/main.py",
+        "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Cone%20Scope/main.py",
+        "https://github.com/hdesoyres/eyesy-modes/blob/master/Modes/Python/S%20-%20Cone%20Scope/main.py",
+        "https://github.com/jeromedagustin/eyesy_projects/blob/main/examples/scopes/S%20-%20Cone%20Scope/main.py",
+        "https://github.com/pmerienne/eyesy-modes/blob/main/Modes/Python/S%20-%20Cone%20Scope/main.py"
+      ],
+      "notes": [
+        "github-stock: official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Cone Scope",
+        "github-stock: v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Cone Scope",
+        "community: fork=False; upstream=n/a; last push 2026-03-31",
+        "community: fork=False; upstream=n/a; last push 2024-05-24",
+        "community: fork=False; upstream=n/a; last push 2026-06-12",
+        "community: fork=False; upstream=n/a; last push 2021-12-02"
+      ]
+    },
+    {
+      "key": "gradient-friend",
+      "title": "S - Gradient Friend",
+      "status": "have-ported",
+      "verdict": null,
+      "verdict_reason": null,
+      "have_as": "s-gradient-friend",
+      "local_path": "s-gradient-friend",
+      "sources": [
+        "community:Arimuri/SHRTY/S - Gradient Friend",
+        "community:hdesoyres/eyesy-modes/S - Gradient Friend",
+        "community:jeromedagustin/eyesy_projects/S - Gradient Friend",
+        "community:pmerienne/eyesy-modes/S - Gradient Friend",
+        "github-stock:EYESY_Modes_OSv3/S - Gradient Friend",
+        "github-stock:EYESY_Modes_Pygame/S - Gradient Friend"
+      ],
+      "generations": [
+        "unknown",
+        "v2-pygame",
+        "v3-pygame"
+      ],
+      "kinds": [
+        "mode"
+      ],
+      "authors": [
+        "Arimuri",
+        "Critter & Guitari",
+        "hdesoyres",
+        "jeromedagustin",
+        "pmerienne"
+      ],
+      "licenses": [
+        "BSD-2-Clause",
+        "NOASSERTION"
+      ],
+      "license_verdict": [
+        "check",
+        "permissive"
+      ],
+      "downloads": null,
+      "views": null,
+      "likes": null,
+      "urls": [
+        "https://github.com/Arimuri/SHRTY/blob/main/data/Modes/S%20-%20Gradient%20Friend/main.py",
+        "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Gradient%20Friend/main.py",
+        "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Gradient%20Friend/main.py",
+        "https://github.com/hdesoyres/eyesy-modes/blob/master/Modes/Python/S%20-%20Gradient%20Friend/main.py",
+        "https://github.com/jeromedagustin/eyesy_projects/blob/main/examples/scopes/S%20-%20Gradient%20Friend/main.py",
+        "https://github.com/pmerienne/eyesy-modes/blob/main/Modes/Python/S%20-%20Gradient%20Friend/main.py"
+      ],
+      "notes": [
+        "github-stock: official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Gradient Friend",
+        "github-stock: v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Gradient Friend",
+        "community: fork=False; upstream=n/a; last push 2026-03-31",
+        "community: fork=False; upstream=n/a; last push 2024-05-24",
+        "community: fork=False; upstream=n/a; last push 2026-06-12",
+        "community: fork=False; upstream=n/a; last push 2021-12-02"
       ]
     },
     {
@@ -7570,124 +7768,6 @@
       ]
     },
     {
-      "key": "concentric",
-      "title": "S - Concentric",
-      "status": "missing",
-      "verdict": null,
-      "verdict_reason": null,
-      "have_as": null,
-      "local_path": null,
-      "sources": [
-        "community:Arimuri/SHRTY/S - Concentric",
-        "community:hdesoyres/eyesy-modes/S - Concentric",
-        "community:jeromedagustin/eyesy_projects/S - Concentric",
-        "community:pmerienne/eyesy-modes/S - Concentric",
-        "github-stock:EYESY_Modes_OSv3/S - Concentric",
-        "github-stock:EYESY_Modes_Pygame/S - Concentric"
-      ],
-      "generations": [
-        "unknown",
-        "v2-pygame",
-        "v3-pygame"
-      ],
-      "kinds": [
-        "mode"
-      ],
-      "authors": [
-        "Arimuri",
-        "Critter & Guitari",
-        "hdesoyres",
-        "jeromedagustin",
-        "pmerienne"
-      ],
-      "licenses": [
-        "BSD-2-Clause",
-        "NOASSERTION"
-      ],
-      "license_verdict": [
-        "check",
-        "permissive"
-      ],
-      "downloads": null,
-      "views": null,
-      "likes": null,
-      "urls": [
-        "https://github.com/Arimuri/SHRTY/blob/main/data/Modes/S%20-%20Concentric/main.py",
-        "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Concentric/main.py",
-        "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Concentric/main.py",
-        "https://github.com/hdesoyres/eyesy-modes/blob/master/Modes/Python/S%20-%20Concentric/main.py",
-        "https://github.com/jeromedagustin/eyesy_projects/blob/main/examples/scopes/S%20-%20Concentric/main.py",
-        "https://github.com/pmerienne/eyesy-modes/blob/main/Modes/Python/S%20-%20Concentric/main.py"
-      ],
-      "notes": [
-        "github-stock: official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Concentric",
-        "github-stock: v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Concentric",
-        "community: fork=False; upstream=n/a; last push 2026-03-31",
-        "community: fork=False; upstream=n/a; last push 2024-05-24",
-        "community: fork=False; upstream=n/a; last push 2026-06-12",
-        "community: fork=False; upstream=n/a; last push 2021-12-02"
-      ]
-    },
-    {
-      "key": "cone-scope",
-      "title": "S - Cone Scope",
-      "status": "missing",
-      "verdict": null,
-      "verdict_reason": null,
-      "have_as": null,
-      "local_path": null,
-      "sources": [
-        "community:Arimuri/SHRTY/S - Cone Scope",
-        "community:hdesoyres/eyesy-modes/S - Cone Scope",
-        "community:jeromedagustin/eyesy_projects/S - Cone Scope",
-        "community:pmerienne/eyesy-modes/S - Cone Scope",
-        "github-stock:EYESY_Modes_OSv3/S - Cone Scope",
-        "github-stock:EYESY_Modes_Pygame/S - Cone Scope"
-      ],
-      "generations": [
-        "unknown",
-        "v2-pygame",
-        "v3-pygame"
-      ],
-      "kinds": [
-        "mode"
-      ],
-      "authors": [
-        "Arimuri",
-        "Critter & Guitari",
-        "hdesoyres",
-        "jeromedagustin",
-        "pmerienne"
-      ],
-      "licenses": [
-        "BSD-2-Clause",
-        "NOASSERTION"
-      ],
-      "license_verdict": [
-        "check",
-        "permissive"
-      ],
-      "downloads": null,
-      "views": null,
-      "likes": null,
-      "urls": [
-        "https://github.com/Arimuri/SHRTY/blob/main/data/Modes/S%20-%20Cone%20Scope/main.py",
-        "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Cone%20Scope/main.py",
-        "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Cone%20Scope/main.py",
-        "https://github.com/hdesoyres/eyesy-modes/blob/master/Modes/Python/S%20-%20Cone%20Scope/main.py",
-        "https://github.com/jeromedagustin/eyesy_projects/blob/main/examples/scopes/S%20-%20Cone%20Scope/main.py",
-        "https://github.com/pmerienne/eyesy-modes/blob/main/Modes/Python/S%20-%20Cone%20Scope/main.py"
-      ],
-      "notes": [
-        "github-stock: official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Cone Scope",
-        "github-stock: v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Cone Scope",
-        "community: fork=False; upstream=n/a; last push 2026-03-31",
-        "community: fork=False; upstream=n/a; last push 2024-05-24",
-        "community: fork=False; upstream=n/a; last push 2026-06-12",
-        "community: fork=False; upstream=n/a; last push 2021-12-02"
-      ]
-    },
-    {
       "key": "dancing-circle-image",
       "title": "S - Dancing Circle - Image",
       "status": "missing",
@@ -8412,65 +8492,6 @@
       "notes": [
         "github-stock: official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Gradient Column",
         "github-stock: v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Gradient Column",
-        "community: fork=False; upstream=n/a; last push 2026-03-31",
-        "community: fork=False; upstream=n/a; last push 2024-05-24",
-        "community: fork=False; upstream=n/a; last push 2026-06-12",
-        "community: fork=False; upstream=n/a; last push 2021-12-02"
-      ]
-    },
-    {
-      "key": "gradient-friend",
-      "title": "S - Gradient Friend",
-      "status": "missing",
-      "verdict": null,
-      "verdict_reason": null,
-      "have_as": null,
-      "local_path": null,
-      "sources": [
-        "community:Arimuri/SHRTY/S - Gradient Friend",
-        "community:hdesoyres/eyesy-modes/S - Gradient Friend",
-        "community:jeromedagustin/eyesy_projects/S - Gradient Friend",
-        "community:pmerienne/eyesy-modes/S - Gradient Friend",
-        "github-stock:EYESY_Modes_OSv3/S - Gradient Friend",
-        "github-stock:EYESY_Modes_Pygame/S - Gradient Friend"
-      ],
-      "generations": [
-        "unknown",
-        "v2-pygame",
-        "v3-pygame"
-      ],
-      "kinds": [
-        "mode"
-      ],
-      "authors": [
-        "Arimuri",
-        "Critter & Guitari",
-        "hdesoyres",
-        "jeromedagustin",
-        "pmerienne"
-      ],
-      "licenses": [
-        "BSD-2-Clause",
-        "NOASSERTION"
-      ],
-      "license_verdict": [
-        "check",
-        "permissive"
-      ],
-      "downloads": null,
-      "views": null,
-      "likes": null,
-      "urls": [
-        "https://github.com/Arimuri/SHRTY/blob/main/data/Modes/S%20-%20Gradient%20Friend/main.py",
-        "https://github.com/critterandguitari/EYESY_Modes_OSv3/blob/main/S%20-%20Gradient%20Friend/main.py",
-        "https://github.com/critterandguitari/EYESY_Modes_Pygame/blob/master/S%20-%20Gradient%20Friend/main.py",
-        "https://github.com/hdesoyres/eyesy-modes/blob/master/Modes/Python/S%20-%20Gradient%20Friend/main.py",
-        "https://github.com/jeromedagustin/eyesy_projects/blob/main/examples/scopes/S%20-%20Gradient%20Friend/main.py",
-        "https://github.com/pmerienne/eyesy-modes/blob/main/Modes/Python/S%20-%20Gradient%20Friend/main.py"
-      ],
-      "notes": [
-        "github-stock: official EYESY OS v3.1 mode set; repo licensed BSD-2-Clause (LICENSE file); same mode also in EYESY_Modes_Pygame as S - Gradient Friend",
-        "github-stock: v2.3 pygame mode set; NO LICENSE FILE - porting blocker; same mode also in EYESY_Modes_OSv3 as S - Gradient Friend",
         "community: fork=False; upstream=n/a; last push 2026-03-31",
         "community: fork=False; upstream=n/a; last push 2024-05-24",
         "community: fork=False; upstream=n/a; last push 2026-06-12",

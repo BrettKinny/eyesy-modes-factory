@@ -4,11 +4,15 @@ Ports of the stock Critter & Guitari EYESY mode library to this platform's
 Lua/GLES2 engine. Sibling repos: `eyesy` (engine/OS), `eyesy-modes-bespoke`
 (original scenes), `eyesy-modes-milkdrop` (MilkDrop engine and presets).
 
-**This repo holds no modes yet.** Nothing from `EYESY_Modes_OSv3` or
-`EYESY_oFLua_Examples` has been ported. The directory is the agreed home for
-them; the contract they must be ported *into* is below, and the live inventory
-of what is out there — 406 distinct modes, 401 of them not covered yet — is
-`docs/research/CoverageMatrix.md`.
+**Three modes are ported so far** — the P0 pilot tranche of the stock OSv3 set:
+`s-concentric`, `s-gradient-friend` and `s-cone-scope`. Each passed the 300-frame
+contract run, and each records its upstream citation and the deviations the
+verifier forced in its own header and in `docs/ports/<slug>.md`. The remaining
+105 OSv3 modes and all 14 `EYESY_oFLua_Examples` are still owed; the contract they
+must be ported *into* is below, the live inventory of what is out there — 406
+distinct modes, 398 of them not covered — is `docs/research/CoverageMatrix.md`,
+and the plan for the rest is `docs/PORTING-LADDER.md` with its machine-readable
+queue `docs/porting-queue.json`.
 
 ## Coverage goal
 
@@ -19,7 +23,7 @@ it should never be blocked on engine work or confuse the engine's history.
 
 | Source | Generation | Scale | Status |
 | --- | --- | --- | --- |
-| `critterandguitari/EYESY_Modes_OSv3` | OS v3, Python/pygame | 108 modes (BSD-2-Clause) | 0 ported |
+| `critterandguitari/EYESY_Modes_OSv3` | OS v3, Python/pygame | 108 modes (BSD-2-Clause) | 3 ported (P0 pilot) |
 | `critterandguitari/EYESY_Modes_Pygame` | OS v2-era, Python/pygame | 66 modes; 37 carried into OSv3, 29 v2-only (**no licence file**) | 0 ported |
 | `critterandguitari/EYESY_oFLua_Examples` | v1, Lua/openFrameworks | 14 examples (**no licence file**) | 0 ported |
 | PatchStorage EYESY platform | all of the above + community | 209 entries (live-verified) | 0 ported |
@@ -27,7 +31,7 @@ it should never be blocked on engine work or confuse the engine's history.
 | community repos (GitHub + Codeberg) | all generations | 472 modes across 18 repos, mostly unlicensed | 0 ported |
 
 Those counts are live-verified, not estimates; the merged have/missing verdict —
-406 distinct modes, 401 of them not covered — is
+406 distinct modes, 398 of them not covered — is
 [`docs/research/CoverageMatrix.md`](docs/research/CoverageMatrix.md), with the
 per-source inventories and the gap list (`coverage.csv`) in
 `docs/research/inventory/`.
@@ -41,9 +45,9 @@ technique rather than worked alphabetically.
 Practical notes for a coverage effort at this scale:
 
 - **Ports are not rewrites.** A pygame mode's `pygame.draw` idiom maps onto the
-  immediate primitives almost one-to-one; the interesting work is the five rules
+  immediate primitives almost one-to-one; the interesting work is the six rules
   below (frame rate, persistence, audio buffer shape, palette registration, tier
-  budget), not the drawing calls.
+  budget, positions that leave the frame), not the drawing calls.
 - **Keep the upstream name** where it means something to users, and record the
   source repo, generation and licence in the mode header. Ported modes are
   derivative works.
@@ -54,6 +58,20 @@ Practical notes for a coverage effort at this scale:
   for things our API does not have yet (persistence via `auto_clear` is the
   known one — see the parity plan in the engine repo). Those are blocked on
   engine work, not on porting effort.
+
+## Modes
+
+| Mode | Upstream (OSv3, BSD-2-Clause) | Verification |
+| --- | --- | --- |
+| `s-concentric` | `S - Concentric/main.py` | 300-frame contract run pass — `docs/ports/s-concentric.md` |
+| `s-gradient-friend` | `S - Gradient Friend/main.py` | 300-frame contract run pass — `docs/ports/s-gradient-friend.md` |
+| `s-cone-scope` | `S - Cone Scope/main.py` | 300-frame contract run pass — `docs/ports/s-cone-scope.md` |
+
+Ported modes are derivative works: the mode header carries the upstream repo,
+path and licence, and the port report records the mapping, the deviations the
+verifier forced and the residual risk. The device tier gate (CM3+, `p50 ≤
+33.3 ms`) is still owed for all three — the p50 in the reports is software
+rendering.
 
 ## What a port has to bridge
 
@@ -104,6 +122,13 @@ shader/mesh upgrades.
    V3D 2.1 (A ≤ 16.7 ms / B ≤ 22.2 ms / C ≤ 33.3 ms). A faithful port that does
    not meet tier C is not shippable — see `docs/SCENE-LIBRARY.md` in the engine
    repo for the levers that delivered.
+6. **Positions that leave the frame.** Stock places content by raw pixel
+   arithmetic that walks it off the 1280×720 canvas for part of a knob's range,
+   and stock's own zero-knob state is often degenerate (coincident geometry, a
+   single dot). The verifier fails a blank grab and reads a knob whose `0.5` and
+   `1.0` states are both empty as dead, so each such case gets a *documented*
+   positional or floor deviation. `docs/PORTING-LADDER.md` §3.6 and §4 carry the
+   conventions and the P0 tranche's three worked examples.
 
 Open engine item a port may hit: `ctx.auto_clear` is not yet exposed to Lua and
 the toggle is inert across the fleet, so a persist-dependent mode cannot be
@@ -142,6 +167,11 @@ upload and the stock `/sdcard/Modes` directory use.
 `sync` is required before `./eyesyctl package`; `preview`/`test` resolve across
 the packs directly.
 
+Verify a mode with the engine repo's `tools/scene_verify.py`: the workstation has
+no engine libraries and no `xvfb-run`, so it runs inside the build container.
+The exact command (with the pack mounted as `/factory`) is in
+`docs/PORTING-LADDER.md`; a 300-frame pass is what "ported" means here.
+
 ## Adding a port
 
 ```sh
@@ -152,3 +182,10 @@ Keep the stock mode's name where the original name is meaningful to users, and
 record the upstream source plus the API generation it came from in the mode
 header. Ported modes are derivative works: check the upstream licence and carry
 its attribution.
+
+`docs/PORTING-LADDER.md` is the working contract: the tranche order, the bridge
+rules every port follows (frame rate, persistence, audio shape, colour, cost,
+positions that leave the frame), the deviation classes the verifier forces and
+why, and the acceptance gate. Implementation is delegated to `local-agent`, one
+mode per task, against a prescriptive brief; the session verifies, fixes and
+integrates, and each landed port gets a `docs/ports/<slug>.md` report.

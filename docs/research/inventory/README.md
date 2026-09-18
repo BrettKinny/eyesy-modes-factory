@@ -11,7 +11,7 @@ not hand-edited — regenerate them from the live sources instead.
 | `github-stock.json` | critterandguitari GitHub account | `tools/inventory/fetch_github_stock.py` |
 | `pysey.json` | `martindefatte/pysey` community patch set | `tools/inventory/fetch_pysey.py` |
 | `community.json` | community repos + repo discovery (GitHub, Codeberg) | `tools/inventory/fetch_community.py` |
-| `local.json` | the packs on this machine | filesystem walk (see `local.md`) |
+| `local.json` | the packs on this machine | filesystem walk (see `local.md`); the pack's *ports* are scanned live by `build_coverage.py` |
 | `verdicts.json` | curated portability verdicts (technique triage, licence facts) | hand-maintained; consumed by the merge |
 | `coverage.csv`, `coverage.json` | merged matrix | `tools/inventory/build_coverage.py` |
 
