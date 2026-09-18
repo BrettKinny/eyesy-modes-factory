@@ -866,11 +866,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-googly-eyes.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "0 meshes; 105 draw calls/frame; 2 colour changes at baseline, ~101 at knob4>0.5 (the cost pattern the device measurement flagged)"
   },
   {
    "stock_name": "S - Grid Polygons - Column Color",
