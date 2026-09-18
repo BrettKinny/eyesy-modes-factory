@@ -73,11 +73,30 @@
 --    curve as a run of 1 px lines through its control-point chain; the
 --    engine API has no bezier primitive, so each curve is tessellated as
 --    23 cubic-bezier segments (one per point gap, each with its midpoint
---    chain as the two control handles) at 12 substeps, drawn as 144
---    e.line strokes per curve (1728 total) with a single shared
---    foreground colour per frame — one e.color per frame, inside the
---    colour-change budget of PORTING-LADDER 3.5. The 1 px line width
---    matches gfxdraw's raster output.
+--    chain as the two control handles) at 12 substeps — 276 strokes per
+--    curve, 3312 per frame — drawn with a single shared foreground colour
+--    per frame: one e.color per frame, inside the colour-change budget of
+--    PORTING-LADDER 3.5. Every stroke is one width-1-pixel quad (4
+--    vertices, 2 triangles, 6 indices) batched into indexed triangle
+--    meshes per frame (header deviation 8): two e.update_mesh + two
+--    e.draw_mesh calls replace the 3312 per-frame e.line calls. The 1 px
+--    line width matches gfxdraw's raster output.
+-- 8. Mesh batching: the unbatched port issued 3312 e.line strokes per
+--    frame (12 curves x 23 cubic segments x 12 substeps). This mode
+--    batches the frame into indexed triangle meshes: each stroke becomes
+--    one width-1-pixel quad (4 vertices, two triangles, 6 static 1-based
+--    indices), preallocated at the exact worst case in setup and mutated
+--    in place (house idiom: s-folia-curves deviation 10 /
+--    flow-field-drift / kalachakra-stupa). The frame needs 3312 x 4 =
+--    13248 vertices, over the engine's hard 8192-vertex mesh cap, so it
+--    is split across the fewest meshes that fit: MESHES = 2, six curves
+--    each — exactly QUADS_PER_MESH = 1656 quads -> 6624 vertices / 9936
+--    indices per mesh, inside the 8192 / 49152 caps (limit 32 handles: 2
+--    here). Because each stroke is its own quad, the 12 separate curves
+--    and their segments never gain spurious joining segments (a single
+--    line strip would connect them). Zero-length strokes (possible when
+--    audio collapses a bezier) are emitted degenerate (zero-area), which
+--    the GPU rasterises to nothing.
 
 local e = eyesy
 local PI = math.pi
@@ -86,7 +105,16 @@ local CURVES = 12
 local POINTS = 24
 local STEPS = 12        -- cubic substeps per segment
 local SEGMENTS = POINTS - 1
-local STRIDES = SEGMENTS * STEPS + 1  -- points per curve (279)
+local STRIDES = SEGMENTS * STEPS + 1  -- points per curve (277)
+
+-- Batching budget (deviation 8): the frame emits
+-- CURVES * SEGMENTS * STEPS = 3312 strokes, i.e. 13248 quad vertices —
+-- over the engine's hard 8192-vertex mesh cap, so the frame takes the
+-- fewest meshes that fit. CURVES / MESHES is exact, so every mesh is
+-- exactly full every frame.
+local MESHES = 2
+local CURVES_PER_MESH = CURVES / MESHES                    -- 6
+local QUADS_PER_MESH = CURVES_PER_MESH * SEGMENTS * STEPS  -- 1656
 
 -- Deterministic middle branch of the stock legacy color_picker (deviation 1).
 local function picker(c)
@@ -124,6 +152,37 @@ for i = 1, CURVES do
   pts[i] = row
 end
 
+-- Batched triangle-mesh buffers (header deviation 8). One width-1-pixel
+-- quad (4 vertices, 6 static indices) per stroke, preallocated per mesh
+-- at the exact worst case and mutated in place; draw never allocates.
+-- Every frame fills every slot of every mesh, so each table passed to
+-- update_mesh is always fully populated (the engine validates the whole
+-- table).
+local mesh = {}
+for m = 1, MESHES do
+  local verts = {}
+  for i = 1, QUADS_PER_MESH * 4 do
+    verts[i] = { 0, 0, 0 }
+  end
+  local idx = {}
+  for q = 0, QUADS_PER_MESH - 1 do
+    local b6 = q * 6
+    local b4 = q * 4
+    idx[b6 + 1] = b4 + 1
+    idx[b6 + 2] = b4 + 2
+    idx[b6 + 3] = b4 + 3
+    idx[b6 + 4] = b4 + 1
+    idx[b6 + 5] = b4 + 3
+    idx[b6 + 6] = b4 + 4
+  end
+  mesh[m] = { verts = verts, idx = idx, handle = nil }
+end
+
+-- The mesh's vertex table and the slot currently being written; draw
+-- selects them per mesh before emitting that mesh's curves.
+local cur_verts
+local cur_n = 0
+
 local function clear_targets()
   local t1, t2 = targets[1], targets[2]
   e.begin_target(t1)
@@ -134,9 +193,44 @@ local function clear_targets()
   e.end_target()
 end
 
--- Draw one curve (row = flat x,y pair table of STRIDES points) with the
--- current e.color. 23 cubic segments x 12 substeps = 276 e.line strokes.
-local function draw_curve(row)
+-- Append one stroke as its quad: perpendicular offset of half a pixel
+-- on each side, matching the width-1 e.line it replaces. A zero-length
+-- stroke emits a degenerate (zero-area) quad, which the GPU rasterises
+-- to nothing.
+local function push_seg(x1, y1, x2, y2)
+  cur_n = cur_n + 1
+  local b4 = (cur_n - 1) * 4
+  local dx = x2 - x1
+  local dy = y2 - y1
+  local len2 = dx * dx + dy * dy
+  if len2 < 1e-9 then
+    for k = 1, 4 do
+      local v = cur_verts[b4 + k]
+      v[1] = x1
+      v[2] = y1
+    end
+    return
+  end
+  local half = 0.5 / math.sqrt(len2)
+  local nx = -dy * half
+  local ny = dx * half
+  local v1 = cur_verts[b4 + 1]
+  v1[1] = x1 + nx
+  v1[2] = y1 + ny
+  local v2 = cur_verts[b4 + 2]
+  v2[1] = x1 - nx
+  v2[2] = y1 - ny
+  local v3 = cur_verts[b4 + 3]
+  v3[1] = x2 + nx
+  v3[2] = y2 + ny
+  local v4 = cur_verts[b4 + 4]
+  v4[1] = x2 - nx
+  v4[2] = y2 - ny
+end
+
+-- Emit one curve (row = flat x,y pair table of STRIDES points) into the
+-- batched mesh: 23 cubic segments x 12 substeps = 276 quads.
+local function emit_curve(row)
   local j0 = 1
   for seg = 1, SEGMENTS do
     local x0, y0 = row[j0], row[j0 + 1]
@@ -161,8 +255,25 @@ local function draw_curve(row)
       j0 = j0 + 2
       local qx = b0 * mx01 + b1 * mx12 + b2 * mx23 + b3 * x3
       local qy = b0 * my01 + b1 * my12 + b2 * my23 + b3 * y3
-      e.line(px, py, qx, qy, 1)
+      push_seg(px, py, qx, qy)
     end
+  end
+end
+
+-- Emit the frame's 3312 strokes and draw them (deviation 8): curves 1..6
+-- go into mesh 1, curves 7..12 into mesh 2. Two update_mesh + draw_mesh
+-- pairs replace the 3312 e.line calls the unbatched port issued.
+local function draw_meshes()
+  for m = 1, MESHES do
+    local entry = mesh[m]
+    cur_verts = entry.verts
+    cur_n = 0
+    local i0 = (m - 1) * CURVES_PER_MESH + 1
+    for i = i0, i0 + CURVES_PER_MESH - 1 do
+      emit_curve(pts[i])
+    end
+    e.update_mesh(entry.handle, entry.verts, entry.idx)
+    e.draw_mesh(entry.handle)
   end
 end
 
@@ -246,9 +357,7 @@ local function draw(ctx)
     e.color(br * (1 - f), bgc * (1 - f), bb * (1 - f))
     e.rect(0, 0, 640, 360)
     e.color(fr, fg, fb)
-    for i = 1, CURVES do
-      draw_curve(pts[i])
-    end
+    draw_meshes()
     e.end_target()
 
     e.color(1, 1, 1)
@@ -262,9 +371,7 @@ local function draw(ctx)
     if targets and prev_alpha > 0 then
       clear_targets()
     end
-    for i = 1, CURVES do
-      draw_curve(pts[i])
-    end
+    draw_meshes()
   end
 end
 
@@ -276,6 +383,9 @@ return {
     e.param("trails", 0.5, 0, 1, 3)
     e.param("fg", 0.5, 0, 1, 4)
     e.param("bg", 0.5, 0, 1, 5)
+    for m = 1, MESHES do
+      mesh[m].handle = e.new_mesh()
+    end
   end,
   draw = draw,
 }

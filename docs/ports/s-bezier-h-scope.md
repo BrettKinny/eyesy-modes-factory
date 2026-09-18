@@ -13,21 +13,25 @@
 Twelve horizontal cubic-bezier curves whose control points come from the audio window,
 drawn over a decaying trail, with a moving spot.
 
-## The cost problem this port inherits
+## The cost problem this port inherited, and its fix
 
-**1728 `e.line` strokes per frame** (12 curves × 23 cubic segments × 12 substeps). That is
-the pack's own measured warning sign: `s-folia-curves` issued ~4032 *vertices* worth of
-polylines and measured **40.56 ms** on the CM3+ (a 24.18 ms floor, +16.4, outside tier C)
-before it was batched into one mesh — after which it measured **30.00 ms**. The pack's
-recorded lesson (ladder §3.5) is explicit: *the bigger lever is draw calls, not
-resolution*.
+**3312 `e.line` strokes per frame** (12 curves × 23 cubic segments × 12 substeps) — note
+this report first said 1728, which was an **arithmetic slip** (12 × 23 × 12 = 3312); the
+batching task caught it.
 
-1728 strokes is roughly 10× the folia stroke count, so this mode is **expected to be far
-outside tier C** on real hardware. The device gate is retired by user direction, so this is
-not a gate failure — but the pack's own guidance says the fix is the **quad idiom**: one
-mesh per frame, every stroke a 4-vertex quad with static 1-based triangle indices
-(1728 × 4 = 6912 vertices, 1728 × 6 = 10368 indices, both inside the 8192 / 49152 caps),
-one `e.update_mesh` + one `e.draw_mesh`. **Batching fix queued.**
+That is the pack's own measured warning sign: `s-folia-curves` measured **40.56 ms** on the
+CM3+ (a 24.18 ms floor, +16.4, outside tier C) before batching took it to **30.00 ms**.
+Ladder §3.5: *the bigger lever is draw calls, not resolution.*
+
+**Batched into meshes (deviation 8).** Each stroke is a 4-vertex quad with static 1-based
+triangle indices. 3312 quads is 13248 vertices — **over the engine's 8192-vertex cap** — so
+the frame is split across the fewest meshes that fit: **`MESHES = 2`, six curves each**,
+1656 quads → **6624 vertices / 9936 indices per mesh**, inside both caps, 2 handles of the
+32 allowed. Two `e.update_mesh` + two `e.draw_mesh` per frame replace the 3312 `e.line`
+calls. Because each stroke is its own quad, the 12 separate curves and their segments never
+gain spurious joining segments — the trap a single continuous line strip would have hit
+(`update_mesh` without indices *is* a line strip). `CURVES / MESHES` is exact, so every mesh
+is exactly full every frame and `update_mesh` never sees a partially-filled table.
 
 ## The persistence bridge
 
@@ -57,27 +61,32 @@ transparent veil. 2 render targets, 5 `e.color` calls in the persistence path.
    segments (midpoint control handles) at 12 substeps — matching `gfxdraw`'s 1 px raster.
    Zero per-frame allocation; **0 mesh handles**.
 
-## Verification — 2026-09-18
+## Verification — 2026-09-18 (after batching)
 
-`python3 tools/verify_port.py s-bezier-h-scope --frames 300` → `"verdict": "pass"`, `failures: []`.
+`python3 tools/verify_port.py s-bezier-h-scope --frames 300` → `"verdict": "pass"`, `failures: []`. Software GL (llvmpipe), engine sha256 `bc29aeef4021…`.
 
 Per-probe A/B, fraction of pixels changed:
 
 | Knob | mid | max |
 | --- | --- | --- |
-| 1 `yoff` | 0.02243 | 0.02178 |
-| 2 `xoff` | 0.01345 | 0.03390 |
-| 3 `trails` | 1.00000 | 0.99619 |
-| 4 `fg` | **0.00000** | 0.01230 |
-| 5 `bg` | 0.98770 | 0.98770 |
+| 1 `yoff` | 0.01700 | 0.01650 |
+| 2 `xoff` | 0.01020 | 0.02570 |
+| 3 `trails` | 1.00000 | 0.99310 |
+| 4 `fg` | **0.00000** | 0.00930 |
+| 5 `bg` | 0.99070 | 0.99070 |
 
-| Check | Result |
-| --- | --- |
-| determinism | mean 0.0, frac 0.0 |
-| audio | quiet 0.01461, loud 0.03483, freq 0.01905 (threshold 0.001) |
-| trigger | not referenced — stock has no trigger/random state, so the fallback cannot fire |
-| luma bounds | mean 14.48–64.77, min stddev 3.35 |
-| `p50_ms` (software GL) | 16.58 |
+| Check | 300 frames (batched) | 300 frames (before) |
+| --- | --- | --- |
+| determinism | mean 0.0, frac 0.0 | mean 0.0, frac 0.0 |
+| audio | quiet 0.0112, loud 0.0266, freq 0.0145 | 0.0146 / 0.0348 / 0.0191 |
+| trigger | not referenced | not referenced |
+| luma bounds | mean 13.6–64.59, min stddev 2.94 | 14.48–64.77, min stddev 3.35 |
+| `p50_ms` (software GL) | 16.7 (resources 4) | 16.6 (resources 2) |
+
+Every value moves by a few percent and none changes character — the expected result of
+rasterising each 1 px stroke as a solid quad instead of a width-1 line, the same trade the
+folia sibling documented (*same footprint, no anti-aliasing either way*). `resources 4` is
+the two meshes plus the two half-resolution trail targets.
 
 ## Residual risk
 

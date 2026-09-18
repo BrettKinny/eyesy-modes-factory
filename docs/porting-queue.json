@@ -694,7 +694,7 @@
    "evidence": "docs/ports/s-bezier-h-scope.md",
    "device_p50_ms": null,
    "device_tier": "retired (repo-only)",
-   "device_note": "1728 e.line strokes/frame -- 10x the folia count that measured outside tier C; batching fix queued. 2 half-res render targets for the trail."
+   "device_note": "batched into 2 meshes (3312 strokes -> 1656 quads/mesh, 6624 verts / 9936 indices each); 2 half-res trail targets"
   },
   {
    "stock_name": "S - Bezier V Scope",
