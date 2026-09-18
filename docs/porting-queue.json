@@ -514,7 +514,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-0-arrival-scope.md",
-   "device_p50_ms": null
+   "device_p50_ms": "24.55 (floor 24.45, marginal +0.1)"
   },
   {
    "stock_name": "S - AA Selector",
@@ -531,7 +531,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-aa-selector.md",
-   "device_p50_ms": null
+   "device_p50_ms": "24.32 (floor 24.45, marginal -0.1)"
   },
   {
    "stock_name": "S - Amp Color",
