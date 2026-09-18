@@ -71,10 +71,11 @@
 --    the end (7 points per cell), giving a closed outline. Stock draws a
 --    3 px outline (int(xr*0.0027) = 3); the mesh strip is 1 px. If the 1 px
 --    strip reads too thin at the gate, the strips would be drawn twice at ±1 px offsets.
---    Per-frame cost: 70 cells × 1 e.color + 3 update_mesh calls (one per
---    class, uploading only the filled vertex prefix). The vertex order
---    within each mesh is static (i, j) order, so each cell always lands in
---    the same slot and the prefix is contiguous.
+--    Per-frame cost: 3 e.color calls (one per class, set immediately
+--    before that class's draw) + 3 update_mesh calls (one per class,
+--    uploading only the filled vertex prefix). The vertex order within
+--    each mesh is static (i, j) order, so each cell always lands in the
+--    same slot and the prefix is contiguous.
 -- 7. No positional deviation: the stock grid fits inside the 1280x720 frame
 --    at all knob values (odd rows shift by <= 160 px, odd columns by <= 144 px;
 --    the largest polygon spans w*raNr + rad <= 4.5*20 + 128.3 ≈ 218 px from its
@@ -178,22 +179,29 @@ local function draw(ctx)
     (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
     (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
 
-  -- Per-cell patchwork colour (deviation 1) and per-colour-class meshes
-  -- (deviation 6).
+  -- Per-colour-class colour (deviation 1) and per-colour-class meshes
+  -- (deviation 6). Each class's whole mesh is drawn with a single colour
+  -- state: the colour a cell gets depends only on its class, so one
+  -- e.color per class (set immediately before that class's draw) replaces
+  -- one per cell.
+  local classColor = {}
+  for k = 1, NCOLORS do
+    local phase
+    if k == 1 then
+      phase = fg
+    elseif k == 2 then
+      phase = (0.4 + fg) % 1
+    else
+      phase = (0.8 + fg) % 1
+    end
+    classColor[k] = picker(phase)
+  end
+
   for i = 0, ROWS - 1 do
     for j = 0, COLS - 1 do
       local cc = cellColor(i, j)
       local m = meshes[cc]
       local v = m.v
-      local r, g, b
-      if cc == 1 then
-        r, g, b = picker(fg)
-      elseif cc == 2 then
-        r, g, b = picker((0.4 + fg) % 1)
-      else
-        r, g, b = picker((0.8 + fg) % 1)
-      end
-
       local x = j * x8 - x8
       local y = i * y5 - y5
       if i % 2 == 1 then x = x + xoffset end
@@ -232,12 +240,13 @@ local function draw(ctx)
       v[b0 + 6][1] = p5x; v[b0 + 6][2] = p5y
       v[b0 + 7][1] = p0x; v[b0 + 7][2] = p0y
 
-      e.color(r, g, b)
       e.update_mesh(m.handle, v, nil, m.n)
     end
   end
 
   for k = 1, NCOLORS do
+    local r, g, b = classColor[k]
+    e.color(r, g, b)
     e.draw_mesh(meshes[k].handle)
   end
 end
