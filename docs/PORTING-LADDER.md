@@ -241,6 +241,12 @@ this pack has settled on:
    revision created 70 per-cell handles and the engine rejected it with "mesh
    budget exceeded".
 
+   **`update_mesh` validates the ENTIRE vertices table.** A mesh preallocated at a
+   fixed capacity and uploaded with only its filled prefix throws *"attempt to
+   index a nil value"* (found porting `s-grid-polygons-patchwork-color`). Size each
+   mesh at its **exact** populated vertex count so the table is never partially
+   filled; a trailing `nil` is fatal, and a fourth count argument is ignored.
+
 6. **Positions that leave the frame** — many stock modes place content by raw
    pixel arithmetic that walks it off the 1280×720 canvas for part of a knob's
    range (`S - Gradient Friend` ejects its column for `knob2 > ~0.45`,
@@ -262,6 +268,35 @@ this pack has settled on:
 
    Record the deviation in the mode header and the port report, and keep the
    stock arithmetic bit-exact for every position that lands inside the frame.
+
+### Family: `grid-slide-square` (6 modes)
+
+The family differs along **two** axes and neither is cosmetic — diff the sources
+rather than assuming a copy:
+
+- **`Filled` vs `Unfilled`**: filled draws `pygame.draw.rect(screen, color, rect, 0)`
+  and applies the slide offsets to *every* cell; unfilled draws an outline of
+  `linew = int(xr*0.0026)` and makes the offsets **conditional** on the same parity
+  branches (`if i%2==1: x = ...`, `if j%2==1: y = ...`).
+- **Colour**: `Uniform` is one `color_picker_lfo(knob4)` per frame; `Column` is a
+  per-column colour; `Patchwork` overwrites sequentially — `i%2==1 → picker(knob4)`,
+  `j%2==1 → picker(1-knob4)`, `(j+i)%3==1 → picker((0.8+knob4)%1)`, last match wins.
+
+Shared: the 7×10 grid (`x = j*x8 - x8`, `y = i*y5 - y5`), `rad = |audio_in[j-i]| /
+hund` with `hund = xr*0.07734`, `width = int(knob3*hund)+1`, and the `sqmover` LFO
+(`start = -otwen`, `max = otwen`, `otwen = xr*0.09375`).
+
+**The `sqmover` oscillator advances 14 times per frame** — the knob block runs 7 times
+(once per row) and calls `update()` **twice** each time, and `xoffset`/`yoffset` are two
+*separate* advances, so `yoffset` is always one step ahead of `xoffset`. Advancing once
+per frame and reusing the value for both is wrong.
+
+**knob1 and knob2 are mutually dependent.** `knob2 = 0` sets `max = start = 0`, which
+pins the oscillator at 0, so knob1 alone can never move anything; `knob1 = 0` makes the
+step zero, so knob2 alone can never move anything either. The verifier probes one knob
+at a time from an all-zero baseline, so both read dead — a **stock-faithful** deadness
+that nonetheless fails the gate, and so needs the documented-deviation treatment of §4
+rather than a re-reading of the source.
 
 ## 4. Deviations the gate forces
 
