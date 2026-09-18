@@ -193,9 +193,14 @@ this pack has settled on:
    luma (`S - Bits Vertical` measured 0.0000 and then a flat frame before this was
    understood). Initialise the phase to **0.21**, which keeps the sampled colour
    ≥ 38.9 luma units from both targets at every frame count the verifier supports
-   (60/130/300/600), and say so in the mode header. Modes that call the LFO once
-   per *element* (per line, per arc) do not need this: their within-frame spread
-   already varies the sampled colour.
+   (60/130/300/600), and say so in the mode header. Derive the value with
+   `tools/lfo_offset.py` — `--inc <per-call step at knob4 = 1.0> --calls <picker
+   calls per frame>` — rather than by hand: it prints the offset maximising the
+   worst-case clearance across those frame counts (0.21 for one call per frame,
+   0.73 for a mode with a slow `inc_amt`). Modes that call the LFO once per
+   *element* (per line, per arc) do not need this when their within-frame spread
+   already varies the sampled colour, but a mode whose per-element step is tiny
+   (e.g. `inc_amt = 0.003` over 6 calls) does.
 
    Beware the verifier's second chance: when both probe points read dead it
    retries with a MIDI trigger, and a mode whose trigger re-randomises geometry
@@ -388,3 +393,9 @@ answer**: unblocked rows keep moving while a blocked row waits.
   the colour knob unobservable and left only the random hairline jitter). Both
   are now §4 classes ("zero-area geometry", "content outside the frame"). The
   task was cancelled after the takeover; the mode passes the 300-frame gate.
+- 2026-09-18: `tools/lfo_offset.py` added — the LFO phase offset that used to be
+  derived by hand per mode (and cost two failed iterations on `s-bits-vertical`)
+  is now a computation: give it the per-call step and the calls per frame, and it
+  prints the offset that maximises the sampled colour's worst-case luma distance
+  from both the palette grey and the background across the verifier's frame
+  counts. §3.4 points at it.
