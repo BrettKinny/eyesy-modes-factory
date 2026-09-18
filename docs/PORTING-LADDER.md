@@ -128,7 +128,13 @@ this pack has settled on:
    per-frame constant against `ctx.dt` (or halve the increments).
 2. **Persistence** — stock trails are a veil alpha-fill over the previous
    surface; ours is a decayed ping-pong feedback target. Port the look, never
-   the veil literally.
+   the veil literally. **The bridge costs three full-screen passes per frame**
+   (scene → target, alpha fade, blit) and is the only thing in the pack that has
+   failed the device tier gate: `s-folia-angles` measured **+21.0 ms** and
+   `s-folia-curves` **+28.4 ms** over a 24.18 ms floor, against a gate of +8.0.
+   **Allocate the ping-pong pair at half resolution** (`e.target(640, 360)` with
+   `draw_target(handle, 0, 0, 1280, 720)`) — the lever the shipped bespoke library
+   uses (`whitney-kaleido`'s 640×360 targets) — and document the softer trail.
 3. **Audio shape** — stock is a 100-value ring at 100 Hz, ±32768; ours is 1024
    normalized samples + 513 FFT bins + 3 bands + rms. Waveform-reading modes
    need the index mapping recomputed; never copy `audio_in[i]` verbatim. The

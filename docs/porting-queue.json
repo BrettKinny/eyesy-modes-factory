@@ -803,7 +803,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-circle-scope-opposite-colors.md",
-   "device_p50_ms": null
+   "device_p50_ms": "23.99 (floor 24.18, marginal -0.2, PASS)"
   },
   {
    "stock_name": "S - Folia Angles",
@@ -820,7 +820,8 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-folia-angles.md",
-   "device_p50_ms": null
+   "device_p50_ms": "45.20 (floor 24.18, marginal +21.0, FAIL (tier))",
+   "device_tier": "fail: persistence bridge at full resolution"
   },
   {
    "stock_name": "S - Folia Curves",
@@ -837,7 +838,8 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-folia-curves.md",
-   "device_p50_ms": null
+   "device_p50_ms": "52.56 (floor 24.18, marginal +28.4, FAIL (tier))",
+   "device_tier": "fail: persistence bridge at full resolution"
   },
   {
    "stock_name": "S - Googly Eyes",
