@@ -1073,11 +1073,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-line-bounce-four-lfo-alternate.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "8 draw calls/frame (4 e.color + 4 e.line), 0 meshes, 0 targets"
   },
   {
    "stock_name": "S - Line Bounce Two - LFO Alternate",
