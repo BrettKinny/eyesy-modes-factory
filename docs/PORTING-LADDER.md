@@ -467,6 +467,13 @@ than silently applied:
   file, then run the gate"**. The conventions are documented in this file so the
   brief does not have to send the agent looking for them. If a task needs real
   investigation, that is this session's job, not the implementer's.
+- **Verify the stock path and slug before writing the brief.** A brief that names
+  a folder that does not exist sends the agent hunting: `S - Sound Jaws` is not a
+  mode — the library has `S - Sound Jaws - Stepped Color` and `S - Sound Jaws -
+  Uniform Color` — and the task given the wrong path spent its full budget
+  floundering and produced a port that drew nothing. `docs/porting-queue.json`
+  carries the authoritative `source_path` per row; read it rather than
+  reconstructing the name from the slug.
 - **This session verifies every port** (300-frame contract run + device gate)
   before it enters the ladder's "done" column, and commits ports in tranches.
 - **Stage explicitly.** Never `git add -A` while a porting task is mid-flight: a
