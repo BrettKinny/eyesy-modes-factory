@@ -412,3 +412,21 @@ answer**: unblocked rows keep moving while a blocked row waits.
   `gradient-column`, the 11-mode grid family, `line-traveller`, `two-scopes`,
   `zoom-scope`), and the loop is one `local-agent` task at a time with the session
   running every 300-frame gate.
+- 2026-09-18: `s-gradient-column` is the clearest lesson in P1 so far: the *same
+  bytes* passed at 60 frames and failed at 300 (`knob3` dead at both probe
+  points), because stock's swell enters the radius as the frequency of a sine of
+  the circle index, so its effect vanishes whenever the sine sits near an
+  extremum. Three legibility deviations (circle-count floor 30, radius floor 8,
+  swell phase coefficient widened 0.1 → 0.3) make the knob observable at any
+  instant; the 300-frame gate then passes with all five knobs live.
+- 2026-09-18: the device gate's protocol needed a correction the P1 batch caught:
+  the floor itself moved 13 ms between two back-to-back `starter` runs, so a
+  single floor reading at the start of a long batch is not a valid reference —
+  `s-football-scope` was reported at +13.6 ms and is actually +1.1 ms over a quiet
+  floor. The protocol is now floor → mode → floor, accepting a marginal only when
+  the two floors agree within 2 ms. Receipt updated:
+  `docs/device-tier/2026-09-18.md`.
+- 2026-09-18: the 11-mode grid family is under way (row 1,
+  `s-grid-circles-column-color`, passed on the agent's first iteration from the
+  family brief). Thirteen modes are verified in total (3 P0 + 10 P1), each with a
+  port report and a queue row.
