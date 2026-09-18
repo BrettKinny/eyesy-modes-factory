@@ -839,8 +839,9 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-folia-curves.md",
-   "device_p50_ms": "52.56 (floor 24.18, marginal +28.4) at full res; quarter-res revision pending measurement",
-   "device_tier": "pending (quarter-res revision in flight)"
+   "device_p50_ms": "30.00 (floor 24.18, marginal +5.8, absolute inside tier C 33.3)",
+   "device_tier": "pass",
+   "device_note": "quarter-res bridge + batched quads (one mesh, one draw); 40.56 -> 30.00 by batching"
   },
   {
    "stock_name": "S - Googly Eyes",

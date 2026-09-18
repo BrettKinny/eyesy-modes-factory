@@ -51,14 +51,64 @@ stride; and the 1-based-state / 0-based-stock-index fix.
 | luma bounds | **mean 4.13–26.09**, min stddev 1.56 |
 | `p50_ms` (software GL) | 16.7 (resources 6) |
 
+## Device tier: fixed, measured
+
+| Revision | device p50 | marginal (floor 24.18) | tier C (≤ 33.3 ms) |
+| --- | --- | --- | --- |
+| full-res bridge, line strips | 52.56 | +28.4 | outside |
+| half-res bridge, line strips | — | — | (superseded) |
+| **quarter-res bridge, batched quads** | **30.00** | **+5.8** | **inside** |
+
+The decisive lever was **draw calls, not resolution**: the polylines are now one
+preallocated mesh per frame (every segment a 4-vertex quad with static 1-based
+triangle indices — the house idiom from the bespoke library's `flow-field-drift` and
+`kalachakra-stupa`), one `e.update_mesh` + one `e.draw_mesh` per frame, worst case
+4032 vertices / 6048 indices. The agent explicitly rejected a single continuous line
+strip, correctly: `update_mesh` without indices *is* a line strip, and it would have
+drawn spurious joining segments between the four separate curves per box and across
+the 63 boxes.
+
+The mode is now **cheaper than its sibling** (30.00 vs 32.96 ms), which uses line
+strips.
+
+## Determinism: the veil floor
+
+One 300-frame run failed the harness precondition (*"identical replays differ by mean
+4.73, frac 0.98"*) while four others passed. Cause: at the baseline every knob is 0, so
+the veil alpha is `knob3*45/255 = 0` — stock's baseline veil does nothing, the trail
+never decays, and the engine's audio analysis arrives from a separate thread, so a
+first-frames snapshot difference becomes **permanent**. The port floors the alpha at
+**8/255** (~3 %, a ~30-frame time constant), which attenuates a startup difference to
+~1e-4 by frame 300 while the trail still reads as a trail. Two consecutive 300-frame
+runs pass with the floor in place.
+
+## Verification — 2026-09-18
+
+`python3 tools/verify_port.py s-folia-curves --frames 300` → `"verdict": "pass"` (two
+consecutive runs, determinism precondition holding). Software GL (llvmpipe), engine
+sha256 `454ece7aafe7…`.
+
+| Check | Result |
+| --- | --- |
+| determinism | mean 0.0, frac 0.0 (with the veil floor) |
+| knob 1 `shape` | mid 0.1327, max 0.2220 |
+| knob 2 `spin` | mid 0.1241, max 0.1039 |
+| knob 3 `trail` | mid 0.9955, max 0.9964 |
+| knob 4 `fg` | mid 0.0000, max 0.0573 |
+| knob 5 `bg` | mid 1.0000, max 1.0000 |
+| audio | quiet 0.0994, loud 0.2004, freq 0.1407 (threshold 0.001) |
+| luma bounds | mean 4.44–26.04, min stddev 1.28 |
+| `p50_ms` (software GL) | 16.1 (resources 6) |
+
 ## Residual risk
 
-- **The frame is very dark** (mean luma 4.13 at its lowest), the same as the
-  sibling: the veil fades toward a near-black background, so the mode sits close to
-  the verifier's blank bound. The bezier substitution makes it marginally darker
-  still than the polylines it replaces (fewer, thinner strokes).
-- **`knob3`'s probes read 1.0000** — the veil keys off the trail knob, so its states
-  are maximally different from the baseline; the knob's subtle range is untested.
-- **The persistence bridge transferred between siblings without rework** — the second
-  mode in the pack to carry a ping-pong render target, and the copy passed first try.
-- Device tier owed.
+- **The frame is very dark** (mean luma 4.44 at its lowest): the veil fades toward a
+  near-black background, so the mode sits close to the verifier's blank bound. Same as
+  its sibling.
+- **The quads are solid 1-target-pixel rectangles** where the line strips were
+  width-1 strips — the same footprint, no anti-aliasing either way (the `aalines` AA
+  was already dropped).
+- **The veil floor changes the baseline look**: stock's trail is permanent at
+  `knob3 = 0`; the port's always decays (that is what makes the mode deterministic).
+- **The batching lesson is now in the ladder** (§3.2): for polyline-heavy modes the
+  tier lever is draw calls, not resolution.
