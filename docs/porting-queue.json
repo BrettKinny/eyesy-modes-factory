@@ -928,11 +928,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-grid-slide-square-filled-column-color.md",
+   "device_p50_ms": "24.18",
+   "device_tier": "pass",
+   "device_note": "at the floor; 10 e.color calls/frame"
   },
   {
    "stock_name": "S - Grid Slide Square - Filled Patchwork Color",
