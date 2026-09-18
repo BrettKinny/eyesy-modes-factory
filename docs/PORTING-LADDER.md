@@ -138,7 +138,26 @@ bridge"); the five things that are never mechanical, each with the convention
 this pack has settled on:
 
 1. **Frame rate** — stock ticks at a hard 30 fps, ours at 60: re-time every
-   per-frame constant against `ctx.dt` (or halve the increments).
+   per-frame constant against `ctx.dt` (or halve the increments). **Get the factor
+   right — it has been got wrong twice, both times silently.**
+
+   Stock advances a stateful value by `step` **once per 30-fps frame**, i.e.
+   `30·step` per second. The port runs at 60 fps with `ctx.dt` in **seconds**
+   (`1/60` under the verifier), so the correct per-frame advance is
+   **`step * 30 * ctx.dt`** — which is `step/2` per frame, i.e. `30·step` px/s,
+   matching stock exactly. Two wrong forms have shipped:
+
+   - `step * 2 * ctx.dt` = `step/30` per frame = `2·step` px/s — **15× too slow**
+     (`s-line-bounce-four-lfo-alternate`; its speed knob barely showed, both probe
+     points reading a near-identical 0.01376, which is what gave it away).
+   - advancing **once per frame** where stock advanced 14 times
+     (`s-grid-slide-square-filled-uniform-color`; see the family note below).
+
+   Both passed the contract gate. **The gate cannot see rate** — it checks
+   determinism, liveness, reactivity and brightness, and a mode running at the
+   wrong speed satisfies all four. The only defences are doing the arithmetic and
+   sanity-checking that a *speed* knob actually changes the frame between its
+   probes.
 2. **Persistence** — stock trails are a veil alpha-fill over the previous
    surface; ours is a decayed ping-pong feedback target. Port the look, never
    the veil literally. **The bridge costs three full-screen passes per frame**
