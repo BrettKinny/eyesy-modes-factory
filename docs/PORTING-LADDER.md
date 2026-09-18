@@ -209,7 +209,15 @@ this pack has settled on:
    false liveness — fix the knob's own visibility instead of relying on it.
 
 5. **Cost** — stock was written for a CPU rasterizer at 30 fps. Tier C is a hard
-   gate; the levers are in the engine repo's `docs/SCENE-LIBRARY.md`.
+   gate; the levers are in the engine repo's `docs/SCENE-LIBRARY.md`. Two hard
+   engine budgets apply to mesh-based ports:
+   - **at most 32 mesh handles per mode** (`engine/src/runtime.cpp`), so
+     per-element handles are illegal past 32 elements — group geometry per colour
+     (the grid family uses one mesh per column, 10 handles) or per shape;
+   - **8192 vertices / 49152 indices** per mesh.
+   Both were hit in practice: `s-grid-triangles-filled-column-color`'s first
+   revision created 70 per-cell handles and the engine rejected it with "mesh
+   budget exceeded".
 
 6. **Positions that leave the frame** — many stock modes place content by raw
    pixel arithmetic that walks it off the 1280×720 canvas for part of a knob's
