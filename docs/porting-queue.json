@@ -985,11 +985,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-grid-slide-square-unfilled-column-color.md",
+   "device_p50_ms": null,
+   "device_tier": "owed (blocked)",
+   "device_note": "280 e.rect bars (four-bar outline) with 10 e.color calls (one per column); expected near the floor. Packaging blocked on the engine repo edits."
   },
   {
    "stock_name": "S - Grid Slide Square - Unfilled Patchwork Color",
