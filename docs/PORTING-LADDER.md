@@ -441,7 +441,12 @@ answer**: unblocked rows keep moving while a blocked row waits.
   twice over — the per-mode delta table removed the per-mode design work, and the
   two mesh warnings (32-handle cap, index table must match its own mesh) were
   learned once and applied to the remaining rows.
-- 2026-09-18: twenty-three modes verified in total (3 P0 + 20 P1). The pack's own
-  cost profile is now clear: the filled-uniform rows are one draw call, the
-  outline rows are 210 immediate `e.line` calls, and only the two quadrant rows
-  need meshes beyond the triangles.
+- 2026-09-18: **P1 complete — 26 of 26 rows verified** (29 modes in total with P0),
+  every one at the 300-frame contract run, each with a port report and a queue row.
+  The tranche's shape: 11 grid rows from one family brief, 15 singles and scope
+  rows, two modes needing a session takeover or multiple steered fixes
+  (`s-circular-trigon-field`, `s-square-shadows-uniform-color`, `s-zoom-scope`), and
+  one new engine constraint found (32 mesh handles). P2 opens with 45 rows, which
+  the queue groups into 11 families (grid ×9, amp ×5, circle ×3, bezier ×2, folia
+  ×2, line ×2, mirror ×2, nested ×2, radial ×2, radiating ×2, sound ×2) plus 12
+  singles; nine P2 briefs are already staged.
