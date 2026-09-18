@@ -769,7 +769,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-circle-row-lfo.md",
-   "device_p50_ms": null
+   "device_p50_ms": "26.67 (floor 24.17, marginal +2.5)"
   },
   {
    "stock_name": "S - Circle Scope",
@@ -786,7 +786,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-circle-scope.md",
-   "device_p50_ms": null
+   "device_p50_ms": "23.95 (floor 24.17, marginal -0.2)"
   },
   {
    "stock_name": "S - Circle Scope - Opposite Colors",
