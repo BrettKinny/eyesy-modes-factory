@@ -1111,11 +1111,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-mirror-grid.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "~216 per-element colour changes/frame with NO possible grouping -- the pack cost driver, and the most likely mode to fail a tier gate if it returns"
   },
   {
    "stock_name": "S - Mirror Grid - Inverse",
