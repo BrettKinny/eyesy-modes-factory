@@ -1019,11 +1019,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-grid-slide-square-unfilled-uniform-color.md",
+   "device_p50_ms": null,
+   "device_tier": "owed (blocked)",
+   "device_note": "280 e.rect calls (four-bar outline) in 1 colour class; expected near the floor. Packaging blocked on the engine repo edits."
   },
   {
    "stock_name": "S - Horizontal + Trails",
