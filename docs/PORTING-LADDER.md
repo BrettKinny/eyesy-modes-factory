@@ -279,6 +279,17 @@ this pack has settled on:
    colour-change cost — the two levers are different, and only the latter has so far
    pushed a mode outside tier C.
 
+   **Drawing inside a target uses that target's dimensions.** The API is explicit
+   (`docs/API.md`): *"Drawing inside a target uses that target's dimensions for both
+   the rectangle and `u_resolution`"* — so geometry emitted inside a 640×360 target
+   must be in **640×360 coordinates**, not screen coordinates. `s-folia-curves` does
+   this correctly (its geometry constants are built from `TW`/`TH`, 320×180, and its
+   veil rect is `e.rect(0, 0, TW, TH)`), and that is the pattern to copy. Getting it
+   wrong is silent: the geometry is simply **clipped** to the top-left of the target
+   and then upscaled, which still passes the gate (deterministic, reactive,
+   non-blank) while showing a fraction of the intended picture. Both `s-bezier-h-scope`
+   and `s-bezier-v-scope` shipped with this defect and were fixed on 2026-09-18.
+
    **`update_mesh` validates the ENTIRE vertices table.** A mesh preallocated at a
    fixed capacity and uploaded with only its filled prefix throws *"attempt to
    index a nil value"* (found porting `s-grid-polygons-patchwork-color`). Size each
