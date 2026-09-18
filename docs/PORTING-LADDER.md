@@ -369,6 +369,16 @@ Per mode:
 | `Circles` | 5 circles (r + pos) | `draw.circle(..., int(scaled_radius))` | `int(knob3*49)+1` (50) | 100 | — | — |
 | `Rectangles` | — | — | — | — | — | — |
 
+**knob 4 goes dead at 300 frames in this family — both 5gon variants, so treat it as
+family-wide.** At 60 frames `5gon-filled` reads `knob 4 = 0.74932`; at 300 frames both of
+its probe points read `0.0000`, and `5gon-outlines` shows the identical pattern. In both
+cases the gate still reports `pass` because its second chance fires a MIDI trigger and
+this family re-randomises its polygon geometry on a trigger — **a false liveness**, which
+§3.4 forbids banking. The cause is the shared rotation mechanism (the accumulator's state
+or the nested-scale ordering), not either port's implementation. Brief the fix into every
+family mode, and require `knob_frac > 0.001` at **both** probe points at 300 frames rather
+than accepting the trigger's rescue.
+
 **The 32-mesh-handle cap binds here.** Stock draws up to **60** nested polygons; the
 engine allows at most **32 mesh handles per mode**, and each polygon needs its own
 handle because its colour comes from its own audio history — so there is nothing to
