@@ -422,10 +422,20 @@ than silently applied:
   the verified `s-concentric` `.eyesy-no-ship` and ran `eyesyctl modes sync`
   itself. Both were reverted; the marker would have silently dropped a verified
   port from every release.)
-- **The task brief is prescriptive** (the local model implements; it does not
+- **The brief is prescriptive** (the local model implements; it does not
   design). Each brief names: the stock file to read, the target folder and slug,
   the knob roles with their stock meaning, the audio mapping, the palette
   formulas, the content resolution strategy, and the exact container command.
+- **Briefs have a hard runtime budget, and open-ended research spends it.**
+  `local-agent` is capped at **30 minutes per task**, and a brief that invites
+  exploration ("study the API docs", "read a few verified modes", "check the
+  verifier defaults") can consume the whole budget without writing a line —
+  which happened on 2026-09-18 with `s-horizontal-trails`: 30 minutes of reading
+  for a 72-line stock mode, no file produced. The working shape is: **name the
+  one closest sibling to copy, give the conventions inline, and say "write the
+  file, then run the gate"**. The conventions are documented in this file so the
+  brief does not have to send the agent looking for them. If a task needs real
+  investigation, that is this session's job, not the implementer's.
 - **This session verifies every port** (300-frame contract run + device gate)
   before it enters the ladder's "done" column, and commits ports in tranches.
 - **Stage explicitly.** Never `git add -A` while a porting task is mid-flight: a
