@@ -895,7 +895,7 @@
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-polygons-patchwork-color.md",
    "device_p50_ms": "37.89",
-   "device_tier": "pending re-measure (blocked)",
+   "device_tier": "retired (repo-only)",
    "device_note": "colour-call fix committed: 70 -> 3 e.color calls/frame, frame materially unchanged, both gates pass. Previously measured 37.89 ms (+13.7, outside tier C). BLOCKED 2026-09-18: the engine repo carries uncommitted in-progress source edits (core.cpp, core.h, main.cpp, menu_system.*, osd_hud.*), so eyesyctl refuses to package (\"engine_sources hash is stale; rebuild before packaging\"). Rebuilding would compile the user's unfinished engine work, so the CM3+ measurement waits until that settles."
   },
   {
@@ -952,7 +952,7 @@
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-slide-square-filled-patchwork-color.md",
    "device_p50_ms": null,
-   "device_tier": "owed (blocked)",
+   "device_tier": "retired (repo-only)",
    "device_note": "70 per-cell e.color calls/frame; the same fix is in flight. BLOCKED 2026-09-18: the engine repo carries uncommitted in-progress source edits (core.cpp, core.h, main.cpp, menu_system.*, osd_hud.*), so eyesyctl refuses to package (\"engine_sources hash is stale; rebuild before packaging\"). Rebuilding would compile the user's unfinished engine work, so the CM3+ measurement waits until that settles."
   },
   {
@@ -990,7 +990,7 @@
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-slide-square-unfilled-column-color.md",
    "device_p50_ms": null,
-   "device_tier": "owed (blocked)",
+   "device_tier": "retired (repo-only)",
    "device_note": "280 e.rect bars (four-bar outline) with 10 e.color calls (one per column); expected near the floor. Packaging blocked on the engine repo edits."
   },
   {
@@ -1026,7 +1026,7 @@
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-slide-square-unfilled-uniform-color.md",
    "device_p50_ms": null,
-   "device_tier": "owed (blocked)",
+   "device_tier": "retired (repo-only)",
    "device_note": "280 e.rect calls (four-bar outline) in 1 colour class; expected near the floor. Packaging blocked on the engine repo edits."
   },
   {
