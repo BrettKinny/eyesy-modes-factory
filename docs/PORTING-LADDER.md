@@ -399,3 +399,16 @@ answer**: unblocked rows keep moving while a blocked row waits.
   prints the offset that maximises the sampled colour's worst-case luma distance
   from both the palette grey and the background across the verifier's frame
   counts. §3.4 points at it.
+- 2026-09-18: `s-five-lines-spin` failed its first gate run on three checks with
+  one root cause — the mode's baseline is five one-pixel hairlines (~120 lit
+  pixels), so no knob change could move the 921 pixels the metric needs, and the
+  audio reached the geometry only through `knob2`. Two legibility floors (an audio
+  floor on the reach, a 4 px stroke thickness floor) were designed by the session
+  and applied after the agent's iteration stalled; the mode then passed at 300
+  frames. §4's "blank/white extremes" row already covers this class.
+- 2026-09-18: nine modes verified (3 P0 + 6 P1), each with a port report and a
+  queue row. P1 stands at 6 of 26 rows; the remaining P1 rows have briefs staged
+  (`classic-*`, `five-lines-spin`, `football-scope`, `gradient-cloud`,
+  `gradient-column`, the 11-mode grid family, `line-traveller`, `two-scopes`,
+  `zoom-scope`), and the loop is one `local-agent` task at a time with the session
+  running every 300-frame gate.
