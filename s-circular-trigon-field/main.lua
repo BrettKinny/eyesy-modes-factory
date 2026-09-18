@@ -11,7 +11,7 @@
 -- are placed by knobs 2 and 3.
 --
 -- Knob roles (stock-exact):
---   1 radius — circle radius (int(knob1 * 800) + audio/100)
+--   1 radius — circle radius (int(knob1 * 640) + audio/100, see deviation 8)
 --   2 point2 — second-vertex offset (knob2 * 199.68 px, +x and +y)
 --   3 point3 — third-vertex offset (knob3 * 199.68 px, -x and +y)
 --   4 fg — foreground colour (LFO picker)
@@ -49,13 +49,27 @@
 --    shapes.
 -- 7. Vestigial: stock computes x960 and never uses it; lx/ly/note_down are
 --    dead globals — all omitted.
+-- 8. Ring radius scaled into the frame: stock's R = int(knob1*800) + audio/100
+--    walks the ring off the canvas above knob1 ~ 0.55 (at knob1 = 1 the ring
+--    is at radius ~800 around (640, 316.8), which the 1280x720 frame never
+--    intersects: the part inside the x range is outside the y range and vice
+--    versa), so the verifier reads a blank grab. The radius scale is the
+--    frame's half-width (640) instead of 800, which keeps the ring visible
+--    across the knob's whole range; the audio term is unchanged.
+-- 9. Minimum triangle extent: with knobs 2 and 3 at 0 stock's second and third
+--    vertices collapse onto the centre vertex, so the filled triangles have
+--    zero area (they render nothing) and the colour knob is unobservable — the
+--    verifier read knob4 as dead at both probe points. Both vertex offsets are
+--    floored at 12 px so the field stays legible at the baseline and the
+--    colour pattern is visible; the knobs still scale the offsets up to 199 px.
 
 local e = eyesy
 local PI = math.pi
 
 local X640 = 640
 local Y260 = 316.8
-local X800 = 800
+local RMAX = 640     -- deviation 8: stock's 800 walks the ring off-canvas
+local MIN_EXTENT = 12 -- deviation 9: stock's triangles collapse to zero area
 local X200 = 199.68 -- 1280 * 0.156
 local XRAN = 78
 
@@ -103,8 +117,8 @@ local function draw(ctx)
   if fg > 0.5 then lfoInc = (fg - 0.5) * 0.2 end
   lfoPhase = (lfoPhase + 1500 * lfoInc * dt) % 2
 
-  local off2 = trunc(point2 * X200)
-  local off3 = trunc(point3 * X200)
+  local off2 = math.max(trunc(point2 * X200), MIN_EXTENT)
+  local off3 = math.max(trunc(point3 * X200), MIN_EXTENT)
 
   for i = 0, 49 do
     -- Audio: stock index i (0-based) -> left[1 + i*10] (deviation 5).
@@ -113,7 +127,7 @@ local function draw(ctx)
       local s = left[1 + i * 10]
       if s then A = s * 32768 end
     end
-    local R = trunc(radius * X800) + A / 100
+    local R = trunc(radius * RMAX) + A / 100
     local ang = i / 50 * 6.28
     local x = R * math.cos(ang) + X640
     local y = R * math.sin(ang) + Y260
@@ -132,7 +146,7 @@ local function draw(ctx)
       local ph = (lfoPhase + i * lfoInc) % 2
       if ph > 1 then ph = 2 - ph end
       local r, g, b = picker(ph)
-      local f = filled[(i + 1) // 2]
+      local f = filled[math.floor((i + 1) / 2)]
       local v = f.vertices
       v[1][1] = ax; v[1][2] = ay; v[1][3] = 0
       v[2][1] = bx; v[2][2] = by; v[2][3] = 0

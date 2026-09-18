@@ -234,9 +234,12 @@ than silently applied:
 
 | Class | Why | Convention |
 | --- | --- | --- |
-| Randomness | replays must be byte-identical | deterministic middle branch of the legacy picker (§3.4) |
+| Randomness | replays must be byte-identical | deterministic middle branch of the legacy picker (§3.4); `e.random()` for `randrange` |
 | Blank/white extremes | verifier bounds at `c = 0` and `c = 1` | bg phase folded to `(bg*0.7+0.15) % 1` (§3.4); radius/geometry floors where a zero knob draws nothing |
 | Content outside the frame | verifier bounds + dead-knob check | scale the offset into the frame (default), wrap only for scroll-like excursions, never wrap a one-frame span (§3.6) |
+| Zero-area geometry | stock's shape collapses when its size knobs are 0, so it renders nothing and the colour knob becomes unobservable | floor the shape's extent (e.g. `S - Circular Trigon Field`'s 12 px vertex offsets), keeping the knobs' scaling above the floor |
+| One-instant colour sampling | the LFO colour is a pure function of time and the gate samples one instant | phase offset 0.21 (§3.4) so the sampled colour clears both the palette grey and the background luma |
+| A branch stock does not define | stock raises or leaves a name unbound at an exact knob value (`S - Football Scope` at `knob4 = 0.5`) | pick the branch, document the choice, and say that stock crashes there |
 
 ## 5. The local-agent rule
 
@@ -262,6 +265,13 @@ than silently applied:
   formulas, the content resolution strategy, and the exact container command.
 - **This session verifies every port** (300-frame contract run + device gate)
   before it enters the ladder's "done" column, and commits ports in tranches.
+- **Stage explicitly.** Never `git add -A` while a porting task is mid-flight: a
+  mode folder that exists on disk is not a mode that has passed the gate.
+  (2026-09-18: `git add -A` swept an in-flight folder — which at that moment had
+  a Lua syntax error — into a tranche commit; it was corrected in the next commit
+  and nothing was released from it, but the rule exists because the tree and the
+  commit must agree on what is verified.) A work-in-progress mode that must sit in
+  the pack during development carries `.eyesy-no-ship` until it passes.
 
 ## 6. Queue and tranches
 
@@ -370,3 +380,11 @@ answer**: unblocked rows keep moving while a blocked row waits.
   can then "pass" the knob on an unrelated geometry change. §3.4 now carries the
   rule (initialise the phase to 0.21, which clears both targets at 60/130/300/600
   frames) and the warning about the false-liveness path.
+- 2026-09-18: `s-circular-trigon-field` needed two structural deviations the
+  agent's five iterations did not reach, and the session applied them: the ring
+  radius scaled into the frame (stock's 800 px ring never intersects the canvas
+  at `knob1 = 1`, so the grab was blank) and a 12 px minimum triangle extent
+  (stock's triangles collapse to zero area with knobs 2 and 3 at 0, which made
+  the colour knob unobservable and left only the random hairline jitter). Both
+  are now §4 classes ("zero-area geometry", "content outside the frame"). The
+  task was cancelled after the takeover; the mode passes the 300-frame gate.
