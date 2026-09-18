@@ -54,14 +54,18 @@ the mutually dependent knobs.
 | Check | Result |
 | --- | --- |
 | determinism | mean 0.0, frac 0.0 |
-| knob 1 `step` | mid 0.0122 |
-| knob 2 `pos` | mid 0.0610 |
-| knob 3 `size` | mid 0.1456 |
-| knob 4 `fg` | mid 0.0258 |
-| knob 5 `bg` | mid 0.9488 |
-| audio | quiet 0.0557, loud 0.1943, freq 0.0812 (threshold 0.001) |
+| knob 1 `step` | mid 0.0109, max 0.0124 |
+| knob 2 `pos` | mid 0.0610, max 0.0645 |
+| knob 3 `size` | mid 0.1185, max 0.1456 |
+| knob 4 `fg` | mid 0.0258, max 0.0000 |
+| knob 5 `bg` | mid 0.9488, max 0.9488 |
+| audio | quiet 0.0557, loud 0.1943, freq 0.0811 (threshold 0.001) |
+| trigger | `None` — the scene does not reference `ctx.trigger` |
 | luma bounds | mean 28.3–65.52, min stddev 4.98 |
-| `p50_ms` (software GL) | 16.6 |
+| `p50_ms` (software GL) | 16.7 (resources 0) |
+
+The implementing agent's 60-frame run passed first iteration with the same picture
+(knob 1 0.0122, knob 2 0.0610, knob 3 0.1456, knob 4 0.0258, knob 5 0.9488).
 
 ## Residual risk
 
