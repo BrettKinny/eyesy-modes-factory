@@ -743,7 +743,7 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
+   "status": "verified-300",
    "verdict": null,
    "verified_at": null,
    "evidence": null,
