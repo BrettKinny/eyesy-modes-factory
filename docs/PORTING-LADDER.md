@@ -257,6 +257,15 @@ this pack has settled on:
    by colour class *and* draw each class in one call — the grouping alone buys nothing
    if the draw loop still changes colour per element.
 
+   **`e.rect` has no border width.** pygame's `pygame.draw.rect(screen, color, rect,
+   linew)` outline must be drawn as **four `e.rect` bars** — top, bottom, left, right —
+   of thickness `linew` forming a perimeter band around the stock rect, with the bounding
+   box growing to `width + rad + 2*linew` (the centred-rect conversion accounts for the
+   outline width; it is not a shrink). That quadruples the rect count (the slide-square
+   family goes from 70 to 280 per frame), which is **fill-rate** cost rather than
+   colour-change cost — the two levers are different, and only the latter has so far
+   pushed a mode outside tier C.
+
    **`update_mesh` validates the ENTIRE vertices table.** A mesh preallocated at a
    fixed capacity and uploaded with only its filled prefix throws *"attempt to
    index a nil value"* (found porting `s-grid-polygons-patchwork-color`). Size each
