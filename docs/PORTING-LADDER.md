@@ -241,6 +241,22 @@ this pack has settled on:
    revision created 70 per-cell handles and the engine rejected it with "mesh
    budget exceeded".
 
+   **Per-element colour changes are a real device cost.** Measured on the CM3+ with
+   bookended `starter` floors at ~24.2 ms, three modes of the same family:
+
+   | Mode | `e.color` calls/frame | device p50 | marginal |
+   | --- | --- | --- | --- |
+   | `s-grid-polygons-uniform-color` | 1 | 24.21 | +0.0 |
+   | `s-grid-polygons-column-color` | 10 | 24.18 | +0.0 |
+   | `s-grid-slide-square-filled-uniform-color` | 1 | 25.33 | +1.1 |
+   | `s-grid-polygons-patchwork-color` | **70** | **37.89** | **+13.7 — outside tier C** |
+
+   The patchwork mode already *groups* its geometry by colour class (three meshes) but
+   then draws per cell, so it issues 70 colour changes where **three** would do: one
+   `e.color` per class, immediately before that class's mesh draw. Group the geometry
+   by colour class *and* draw each class in one call — the grouping alone buys nothing
+   if the draw loop still changes colour per element.
+
    **`update_mesh` validates the ENTIRE vertices table.** A mesh preallocated at a
    fixed capacity and uploaded with only its filled prefix throws *"attempt to
    index a nil value"* (found porting `s-grid-polygons-patchwork-color`). Size each
@@ -278,9 +294,15 @@ rather than assuming a copy:
   and applies the slide offsets to *every* cell; unfilled draws an outline of
   `linew = int(xr*0.0026)` and makes the offsets **conditional** on the same parity
   branches (`if i%2==1: x = ...`, `if j%2==1: y = ...`).
-- **Colour**: `Uniform` is one `color_picker_lfo(knob4)` per frame; `Column` is a
-  per-column colour; `Patchwork` overwrites sequentially — `i%2==1 → picker(knob4)`,
+- **Colour**: `Uniform` is one `color_picker_lfo(knob4)` per frame; `Column` calls the
+  **static** legacy picker — `color_picker((j*0.1 + knob4) % 1)`, *inside* the `j` loop,
+  so once per column (10 calls per frame, no LFO state, and all 7 rows of a column share
+  the colour); `Patchwork` overwrites sequentially — `i%2==1 → picker(knob4)`,
   `j%2==1 → picker(1-knob4)`, `(j+i)%3==1 → picker((0.8+knob4)%1)`, last match wins.
+  Do not assume the family shares one picker: `Column` is *not* time-based, so it needs
+  no `lfo_offset` phase — but if a port calls the LFO once per element, derive the offset
+  for **its own call count** (`tools/lfo_offset.py --calls <n>`) rather than copying the
+  one-call-per-frame 0.21.
 
 Shared: the 7×10 grid (`x = j*x8 - x8`, `y = i*y5 - y5`), `rad = |audio_in[j-i]| /
 hund` with `hund = xr*0.07734`, `width = int(knob3*hund)+1`, and the `sqmover` LFO

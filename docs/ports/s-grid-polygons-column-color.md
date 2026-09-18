@@ -82,3 +82,16 @@ to the triangle rows' index tables.
 - **`knob4`'s max probe is 0.0000** (mid 0.0182) — the usual integer-`fg` pattern.
 - The two colour siblings (`-patchwork-color`, `-uniform-color`) share this geometry
   verbatim and differ only in the colour rule, so they are sibling copies.
+
+## Device tier — 2026-09-18
+
+| Metric | Value |
+| --- | --- |
+| device p50 | **24.18 ms** |
+| bookended floor | 24.18 / 24.19 ms |
+| marginal | **+0.0 ms** |
+| tier C (≤ 33.3 ms) | **pass** |
+
+Sits exactly on the floor: 10 `e.color` calls and 10 mesh draws per frame (one handle
+per column) cost nothing measurable against the baseline. Measured on the CM3+ with
+`starter` bookends, 600 frames per mode.

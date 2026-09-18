@@ -875,7 +875,9 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-polygons-column-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "24.18",
+   "device_tier": "pass",
+   "device_note": "at the floor; 10 e.color calls/frame"
   },
   {
    "stock_name": "S - Grid Polygons - Patchwork Color",
@@ -892,7 +894,9 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-polygons-patchwork-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "37.89",
+   "device_tier": "FAIL",
+   "device_note": "floor 24.19, marginal +13.7 -- outside tier C. Cause: 70 e.color calls/frame; the geometry is already grouped into 3 colour-class meshes but the draw loop still changes colour per cell, so 3 colour calls would do. Fix queued."
   },
   {
    "stock_name": "S - Grid Polygons - Uniform Color",
@@ -909,7 +913,9 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-polygons-uniform-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "24.21",
+   "device_tier": "pass",
+   "device_note": "at the floor; 1 e.color call/frame"
   },
   {
    "stock_name": "S - Grid Slide Square - Filled Column Color",
@@ -960,7 +966,9 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-slide-square-filled-uniform-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "25.33",
+   "device_tier": "pass",
+   "device_note": "floor 24.18, marginal +1.1; 70 e.rect calls in one colour"
   },
   {
    "stock_name": "S - Grid Slide Square - Unfilled Column Color",

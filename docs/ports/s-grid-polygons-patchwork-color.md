@@ -77,3 +77,27 @@ count, so the table is never partially filled. (A fourth count argument to
 - **`knob4`'s max probe is 0.0000** (mid 0.0506): at `fg = 1.0` all three classes shift
   by whole cycles and land on the baseline's colours.
 - Device tier owed; three draw calls, so the cost should sit at the floor.
+
+## Device tier — 2026-09-18
+
+| Metric | Value |
+| --- | --- |
+| device p50 | **37.89 ms** |
+| bookended floor | 24.18 / 24.19 ms |
+| marginal | **+13.7 ms** |
+| tier C (≤ 33.3 ms) | **FAIL — outside** |
+
+**The cost is the 70 per-frame `e.color` calls, not the geometry.** The port already
+groups its geometry by colour class into three meshes, but the draw loop still issues one
+`e.color` per cell — so it pays 70 colour state changes where **three** would do (one per
+class, immediately before that class's mesh draw). The family's measurements isolate the
+cause cleanly:
+
+| Mode | `e.color` calls/frame | device p50 | marginal |
+| --- | --- | --- | --- |
+| `s-grid-polygons-uniform-color` | 1 | 24.21 | +0.0 |
+| `s-grid-polygons-column-color` | 10 | 24.18 | +0.0 |
+| **this mode** | **70** | **37.89** | **+13.7** |
+
+Fix queued: draw each colour-class mesh in one call with a single `e.color` before it,
+keeping the class grouping the port already computes. Recorded in ladder §3.5.

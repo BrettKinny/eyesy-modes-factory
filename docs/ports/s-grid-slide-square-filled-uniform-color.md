@@ -103,3 +103,16 @@ floors are the smallest that make each knob observable.
   wrap or scale is applied (deviation 7).
 - Device tier owed; 70 `e.rect` calls in one colour, so the cost should sit near the
   floor.
+
+## Device tier — 2026-09-18
+
+| Metric | Value |
+| --- | --- |
+| device p50 | **25.33 ms** |
+| bookended floor | 24.18 / 24.19 ms |
+| marginal | **+1.1 ms** |
+| tier C (≤ 33.3 ms) | **pass** |
+
+70 `e.rect` calls in a single colour cost +1.1 ms over the floor — the `e.rect` path is
+cheap as long as the colour does not change per call (contrast
+`s-grid-polygons-patchwork-color`, which changes colour 70 times and measures +13.7 ms).

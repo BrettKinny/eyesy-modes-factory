@@ -56,3 +56,14 @@ pack's documented **0.21 phase offset** (confirmed with `tools/lfo_offset.py --i
 - **`min stddev 6.85` is the family's healthiest margin** (its patchwork sibling sits at
   0.66), because one colour keeps all 70 lit polygons in the same luma band.
 - Device tier owed; one draw call, so the cost should sit at the floor.
+
+## Device tier — 2026-09-18
+
+| Metric | Value |
+| --- | --- |
+| device p50 | **24.21 ms** |
+| bookended floor | 24.18 / 24.19 ms |
+| marginal | **+0.0 ms** |
+| tier C (≤ 33.3 ms) | **pass** |
+
+At the floor: one `e.color` call and one mesh draw per frame for all 70 cells.
