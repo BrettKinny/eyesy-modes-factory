@@ -21,7 +21,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-concentric.md",
-   "device_p50_ms": null
+   "device_p50_ms": "40.66 (floor 36.74, marginal +3.9)"
   },
   {
    "stock_name": "S - Cone Scope",
@@ -38,7 +38,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-cone-scope.md",
-   "device_p50_ms": null
+   "device_p50_ms": "43.93 (floor 36.74, marginal +7.2)"
   },
   {
    "stock_name": "S - Gradient Friend",
@@ -55,7 +55,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-gradient-friend.md",
-   "device_p50_ms": null
+   "device_p50_ms": "38.75 (floor 36.74, marginal +2.0)"
   },
   {
    "stock_name": "S - Arcway Black",
@@ -72,7 +72,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-arcway-black.md",
-   "device_p50_ms": null
+   "device_p50_ms": "35.39 (floor 35.42, marginal -0.0)"
   },
   {
    "stock_name": "S - Bits Vertical",
@@ -89,7 +89,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-bits-vertical.md",
-   "device_p50_ms": null
+   "device_p50_ms": "35.31 (floor 35.42, marginal -0.1)"
   },
   {
    "stock_name": "S - Circular Trigon Field",
@@ -106,7 +106,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-circular-trigon-field.md",
-   "device_p50_ms": null
+   "device_p50_ms": "35.98 (floor 35.42, marginal +0.6)"
   },
   {
    "stock_name": "S - Classic Horizontal",
@@ -123,7 +123,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-classic-horizontal.md",
-   "device_p50_ms": null
+   "device_p50_ms": "35.87 (floor 35.42, marginal +0.4)"
   },
   {
    "stock_name": "S - Classic Vertical",
@@ -140,7 +140,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-classic-vertical.md",
-   "device_p50_ms": null
+   "device_p50_ms": "35.95 (floor 35.42, marginal +0.5)"
   },
   {
    "stock_name": "S - Five Lines Spin",
@@ -157,7 +157,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-five-lines-spin.md",
-   "device_p50_ms": null
+   "device_p50_ms": "35.01 (floor 35.42, marginal -0.4)"
   },
   {
    "stock_name": "S - Football Scope",
@@ -174,7 +174,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-football-scope.md",
-   "device_p50_ms": null
+   "device_p50_ms": "35.70 (floor 34.56, marginal +1.1)"
   },
   {
    "stock_name": "S - Gradient Cloud",
@@ -191,7 +191,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-gradient-cloud.md",
-   "device_p50_ms": null
+   "device_p50_ms": "36.35 (floor 35.10, marginal +1.2)"
   },
   {
    "stock_name": "S - Gradient Column",
@@ -208,7 +208,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-gradient-column.md",
-   "device_p50_ms": null
+   "device_p50_ms": "33.35 (floor 35.10, marginal -1.8)"
   },
   {
    "stock_name": "S - Grid Circles - Column Color",
@@ -225,7 +225,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-circles-column-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "34.09 (floor 35.10, marginal -1.0)"
   },
   {
    "stock_name": "S - Grid Circles - Outlined",
@@ -242,7 +242,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-circles-outlined.md",
-   "device_p50_ms": null
+   "device_p50_ms": "32.15 (floor 31.59, marginal +0.6)"
   },
   {
    "stock_name": "S - Grid Circles - Outlined Column Color",
@@ -259,7 +259,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-circles-outlined-column-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "32.18 (floor 31.59, marginal +0.6)"
   },
   {
    "stock_name": "S - Grid Circles - Patchwork Color",
@@ -276,7 +276,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-circles-patchwork-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "33.46 (floor 31.59, marginal +1.9)"
   },
   {
    "stock_name": "S - Grid Circles - Uniform Color",
@@ -293,7 +293,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-circles-uniform-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "32.19 (floor 31.59, marginal +0.6)"
   },
   {
    "stock_name": "S - Grid Triangles - Filled Column Color",
@@ -310,7 +310,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-triangles-filled-column-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "32.31 (floor 31.59, marginal +0.7)"
   },
   {
    "stock_name": "S - Grid Triangles - Filled Patchwork Color",
@@ -327,7 +327,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-triangles-filled-patchwork-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "32.29 (floor 31.59, marginal +0.7)"
   },
   {
    "stock_name": "S - Grid Triangles - Filled Uniform Color",
@@ -344,7 +344,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-triangles-filled-uniform-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "32.29 (floor 31.59, marginal +0.7)"
   },
   {
    "stock_name": "S - Grid Triangles - Unfilled Column Color",
@@ -361,7 +361,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-triangles-unfilled-column-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "31.90 (floor 31.59, marginal +0.3)"
   },
   {
    "stock_name": "S - Grid Triangles - Unfilled Patchwork Color",
@@ -378,7 +378,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-triangles-unfilled-patchwork-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "31.92 (floor 31.59, marginal +0.3)"
   },
   {
    "stock_name": "S - Grid Triangles - Unfilled Uniform Color",
@@ -395,7 +395,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-triangles-unfilled-uniform-color.md",
-   "device_p50_ms": null
+   "device_p50_ms": "31.91 (floor 31.59, marginal +0.3)"
   },
   {
    "stock_name": "S - Line Traveller",
@@ -412,7 +412,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-line-traveller.md",
-   "device_p50_ms": null
+   "device_p50_ms": "31.44 (floor 31.59, marginal -0.1)"
   },
   {
    "stock_name": "S - Perspective Lines",
@@ -429,7 +429,7 @@
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-perspective-lines.md",
-   "device_p50_ms": null
+   "device_p50_ms": "31.82 (floor 31.59, marginal +0.2)"
   },
   {
    "stock_name": "S - Square Shadows - Uniform Color",
