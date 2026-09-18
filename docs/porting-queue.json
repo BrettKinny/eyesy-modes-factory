@@ -187,10 +187,10 @@
    "tranche": "P1",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-gradient-cloud.md",
    "device_p50_ms": null
   },
   {
