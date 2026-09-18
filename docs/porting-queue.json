@@ -1130,11 +1130,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-mirror-grid-inverse.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "~216 per-element colour changes/frame, no grouping possible; no flat-frame deviation needed"
   },
   {
    "stock_name": "S - Nested Ellipses - Filled",
