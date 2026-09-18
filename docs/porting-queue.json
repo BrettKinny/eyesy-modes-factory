@@ -1301,11 +1301,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-sound-jaws-uniform-color.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "1 mesh (160 verts / 240 indices), 1 colour change/frame; screengrab echo dropped; three degenerate-input floors"
   },
   {
    "stock_name": "S - X Scope",
