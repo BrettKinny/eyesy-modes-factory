@@ -90,12 +90,22 @@ the two meshes plus the two half-resolution trail targets.
 
 ## Residual risk
 
+- **FIXED 2026-09-18: the geometry was clipped to the top-left quarter of the frame.**
+  `docs/API.md` states that *"drawing inside a target uses that target's dimensions"*, so
+  geometry emitted inside the 640×360 feedback target must be in **640×360 coordinates** —
+  but this mode computed it from `ctx.width`/`ctx.height` (1280×720) and drew it inside the
+  target anyway. Points ran x ∈ [-128, 1344] and y ≈ 360 ± 720, so roughly three quarters of
+  the curves fell outside and were then upscaled. The evidence is in the luma range: the
+  bright-background probe read a maximum of **29.62 before the fix and 64.59 after**, and
+  `knob5`'s frac went from partly dead to **0.99**. The mode now derives its geometry from
+  `GW`/`GH` (the target's dimensions) when the trail is on and keeps `W`/`H` for the
+  `knob3 = 0` screen path — the `s-folia-curves` pattern, which was correct all along.
+  Recorded as deviation 9 in the header. This was earlier mis-filed in this report as an
+  unexplained "very dark, flat frame".
 - **knob 4's mid probe is exactly 0**, and this is **stock-faithful**: stock's static branch
-  maps `knob4 = 0.5` to `picker(0.0)` — the same colour as `knob4 = 0`. The knob is live at
-  its max (0.01230), and with no trigger path the gate cannot be banking a false liveness.
-  No floor was applied, correctly.
-- **1728 draw calls per frame** — the mode's dominant cost risk, and the reason the
-  batching fix is queued (above).
+  maps `knob4 = 0.5` to `picker(0.0)` — the same colour as `knob4 = 0`. It is live at its max
+  (0.00930), and with no trigger path the gate cannot be banking a false liveness. No floor
+  applied, correctly.
 - **The trail is softer than stock's** because the feedback targets are half resolution.
-- **`min stddev 3.35` is low** (luma 14.48–64.77): a dark frame with thin 1 px strokes, so
-  it sits relatively close to the verifier's flatness floor.
+- **`min stddev 2.94`** belongs to the `knob3`-mid trail frame, where the dark veil dominates
+  — unchanged by the fix and by design.

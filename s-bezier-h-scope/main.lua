@@ -18,6 +18,8 @@
 -- Scene: 12 horizontal bezier scope curves. Curve i passes through 24
 -- points at x = i*64 - 128, y = audio + 360 - 6*voffset + i*voffset, with
 -- the x of every point additionally offset by i*100 (deviation 6).
+-- Coordinates are the presentation surface's (screen when knob3 = 0, the
+-- 640x360 target when trails are on; deviation 9).
 --
 -- Documented deviations from stock:
 -- 1. Foreground palette: stock color_picker_lfo uses the legacy picker,
@@ -58,14 +60,14 @@
 --    (1 - a/255), the scene is drawn into the back target at full
 --    strength, the result is blitted to the screen, and an a/255 bg
 --    rectangle over the screen darkens the previous frame's screen
---    content. Targets are allocated at half resolution (640x360, drawn
---    upscaled to 1280x720) per the pack's documented cost lever, so the
---    trail reads slightly softer than stock's. At knob3 = 0 the targets
---    are untouched (no feedback), matching stock's transparent veil.
+--    content. Targets are allocated at half resolution (TW x TH,
+--    640x360, drawn upscaled to 1280x720) per the pack's documented
+--    cost lever, so the trail reads slightly softer than stock's. At
+--    knob3 = 0 the targets are untouched (no feedback), matching
+--    stock's transparent veil.
 -- 6. Positions: stock's spot = i*64 - 128 starts two intervals off-screen
 --    to the left, and curve i shifts every point by i*100, so the
 --    rightmost point of the top curve leaves the right edge at xoff > 0.
---    This is stock's own framing (the curves sweep across the frame) and
 --    is kept exactly: nothing is wrapped or clamped, the frame is never
 --    blank (the lower curves always cross the full width) and every probe
 --    point is observable.
@@ -97,15 +99,30 @@
 --    line strip would connect them). Zero-length strokes (possible when
 --    audio collapses a bezier) are emitted degenerate (zero-area), which
 --    the GPU rasterises to nothing.
-
+-- 9. Presentation coordinates: the scene is drawn either to the screen
+--    or into the 640x360 target, and the engine uses the target's
+--    dimensions for the in-target coordinate space (docs/API.md:
+--    "Drawing inside a target uses that target's dimensions"), so the
+--    geometry is computed from the presentation surface's dimensions:
+--    the target's (TW x TH) when trails are on, the screen's (W x H) at
+--    knob3 = 0. Every length that stock derives from xres/yres is
+--    derived from the same surface here, so the framing is
+--    stock-proportional at the target's resolution (pointInterval 32,
+--    margin 64, yhalf 180 in-target vs 64/128/360 on screen) and the
+--    curves fill the frame instead of being clipped to a corner by a
+--    screen-sized geometry drawn into a half-size target.
 local e = eyesy
 local PI = math.pi
-
 local CURVES = 12
 local POINTS = 24
 local STEPS = 12        -- cubic substeps per segment
 local SEGMENTS = POINTS - 1
 local STRIDES = SEGMENTS * STEPS + 1  -- points per curve (277)
+
+-- Feedback target size (deviation 5): the scene is drawn into the target
+-- and blit upscaled to the screen, so in-target lengths are half-res.
+local TW = 640
+local TH = 360
 
 -- Batching budget (deviation 8): the frame emits
 -- CURVES * SEGMENTS * STEPS = 3312 strokes, i.e. 13248 quad vertices —
@@ -310,18 +327,23 @@ local function draw(ctx)
   end
   local fr, fg, fb = picker(fgval)
 
-  -- Stock geometry (deviation 6: kept exact, off-screen extents included).
-  local pointInterval = trunc(W / (POINTS - 4))  -- int(xres / 20) = 64
-  local xr = pointInterval * POINTS                -- 1536
-  local margin = trunc(xr / POINTS) * 2            -- 128
-  local yhalf = trunc(H / 2)                       -- 360
-  local voffset = k1 * (yhalf / 10)                -- knob1 * 36
+  -- Stock geometry (deviation 6: kept exact, off-screen extents
+  -- included), computed in the presentation surface's dimensions
+  -- (deviation 9): the target's when trails are on, the screen's when
+  -- knob3 = 0.
+  local alpha = trunc(k3 * 20)
+  local GW, GH = (alpha > 0) and TW or W, (alpha > 0) and TH or H
+  local pointInterval = trunc(GW / (POINTS - 4))  -- int(xres / 20)
+  local xr = pointInterval * POINTS
+  local margin = trunc(xr / POINTS) * 2
+  local yhalf = trunc(GH / 2)
+  local voffset = k1 * (yhalf / 10)
   local centering = (voffset * 12) / 2             -- 6 * voffset
   local xoff = 0
   if k2 < 0.48 then
-    xoff = (0.48 - k2) * (W * -0.078)
+    xoff = (0.48 - k2) * (GW * -0.078)
   elseif k2 > 0.52 then
-    xoff = (k2 - 0.52) * (W * 0.078)
+    xoff = (k2 - 0.52) * (GW * 0.078)
   end
 
   -- Fill the 12 curves' control points (audio sampled once per point).
@@ -329,7 +351,7 @@ local function draw(ctx)
     local row = pts[i]
     for p = 0, SEGMENTS do
       local s = left and left[1 + p * 20] or 0
-      local height = trunc(s * 32768 * (H / 32768))  -- int(A * H / 32768) (deviation 4)
+      local height = trunc(s * 32768 * (GH / 32768))  -- int(A * GH / 32768) (deviation 4)
       local spot = pointInterval * p - margin
       row[p * 2 + 1] = spot + xoff * i
       row[p * 2 + 2] = height + yhalf - centering + voffset * i
@@ -339,7 +361,6 @@ local function draw(ctx)
   -- One foreground colour for the whole frame (deviation 7).
   e.color(fr, fg, fb)
 
-  local alpha = trunc(k3 * 20)
   if alpha > 0 then
     -- Persistence bridge (deviation 5).
     if not targets then
