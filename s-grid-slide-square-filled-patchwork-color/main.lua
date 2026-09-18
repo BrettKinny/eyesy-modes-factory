@@ -80,9 +80,15 @@
 --    abs(sample * 1306.3) at xr = 1280 (the 32768/99.0 factor is the ring's
 --    denormalization divided by hund); the port keeps the literal form
 --    abs(sample * 32768 / hund).
--- 6. Squares are drawn as individual e.rect calls: 70 per frame with per-cell
---    colour changes (up to 70 e.color calls), so no mesh is needed (the
---    siblings draw 70 e.rect calls per frame). pygame's rect is centred on
+-- 6. Squares are drawn as individual e.rect calls: 70 per frame (the
+--    siblings draw 70 e.rect calls per frame, so no mesh is needed).
+--    The per-cell patchwork colour has only three classes (fg, 1-fg,
+--    (0.8+fg)%1), so the 70 per-cell e.color calls are grouped: each cell's
+--    rect is written in place into a preallocated per-class slot list (no
+--    per-frame allocation), then the three classes are drawn back to back,
+--    each with a single e.color set immediately before that class's rects.
+--    The rect geometry is unchanged; only the issue order differs (grouped
+--    by class instead of in (i,j) order). pygame's rect is centred on
 --    (x,y); e.rect takes a top-left corner, so the port draws at
 --    (x - (width+rad)/2, y - (width+rad)/2) with size width+rad (stock's
 --    inflate_ip(rad, rad) adds rad to width and to height, so the final side
@@ -131,6 +137,20 @@ local sqmoverCur, sqmoverDir = 0, 1
 local sqmoverStart = -120
 local sqmoverMax = 120
 
+-- Per-colour-class rect slots, preallocated once (tier fix): three lists of
+-- up to 70 {x, y, side} tables, one per patchwork class (1 = fg, 2 = 1-fg,
+-- 3 = (0.8+fg)%1). Filled in place per frame, no allocation after setup.
+local slots = {}
+do
+  for k = 1, 3 do
+    local list = {}
+    for n = 1, 70 do
+      list[n] = {0, 0, 0}
+    end
+    slots[k] = list
+  end
+end
+
 local function draw(ctx)
   local W = ctx.width
   local H = ctx.height
@@ -148,7 +168,8 @@ local function draw(ctx)
     (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
     (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
 
-  -- Patchwork picker arguments (static, pure function of knob4) — deviation 4.
+  local n1, n2, n3 = 0, 0, 0 -- per-class slot counts
+
   local c1 = fg
   local c2 = 1 - fg
   local c3 = (0.8 + fg) % 1
@@ -169,7 +190,7 @@ local function draw(ctx)
   local width = math.floor(size * hund) + 1
   local left = ctx.audio and ctx.audio.left
 
-  -- Filled squares, per-cell patchwork colour (deviations 1, 4, 6). Stock's
+  -- Filled squares, per-colour-class slots (deviations 1, 4, 6). Stock's
   -- knob block runs once per row and update() is called TWICE per row —
   -- xoffset and yoffset are two separate advances (deviation 3).
   for i = 0, ROWS - 1 do
@@ -200,19 +221,18 @@ local function draw(ctx)
       -- Stock parity branches also re-assign the base position (equivalent to
       -- adding the offset to the base); xoffset on odd rows, yoffset on odd
       -- columns.
-      local cr, cg, cb
+      local cc
       if i % 2 == 1 then
         cx = cx + xoffset
-        cr, cg, cb = picker(c1)
+        cc = 1
       end
       if j % 2 == 1 then
         cy = cy + yoffset
-        cr, cg, cb = picker(c2)
+        cc = 2
       end
       if (j + i) % 3 == 1 then
-        cr, cg, cb = picker(c3)
+        cc = 3
       end
-      e.color(cr, cg, cb)
 
       -- Audio: stock index k = j-i (range -6..14) wraps like Python
       -- (deviation 5), then strides the platform buffer.
@@ -225,8 +245,48 @@ local function draw(ctx)
       -- pygame Rect centred on (cx,cy), width x width inflated by rad:
       -- final side width + rad, top-left corner at (cx - side/2, cy - side/2).
       local side = width + rad
-      e.rect(cx - side / 2, cy - side / 2, side, side)
+
+      -- Per-class rect slots (tier fix): the rect itself is unchanged, only
+      -- its issue order is grouped by class so one e.color per class suffices.
+      if cc == 1 then
+        n1 = n1 + 1
+        local t = slots[1][n1]
+        t[1] = cx - side / 2
+        t[2] = cy - side / 2
+        t[3] = side
+      elseif cc == 2 then
+        n2 = n2 + 1
+        local t = slots[2][n2]
+        t[1] = cx - side / 2
+        t[2] = cy - side / 2
+        t[3] = side
+      else
+        n3 = n3 + 1
+        local t = slots[3][n3]
+        t[1] = cx - side / 2
+        t[2] = cy - side / 2
+        t[3] = side
+      end
     end
+  end
+
+  -- Draw class-by-class: one e.color per class, set immediately before that
+  -- class's rects (draw order interleaved classes, so a pre-pass would not
+  -- work — the last e.color before a rect is the one that rect sees).
+  e.color(picker(c1))
+  for n = 1, n1 do
+    local t = slots[1][n]
+    e.rect(t[1], t[2], t[3], t[3])
+  end
+  e.color(picker(c2))
+  for n = 1, n2 do
+    local t = slots[2][n]
+    e.rect(t[1], t[2], t[3], t[3])
+  end
+  e.color(picker(c3))
+  for n = 1, n3 do
+    local t = slots[3][n]
+    e.rect(t[1], t[2], t[3], t[3])
   end
 end
 
