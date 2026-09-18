@@ -1263,11 +1263,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-radiating-square-uniform-color.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "1 mesh (404 verts / 606 indices), 4 engine calls/frame; above knob4=0.5 reproduces only the first line colour of stock per-line sequence"
   },
   {
    "stock_name": "S - Sound Jaws - Stepped Color",
