@@ -895,8 +895,8 @@
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-polygons-patchwork-color.md",
    "device_p50_ms": "37.89",
-   "device_tier": "FAIL",
-   "device_note": "floor 24.19, marginal +13.7 -- outside tier C. Cause: 70 e.color calls/frame; the geometry is already grouped into 3 colour-class meshes but the draw loop still changes colour per cell, so 3 colour calls would do. Fix queued."
+   "device_tier": "pending re-measure (blocked)",
+   "device_note": "colour-call fix committed: 70 -> 3 e.color calls/frame, frame materially unchanged, both gates pass. Previously measured 37.89 ms (+13.7, outside tier C). BLOCKED 2026-09-18: the engine repo carries uncommitted in-progress source edits (core.cpp, core.h, main.cpp, menu_system.*, osd_hud.*), so eyesyctl refuses to package (\"engine_sources hash is stale; rebuild before packaging\"). Rebuilding would compile the user's unfinished engine work, so the CM3+ measurement waits until that settles."
   },
   {
    "stock_name": "S - Grid Polygons - Uniform Color",
@@ -952,8 +952,8 @@
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/s-grid-slide-square-filled-patchwork-color.md",
    "device_p50_ms": null,
-   "device_tier": "owed",
-   "device_note": "expected to fail: 70 per-cell e.color calls/frame (the cousin measured +13.7 ms, outside tier C); same colour-class fix queued"
+   "device_tier": "owed (blocked)",
+   "device_note": "70 per-cell e.color calls/frame; the same fix is in flight. BLOCKED 2026-09-18: the engine repo carries uncommitted in-progress source edits (core.cpp, core.h, main.cpp, menu_system.*, osd_hud.*), so eyesyctl refuses to package (\"engine_sources hash is stale; rebuild before packaging\"). Rebuilding would compile the user's unfinished engine work, so the CM3+ measurement waits until that settles."
   },
   {
    "stock_name": "S - Grid Slide Square - Filled Uniform Color",
