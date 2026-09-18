@@ -46,24 +46,25 @@ Per-probe A/B, fraction of pixels changed (the gate's `knob_frac` is the max pro
 
 | Knob | mid | max |
 | --- | --- | --- |
-| 1 `history` | 0.0000 | 0.96294 |
-| 2 `spin` | 0.05220 | 0.53640 |
-| 3 `count` | 0.90748 | 0.92258 |
-| **4 `offset`** | **0.06929** | **0.11081** |
-| 5 `bg` | 0.03706 | 0.03706 |
+| 1 `history` | 0.0000 | 0.64340 |
+| 2 `spin` | 0.50200 | 0.17100 |
+| 3 `count` | 0.61640 | 0.62260 |
+| **4 `offset`** | **0.06930** | **0.11080** |
+| 5 `bg` | 0.35660 | 0.35660 |
 
-| Check | Result |
-| --- | --- |
-| determinism | mean 0.0, frac 0.0 |
-| audio | quiet 0.96294, loud 0.96294, freq 0.20430 (threshold 0.001) |
-| trigger | `null` — the scene does not reference `ctx.trigger` |
-| luma bounds | mean 95.12–147.14, min stddev 5.65 |
-| `p50_ms` (software GL) | 16.6 |
+| Check | 300 frames | 60 frames |
+| --- | --- | --- |
+| determinism | mean 0.0, frac 0.0 | mean 0.0, frac 0.0 |
+| audio | quiet/loud 0.6434, freq 0.2043 | 0.96294 / 0.96294 / 0.20430 |
+| trigger | `None` — the scene does not reference `ctx.trigger` | `null` |
+| luma bounds | mean 80.1–147.14, min stddev 5.65 | 95.12–147.14, stddev 5.65 |
+| `p50_ms` (software GL) | 16.1 (resources 0) | 16.6 |
 
 **A measurement note worth keeping:** knob 4's mean-luma delta is only 0.97 / 1.55 while
-its *pixel-fraction* delta is 0.069 / 0.111 — a rotated rectangle covers a similar area, so
-it barely moves the mean brightness while clearly changing the picture. Reading liveness
-from luma means alone would have called this knob dead when it is live at both probes.
+its *pixel-fraction* delta is 0.0693 / 0.1108 — a rotated rectangle covers a similar area,
+so it barely moves the mean brightness while clearly changing the picture. Reading
+liveness from luma means alone would have called this knob dead when it is live at both
+probes, and stably so across both run lengths.
 
 ## Residual risk
 
