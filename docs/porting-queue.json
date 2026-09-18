@@ -1225,11 +1225,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-radial-scope-rotate-uniform-color.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "1 mesh, 1 colour change/frame -- the honest case, since the uniform branch genuinely is one colour"
   },
   {
    "stock_name": "S - Radiating Square - Stepped Color",
