@@ -135,6 +135,14 @@ this pack has settled on:
    **Allocate the ping-pong pair at half resolution** (`e.target(640, 360)` with
    `draw_target(handle, 0, 0, 1280, 720)`) — the lever the shipped bespoke library
    uses (`whitney-kaleido`'s 640×360 targets) — and document the softer trail.
+   Measured progression on the CM3+ (same device, floor ~24.2 ms): full resolution
+   **+21.0 ms**, half **+11.7**, quarter **+8.8** (absolute 32.96 ms, inside tier C's
+   33.3 ms ceiling). The shrinking gains identify the cost as **fixed per-pass
+   overhead** — target binds, the blit, the fade rect — not fill rate, so the
+   resolution lever runs out around quarter resolution. Any mode needing stock
+   persistence pays ~9 ms of bridge overhead on this device; the engine-side answer,
+   if that ever matters, is a feedback path that samples the previous target as a
+   texture instead of blitting it (what the shipped shader scenes do).
 3. **Audio shape** — stock is a 100-value ring at 100 Hz, ±32768; ours is 1024
    normalized samples + 513 FFT bins + 3 bands + rms. Waveform-reading modes
    need the index mapping recomputed; never copy `audio_in[i]` verbatim. The
