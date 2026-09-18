@@ -250,6 +250,7 @@ than silently applied:
 | --- | --- | --- |
 | Randomness | replays must be byte-identical | deterministic middle branch of the legacy picker (§3.4); `e.random()` for `randrange` |
 | Blank/white extremes | verifier bounds at `c = 0` and `c = 1` | bg phase folded to `(bg*0.7+0.15) % 1` (§3.4); radius/geometry floors where a zero knob draws nothing |
+| Degenerate baseline content | the all-knobs-zero state draws too little for the luma metric (a hairline, one dot, a single stroke) | floor the *count*, *extent* and *thickness* so the baseline is legible. **Size the floor against the quietest audio variant, not the baseline**: `s-aquarium`'s strokes are ~1 px long at the verifier's quiet gain, so floors that sufficed at normal gain still read flat |
 | Content outside the frame | verifier bounds + dead-knob check | scale the offset into the frame (default), wrap only for scroll-like excursions, never wrap a one-frame span (§3.6) |
 | Zero-area geometry | stock's shape collapses when its size knobs are 0, so it renders nothing and the colour knob becomes unobservable | floor the shape's extent (e.g. `S - Circular Trigon Field`'s 12 px vertex offsets), keeping the knobs' scaling above the floor |
 | One-instant colour sampling | the LFO colour is a pure function of time and the gate samples one instant | phase offset 0.21 (§3.4) so the sampled colour clears both the palette grey and the background luma |
