@@ -707,11 +707,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-bezier-v-scope.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "batched into 2 meshes (3312 strokes -> 1656 quads/mesh, 6624 verts / 9936 indices each); 2 half-res trail targets"
   },
   {
    "stock_name": "S - Bits Horizontal",
