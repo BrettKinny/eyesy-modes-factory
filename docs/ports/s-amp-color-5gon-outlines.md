@@ -51,35 +51,54 @@ polygons; each needs its own handle because its colour comes from its own audio 
 32 handles, 20 vertices / 30 indices each (5 quads, 10 triangles, **1-based** indices),
 up to 32 `e.color` calls per frame. Zero per-frame allocation.
 
-## Verification — 2026-09-18
+## Verification — 2026-09-18 (after the knob-4 fix)
 
 `python3 tools/verify_port.py s-amp-color-5gon-outlines --frames 300` → `"verdict": "pass"`, `failures: []`. Software GL (llvmpipe), engine sha256 `bc29aeef4021…`.
 
-| Check | Result |
-| --- | --- |
-| determinism | mean 0.0, frac 0.0 |
-| knob 1 `history` | mid 0.0000, max 0.0127 |
-| knob 2 `spin` | mid 0.0341, max 0.0271 |
-| knob 3 `count` | mid 0.2762, max 0.2959 |
-| **knob 4 `offset`** | **mid 0.0000, max 0.0000** |
-| knob 5 `bg` | mid 0.9872, max 0.9872 |
-| audio | quiet 0.0127, loud 0.0127, freq 0.0000 (threshold 0.001) |
-| trigger | **True** |
-| luma bounds | mean 28.6–65.1, min stddev 5.27 |
-| `p50_ms` (software GL) | 16.6 (resources 32) |
+| Check | 300 frames | 60 frames |
+| --- | --- | --- |
+| determinism | frac 0.0 | frac 0.0 |
+| knob 1 `history` | 0.02431 | 0.03289 |
+| knob 2 `spin` | 0.05622 | 0.05522 |
+| knob 3 `count` | 0.30129 | 0.38054 |
+| **knob 4 `offset`** | **0.02265** | **0.02266** |
+| knob 5 `bg` | 0.97569 | 0.96711 |
+| audio | quiet/loud 0.02431, freq **0.01156** | 0.03289 / 0.03289 / 0.01157 |
+| luma bounds | 30.38–65.93, min stddev 12.27 | 30.69–66.67, stddev 14.51 |
+| `p50_ms` (software GL) | 16.66 | 16.64 |
+
+Knob 4's value is **stable across both run lengths** (0.02265 / 0.02266) and clears the
+0.001 threshold on its own — the trigger fallback does not fire, because it only fires
+when *both* probe points read dead.
+
+## The knob-4 defect and its fix (deviation 10)
+
+The family's shared defect, and it is **stock-faithful**: stock's per-polygon offset is
+`current_rotation + i * (knob4 * 180)`, so the knob's whole excursion is multiplied by
+the polygon index. At the all-knobs-zero baseline `knob3 = 0` gives `count = 1`, the loop
+runs only `i = 0`, and the offset term is identically zero — **knob 4 cannot move a pixel
+at any frame count, in stock too**. The gate's second chance (a MIDI trigger, which
+re-randomises this mode's geometry) was masking it, which ladder §3.4 forbids banking.
+
+**Fix:** floor the drawn count at **2** so the offset has a second shape to offset — the
+same treatment the filled sibling carries, and the pack's precedent for a knob the
+baseline multiplies by zero (`s-0-arrival-scope`'s 12 px box floor,
+`s-circular-trigon-field`'s 12 px extent). Look impact: below `knob3 ≈ 0.017` the mode
+draws two nested outlines where stock draws one, so the all-knobs-zero baseline shows an
+inner outline covering roughly 12 % of the frame; above that the geometry is stock-exact.
+The fix revived the `audio-freq` probe (0.0000 → 0.01156) and raised `min stddev` from
+5.27 to 12.27.
 
 ## Residual risk
 
-- **`knob 4` is dead at 300 frames here too, and this pass is also a false liveness.**
-  Both probe points read `0.0000` and the verdict survives on the trigger fallback
-  (`trigger_pass: True`) because the mode re-randomises its polygon geometry on a
-  trigger. **This makes it family-wide, not a one-off**: the sibling `5gon-filled` shows
-  the identical pattern (dead at 300 frames, live at 60 at 0.74932), so the cause is the
-  family's shared rotation mechanism rather than either port's implementation. The
-  `5gon-filled` fix is in flight and its diagnosis will be applied here; the two
-  remaining family modes (`Circles`, `Rectangles`) will need it as well.
-- **`audio-freq` reads 0.0000** and quiet/loud are identical — stock-faithful, since the
-  family reads a waveform sample (`audio_in[i]`), not a spectrum bin.
-- **The 32-handle count cap** is the mode's largest deviation from stock.
+- **knob 4's liveness margin is thin here** (0.02265 against 0.001 — about 22×, where the
+  filled sibling reads 0.11939). It rests on a 7 px outline's rotation being visible
+  where a filled polygon's is more so; a stricter `min_fraction` would need the outline
+  widened or the floor raised.
+- **The count floor is the mode's second geometric deviation** (with the 32-handle cap):
+  the all-knobs-zero baseline is not stock's single outline.
+- **`audio-quiet` and `audio-loud` are the same value** — stock-faithful, since the family
+  reads a waveform sample (`audio_in[i]`), not a spectrum bin.
 - **Miter tips can flare** past pygame's round joins for strongly reflex triggered vertex
   sets — the same degenerate case where pygame's own outline degenerates.
+- **The 32-handle count cap** is the mode's largest deviation from stock.
