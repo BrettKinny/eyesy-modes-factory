@@ -1018,7 +1018,7 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
+   "status": "verified-300",
    "verdict": null,
    "verified_at": null,
    "evidence": null,
@@ -1054,11 +1054,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-horizontal-trails.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "100 strokes in 2 meshes, drawn twice per frame when the trail is on; 2 half-res targets"
   },
   {
    "stock_name": "S - Line Bounce Four - LFO Alternate",
