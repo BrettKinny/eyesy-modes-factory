@@ -68,6 +68,18 @@ Per-probe A/B, fraction of pixels changed:
 
 ## Residual risk
 
+- **FIXED 2026-09-18: the LFOs ran 15× too slow.** The port advanced them by
+  `step * 2 * dt`, giving `2·step` px/s where stock's rate is `30·step` px/s — stock steps
+  once per 30-fps frame, and matching that at 60 fps with `dt` in seconds needs
+  **`step * 30 * dt`**. The defect was found by the two-line sibling's port, whose brief said
+  to check each constant against the source rather than assume it carried over. The frames
+  demonstrably changed (mode sha256 `d91e8f9d…` → `62299091…`), and header deviation 5's
+  reasoning was corrected — it had argued for the wrong factor explicitly.
+  **The gate could not see this**: determinism, liveness, reactivity and brightness are all
+  satisfied by a mode running at the wrong speed, and `knob3`'s two probe fractions barely
+  move either way (0.01376 → 0.01372), because the verifier grabs a single frame at which the
+  LFO has advanced only `step·dt` pixels — ~1 px at the wrong rate, ~15 px at the right one,
+  both small against a 1280×720 frame.
 - **Two of the three audio probes are BELOW the 0.001 threshold** (`audio-loud` 0.00057,
   `audio-freq` 0.00054); the set passes because `audio-quiet` clears it at 0.00168. This is the
   thinnest audio margin in the pack by a wide margin, and it is structural: the mode reads one
@@ -77,7 +89,5 @@ Per-probe A/B, fraction of pixels changed:
   phases (`1.0`, `1.25`, `1.5`, `1.75` mod 1) fold onto the same four colours as `k4 = 0`, so the
   frame is byte-identical to the baseline — stock-faithful, not a defect. Liveness rests on the
   0.5 probe, as in the bezier siblings.
-- **knob 3's two probes read identically** (0.01376) — the LFO step knob changes the bounce rate,
-  which at a single grab instant changes little.
 - No device tier claim (gate retired); the mode is 8 draw calls with no meshes or targets, so it
   should sit at the floor.

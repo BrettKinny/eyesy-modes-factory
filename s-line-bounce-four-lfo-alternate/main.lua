@@ -61,14 +61,15 @@
 --    x = 0 at the baseline), so the visible effect is preserved while
 --    replays stay byte-identical.
 -- 5. Position LFOs re-timed 30 -> 60 fps: stock steps each LFO by an
---    integer number of pixels once per 30-fps frame. Here each LFO's
---    position advances by (stock step) * 2 * ctx.dt, so a 30-fps stock
---    frame is matched exactly at any dt. The range clamp-and-bounce
---    (clamp to the end, flip direction) is stock-exact; stock's two
---    independent ifs are written as an if/elseif, which differs only
---    when start >= max — unreachable, since size2 <= 50 keeps b3's
---    max = yres/2 - size2/2 above its start = 0 and b4's start below
---    its max = yres.
+--    integer number of pixels once per 30-fps frame, i.e. 30 * step
+--    px/s. To match that rate at 60 fps the per-frame advance must be
+--    (stock step) * 30 * ctx.dt: at dt = 1/60 that is step/2 px per
+--    frame, i.e. 30 * step px/s, exactly stock's rate.
+--    The range clamp-and-bounce (clamp to the end, flip direction) is
+--    stock-exact; stock's two independent ifs are written as an
+--    if/elseif, which differs only when start >= max — unreachable,
+--    since size2 <= 50 keeps b3's max = yres/2 - size2/2 above its
+--    start = 0 and b4's start below its max = yres.
 -- 6. Line widths: pygame.draw.line treats a width <= 0 as 1 px, while
 --    e.line takes the width literally; stock's int() + 1 already floors
 --    both at 1, so size2 (the horizontal stroke) is stock-exact as
@@ -131,10 +132,10 @@ end
 
 -- Stock LFO.update(): advance, clamp at either end, flip direction.
 -- Called at the 60-fps re-timed rate (deviation 5): stock steps once
--- per 30-fps frame, so the per-frame advance here is 2 * dt times the
--- stock step.
+-- per 30-fps frame (30 * step px/s), so the per-frame advance here is
+-- 30 * dt times the stock step.
 local function lfo_update(l, dt)
-  l.pos = l.pos + l.step * l.dir * (2 * dt)
+  l.pos = l.pos + l.step * l.dir * (30 * dt)
   if l.pos >= l.max then
     l.dir = -1
     l.pos = l.max
