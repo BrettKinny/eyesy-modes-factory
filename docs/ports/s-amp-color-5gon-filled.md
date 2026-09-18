@@ -39,38 +39,55 @@ That is a real fidelity loss, not a rounding detail. The spacing formula keeps s
 literal `60` denominator, so with the capped count the spacing factor never reaches its
 stock maximum.
 
-## Verification — 2026-09-18
+## Verification — 2026-09-18 (after the knob-4 fix)
 
 `python3 tools/verify_port.py s-amp-color-5gon-filled --frames 300` → `"verdict": "pass"`, `failures: []`. Software GL (llvmpipe), engine sha256 `bc29aeef4021…`.
 
-| Check | Result (300 frames) | (60 frames, implementing agent) |
+| Check | Result (300 frames) | 60 frames |
 | --- | --- | --- |
 | determinism | mean 0.0, frac 0.0 | mean 0.0, frac 0.0 |
 | knob 1 `history` | mid 0.0000, max 0.5590 | 0.75066 |
-| knob 2 `spin` | mid 0.2880, max 0.1424 | 0.32289 |
+| knob 2 `spin` | mid 0.2880, max 0.1424 | 0.43583 |
 | knob 3 `count` | mid 0.5357, max 0.5372 | 0.70757 |
-| **knob 4 `offset`** | **mid 0.0000, max 0.0000** | **0.74932** |
+| **knob 4 `offset`** | **mid 0.0000, max 0.11939** | **0.11938** |
 | knob 5 `bg` | mid 0.4410, max 0.4410 | 0.24934 |
-| audio | quiet 0.5590, loud 0.5590, freq 0.0000 | 0.75066 / 0.75066 / 0.0000 |
-| trigger | **True** | True |
-| luma bounds | mean 32.57–120.72, min stddev 23.17 | 37.02–128.56, stddev 20.33 |
-| `p50_ms` (software GL) | 16.6 (resources 32) | 16.66 |
+| audio | quiet 0.5590, loud 0.5590, freq **0.15505** | 0.75066 / 0.75066 / 0.15504 |
+| trigger | True | True |
+| luma bounds | mean 34.21–118.55, min stddev 26.38 | 38.66–126.39, stddev 34.11 |
+| `p50_ms` (software GL) | 16.6 (resources 32) | 16.64 |
+
+The mode's own 60-frame run before the fix read knob 4 as `0.74932` — which the
+diagnosis showed was the **trigger's** number, not the knob's; knob 4 was in fact dead at
+both lengths.
+
+## The knob-4 defect and its fix (deviation 9)
+
+Stock's per-polygon rotation offset is `current_rotation + i * (knob4 * 180)` — the
+knob's whole excursion is **multiplied by the polygon index**. At the verifier's
+all-knobs-zero baseline `knob3 = 0` gives `count = int(0*59)+1 = 1`, so the loop runs only
+`i = 0`, the offset term is multiplied by zero, and **knob 4 cannot move a single pixel at
+any frame count — in stock too**. Stock-faithful, but it fails the gate, and the gate's
+second chance (a MIDI trigger, which re-randomises this mode's geometry) would have banked
+a **false liveness** — forbidden by ladder §3.4.
+
+**Fix:** floor the drawn count at **2**, so the offset has a second shape to offset. Look
+impact: below `knob3 ≈ 0.017` the mode draws two nested pentagons where stock draws one,
+so the all-knobs-zero baseline shows an inner pentagon covering roughly 12 % of the frame;
+above that the geometry is stock-exact. The pack's precedent for this treatment is
+`s-0-arrival-scope` (a 12 px box-width floor) and `s-circular-trigon-field` (a 12 px
+triangle extent). The fix also revived the `audio-freq` probe (0.0000 → 0.15505) and
+raised `min stddev` from 20.33 to 26.38.
+
+**This is family-wide**: `s-amp-color-5gon-outlines` showed the identical deadness, and
+the same fix is being applied there.
 
 ## Residual risk
 
-- **`knob 4` is dead at 300 frames and the pass is a false liveness.** Both of its probe
-  points read `0.0000`, and the verdict survives only because the verifier's second
-  chance fires a MIDI trigger (`trigger_pass: True`) and this mode re-randomises its
-  polygon geometry on a trigger. The ladder states the rule explicitly: *"a mode whose
-  trigger re-randomises geometry can then 'pass' on the trigger's effect rather than the
-  knob's. That is a false liveness — fix the knob's own visibility instead of relying on
-  it."* **Fix queued.** Note the knob is live at 60 frames (0.74932), so the failure is
-  frame-count dependent — the accumulated rotation or the audio history reaches a state
-  where the per-shape offset no longer changes pixels.
-- **`audio-freq` reads 0.0000** at both lengths, and `audio-quiet`/`audio-loud` are the
-  *same* value (0.5590) — the mode responds to the audio level but not to frequency,
-  which is stock-faithful (it reads `audio_in[i]`, a waveform sample, not a spectrum
-  bin), but it means the frequency probe is structurally inapplicable here.
+- **The count floor is the mode's second geometric deviation** (with the 32-handle cap):
+  the all-knobs-zero baseline is not stock's single polygon.
+- **`audio-quiet` and `audio-loud` are the same value** — the mode responds to the audio
+  level but not to frequency in the level probes, which is stock-faithful (it reads
+  `audio_in[i]`, a waveform sample, not a spectrum bin).
 - **The 32-handle count cap** (above) is the mode's largest deviation from stock.
 - **Up to 32 `e.color` calls per frame** — one per polygon, below the 70-call measurement
   that took a mode outside tier C, so within the known budget.

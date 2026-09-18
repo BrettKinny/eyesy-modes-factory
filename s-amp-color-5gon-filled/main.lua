@@ -8,7 +8,7 @@
 --   2 spin — rotation direction & rate (dead zone 0.49..0.51 resets to 0;
 --            below 0.48 counter-clockwise, above 0.52 clockwise,
 --            rate = |knob2 - 0.48| * 52 deg/frame at 30 fps)
---   3 count — nested polygon count (int(knob3*59)+1)
+--   3 count — nested polygon count (int(knob3*59)+1, floored at 2 — deviation 9)
 --   4 offset — per-polygon rotation offset (i * knob4 * 180 deg)
 --   5 bg — background colour
 --   Trigger — picks five new random vertex positions in [-1,1]
@@ -50,8 +50,8 @@
 --    first `count` meshes are updated and drawn. Each mesh is sized at its
 --    exact populated vertex count (5), so update_mesh never sees a trailing
 --    nil. Stock's knob3 draws up to 60 polygons; the port caps the count
---    at 32 to stay within the handle budget — the only deviation from
---    stock geometry.
+--    at 32 to stay within the handle budget — one of the port's two
+--    geometric deviations (the other is the count floor, 9).
 -- 7. Per-element colour: each polygon gets its own e.color call (up to 32
 --    per frame, set immediately before that polygon's draw). This is within
 --    the measured device cost budget for this mode family (the grid-slide
@@ -61,6 +61,23 @@
 --    frame at all knob values (the largest polygon spans at most
 --    poly_width/2 * 1.0 = 640 px from centre in x and 360 px in y, still
 --    within the frame). No wrap or scale is applied.
+-- 9. Count floored at 2. Stock's per-polygon rotation offset is
+--    current_rotation + i * (knob4 * 180), i.e. the knob's whole excursion is
+--    multiplied by the polygon index. At the verifier's all-knobs-zero
+--    baseline knob3 = 0, so stock's count is int(0*59)+1 = 1: the loop runs
+--    only i = 0, the offset term is multiplied by zero, and knob4 cannot move
+--    a single pixel at ANY frame count. That is a stock-faithful deadness
+--    (stock is inert there too) which nonetheless fails the gate, and the
+--    gate's second chance — a MIDI trigger, which re-randomises this mode's
+--    polygon — would otherwise bank a false liveness (PORTING-LADDER 3.4).
+--    The drawn count is floored at 2 so the offset has a shape to offset,
+--    the same treatment s-0-arrival-scope (12 px box-width floor) and
+--    s-circular-trigon-field (12 px triangle extent) give a knob the baseline
+--    state multiplies by zero. Look impact: below knob3 = 1/59 ~ 0.017 the
+--    mode draws two nested pentagons where stock draws one, so the
+--    all-knobs-zero baseline shows an inner pentagon covering ~12 % of the
+--    frame. Above that the geometry is stock-exact, and knob3's scaling
+--    (2..32 with the mesh cap) is unchanged.
 
 
 local e = eyesy
@@ -139,8 +156,10 @@ local function draw(ctx)
     end
   end
 
-  -- Number of polygons (deviation 6: capped at 32).
+  -- Number of polygons (deviation 6: capped at 32; deviation 9: floored at 2
+  -- so the per-shape rotation offset has a shape to rotate).
   local count = trunc(k3 * 59) + 1
+  if count < 2 then count = 2 end
   if count > MAX_COUNT then count = MAX_COUNT end
 
   -- History length.
