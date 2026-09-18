@@ -1206,11 +1206,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-radial-scope-rotate-stepped-color.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "1 mesh (300 verts / 450 indices), 1 colour change/frame; the stepped rainbow collapsed to one colour deliberately (75 changes would sit at the measured cost cliff)"
   },
   {
    "stock_name": "S - Radial Scope - Rotate Uniform Color",
