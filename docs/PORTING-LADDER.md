@@ -19,8 +19,13 @@ upstream assets it needs) that:
 2. passes `tools/scene_verify.py` at `--frames 300` (all five knobs live against
    an all-knobs-zero baseline, audio and trigger above threshold, determinism
    byte-identical, no blank/flat/white grab, no shader warning, no mode errors);
-3. passes the **device tier gate** — measured on the spare CM3+ as a marginal
-   cost over the same-session engine floor (see "Device tier gate" below);
+3. ~~passes the **device tier gate**~~ — **SUSPENDED 2026-09-18 by user
+   direction: modes go into the repository only and are never put on the live
+   unit.** The measurement deploys the packaged pack to the spare CM3+, so it is
+   retired; the 42 rows measured before the direction stand as a record, and new
+   ports are gated on the 300-frame contract run alone. The *findings* from those
+   measurements remain binding design guidance — draw calls over resolution,
+   colour-change cost, the four-bar outline (see "Device tier gate" below);
 4. carries a header citing the upstream repo, path and licence, and a report at
    `docs/ports/<slug>.md` recording the mapping, the deviations, the verification
    numbers and the residual risk.
@@ -52,6 +57,14 @@ Software rendering means `p50_ms` here is a correctness-side number, **not** the
 device tier gate (item 3 above, measured on the CM3+).
 
 ### Device tier gate
+
+**Retired 2026-09-18 by user direction: modes are added to the repository only and
+are never put on the live unit.** `headless-test` deploys the packaged pack to the
+CM3+ to measure it, so these runs have stopped. What follows is kept for two
+reasons: the numbers it produced are still the pack's design guidance (they are
+what identified draw calls as the real lever, and colour changes as the cost that
+takes a mode outside tier C), and the method is what any future re-measurement
+would follow.
 
 Measured on the spare CM3+ (DEVICE_IP, clone `CLONE_ID`),
 600 frames offscreen, with the live platform running — the documented shared-load
