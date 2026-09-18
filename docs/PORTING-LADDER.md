@@ -441,12 +441,13 @@ answer**: unblocked rows keep moving while a blocked row waits.
   twice over — the per-mode delta table removed the per-mode design work, and the
   two mesh warnings (32-handle cap, index table must match its own mesh) were
   learned once and applied to the remaining rows.
-- 2026-09-18: **P1 complete — 26 of 26 rows verified** (29 modes in total with P0),
-  every one at the 300-frame contract run, each with a port report and a queue row.
-  The tranche's shape: 11 grid rows from one family brief, 15 singles and scope
-  rows, two modes needing a session takeover or multiple steered fixes
-  (`s-circular-trigon-field`, `s-square-shadows-uniform-color`, `s-zoom-scope`), and
-  one new engine constraint found (32 mesh handles). P2 opens with 45 rows, which
-  the queue groups into 11 families (grid ×9, amp ×5, circle ×3, bezier ×2, folia
-  ×2, line ×2, mirror ×2, nested ×2, radial ×2, radiating ×2, sound ×2) plus 12
-  singles; nine P2 briefs are already staged.
+- 2026-09-18: **P2's dominant pattern is the sibling copy.** `s-arcway` was ported
+  in zero iterations and 3m47s by copying the verified `s-arcway-black` verbatim and
+  changing one colour rule — the cheapest row in the program so far. Most of P2 is
+  built this way: the amp family (5 rows), grid-polygons (3), grid-slide-square (6),
+  and the circle/bezier/folia/line-bounce/mirror/nested/radial/radiating/sound-jaws
+  pairs are all colour, size or fill variants of one another. **Write the brief as a
+  diff against the verified sibling** — name the sibling, say which expressions
+  change, and carry the sibling's deviation list verbatim — rather than restating
+  the whole mapping. The first of each family still needs a full brief; the rest do
+  not.
