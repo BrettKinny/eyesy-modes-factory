@@ -143,6 +143,14 @@ this pack has settled on:
    persistence pays ~9 ms of bridge overhead on this device; the engine-side answer,
    if that ever matters, is a feedback path that samples the previous target as a
    texture instead of blitting it (what the shipped shader scenes do).
+   **The bigger lever is draw calls, not resolution.** Batching a polyline-heavy mode
+   into **one** mesh per frame — every segment a 4-vertex quad with static 1-based
+   triangle indices, the house idiom from the bespoke library's `flow-field-drift` and
+   `kalachakra-stupa` — took `s-folia-curves` from **40.56 ms to 30.00 ms** on the same
+   device (+16.4 → +5.8 over the floor, absolute inside tier C), while the resolution
+   lever had only reached the bridge's fixed per-pass overhead. Never use a single
+   continuous line strip for disconnected polylines: `update_mesh` without indices is a
+   line strip, so it draws joining segments between them.
 3. **Audio shape** — stock is a 100-value ring at 100 Hz, ±32768; ours is 1024
    normalized samples + 513 FFT bins + 3 bands + rms. Waveform-reading modes
    need the index mapping recomputed; never copy `audio_in[i]` verbatim. The
