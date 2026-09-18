@@ -342,6 +342,42 @@ at a time from an all-zero baseline, so both read dead — a **stock-faithful** 
 that nonetheless fails the gate, and so needs the documented-deviation treatment of §4
 rather than a re-reading of the source.
 
+### Family: `amp-color` (4 modes)
+
+Shared skeleton (all four):
+
+- **`count` nested shapes at the screen centre**, each scaled by
+  `size = full - (i * (full/count) * (1 + 0.1*(N-count)/N))` where `N` is the mode's
+  own max-count constant (**60** for the 5gons, **100** for circles — the constant is
+  part of the formula, not the shape count).
+- **Per-shape colour from that shape's own audio history**: a running average over a
+  deque of `maxlen = int(knob1*20)+1`.
+- **Per-shape rotation** `current_rotation + i*offset`, where `current_rotation` is a
+  stock global accumulated per frame from knob2 — dead zone `0.49..0.51` resets it to 0,
+  rate `|knob2-0.48| * 52` deg/frame at 30 fps.
+- **Trigger re-randomises the geometry** (5 random points for the 5gons, 5 random
+  circles for circles, nothing for rectangles).
+- Background from `color_picker_bg(knob5)`; the audio index for shape `i` is
+  `audio_in[i]` (0-based, **no wrap**).
+
+Per mode:
+
+| Mode | shape | draw | count | `N` | offset | audio scale |
+| --- | --- | --- | --- | --- | --- | --- |
+| `5gon Filled` | 5-vertex polygon | `draw.polygon(..., pts)` filled | `int(knob3*59)+1` (60) | 60 | `i*(knob4*180)` deg | `abs(audio_in[i]/32768)` |
+| `5gon Outlines` | same | `draw.polygon(..., pts, 7)` — 7 px outline | same | 60 | same | same |
+| `Circles` | 5 circles (r + pos) | `draw.circle(..., int(scaled_radius))` | `int(knob3*49)+1` (50) | 100 | — | — |
+| `Rectangles` | — | — | — | — | — | — |
+
+**The 32-mesh-handle cap binds here.** Stock draws up to **60** nested polygons; the
+engine allows at most **32 mesh handles per mode**, and each polygon needs its own
+handle because its colour comes from its own audio history — so there is nothing to
+group by. The port therefore caps the drawn count at 32 and documents the deviation:
+the mode is stock-exact for `knob3 ≤ 0.53` and draws 32 polygons where stock draws more
+above that. That is a real fidelity loss, not a rounding detail, and it is the second
+time this budget has forced a shape (see `s-grid-triangles-filled-column-color`'s
+rejected 70 handles).
+
 ## 4. Deviations the gate forces
 
 Three deviation classes recur, and all three are documented per mode rather
