@@ -1282,11 +1282,13 @@
    "tranche": "P2",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/s-sound-jaws-stepped-color.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "1 mesh (160 verts / 240 indices), 1 colour change/frame; screengrab feedback echo dropped (no surface-copy primitive)"
   },
   {
    "stock_name": "S - Sound Jaws - Uniform Color",
