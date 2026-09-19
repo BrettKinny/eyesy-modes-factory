@@ -1358,11 +1358,13 @@
    "tranche": "P3",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/t-ball-of-mirrors-trails.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "half-res ping-pong bridge for the echo, 0 meshes; the trail is the previous frame blitted at an alpha, not a decayed accumulator"
   },
   {
    "stock_name": "T - Bezier Cousins - Trails",
