@@ -418,6 +418,32 @@ above that. That is a real fidelity loss, not a rounding detail, and it is the s
 time this budget has forced a shape (see `s-grid-triangles-filled-column-color`'s
 rejected 70 handles).
 
+### What the verifier actually probes
+
+Read from the engine's `tools/scene_verify.py` (the wrapper delegates to it). Knowing this
+saves a round trip per task, and two of the facts below decide whether a `pass` means
+anything:
+
+| run | what it does |
+| --- | --- |
+| `base`, `base2` | all knobs 0.0, gain 1 — `base2` re-runs `base` to assert the noise floor |
+| `knobK-mid`, `knobK-max` | knob K at **0.5** and **1.0**, both applied at **frame 5** |
+| `audio-quiet` / `-loud` / `-freq` | gain **0.05** / **3.5** / 1.0 with freq ×3.5, at frame 5 |
+| `trigger` | a MIDI note-on at **frame `frames - 30`** (hence `--frames >= 60`) |
+| `knobK-trig` | **second chance, generated ONLY when knob K's mid AND max both read `frac <= min_fraction` (0.001)**: knob at 1.0 **plus** the same note-on |
+
+`frac` is the fraction of pixels differing from `base`'s grab (`CHANGE_THRESHOLD = 1`); the
+engine is bit-deterministic, so a stimulus with no effect gives a byte-identical grab and
+`frac = 0.0`. **The grab is the final frame**, so a stateful mode has `frames - 5` frames to
+respond.
+
+**Two consequences.** First, **a `trig` value is never the knob's number**: it only exists for
+knobs that were already dead, so a non-zero `trig` with zero mid/max means the knob is dead and
+the verdict is the trigger's (§3.4). Second, **the wrapper's summary `knob_frac` takes the max
+over mid/max/trig**, so it reports the trigger's figure as if it were the knob's — **the
+per-probe table in `summary.json`'s `ab_diffs` is the only place the distinction is visible**,
+and every brief must ask for it.
+
 ## 4. Deviations the gate forces
 
 Three deviation classes recur, and all three are documented per mode rather
