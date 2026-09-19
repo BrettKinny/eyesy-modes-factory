@@ -1377,11 +1377,13 @@
    "tranche": "P3",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-60",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/t-bezier-cousins-trails.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "batched strokes + half-res trail bridge; an audio term was ADDED since stock reads no audio"
   },
   {
    "stock_name": "T - Bits H - Row Color",
