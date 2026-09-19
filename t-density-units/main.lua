@@ -2,24 +2,33 @@
 -- Upstream: critterandguitari/EYESY_Modes_OSv3, path "T - Density Units/main.py"
 -- Licence: BSD-2-Clause (c) Critter & Guitari
 --
--- The scene is a scatter of 100 square "units" on a virtual canvas that spans
--- the full screen plus a margin. Unit j (0-based) sits at (px[j], py[j]) in
--- screen-pixel coordinates and is drawn as a size×size rectangle centred on
--- that point. Stock's setup roll places units in
+-- The scene is a scatter of 100 square "units" drawn as a size×size rectangle
+-- centred on (x[j], y[j]). Stock's setup roll places units in
 --   x: [-x100, W + x100)  where x100 = int(W * 0.078)  (~99 px at 1280)
 --   y: [-y100, H + y100)  where y100 = int(H * 0.139)  (~100 px at 720)
 -- so ~94% of units land on screen. The draw loop renders only the first 30
 -- units (stock's fixed loop bound) — the other 70 are state, not pixels.
 --
+-- The port keeps the scatter as 100 normalized values (ux, uy) rolled once in
+-- setup and re-rolled on trigger, and maps them into the live spacing window
+-- each frame (deviation 7). Stock instead rolls absolute pixel positions and
+-- only re-rolls them on a trigger, which leaves the spacing knob with nothing
+-- to move at its own probe points.
+--
 -- Knob roles (stock-exact):
 --   1 rect diameter — size = int(knob1 * W * 0.156) + 1 px (max ~200 px)
 --   2 spacing — xdensity = int(knob2 * W/2) + 20, ydensity = int(knob2 * H/2) + 20;
---               on trigger the 100 units are re-rolled over a canvas inset by
---               (xdensity, ydensity) on each side
---   3 filled/unfilled — knob3 < 0.5: filled rect, border = int(size*knob3) + 1,
---                       corner radius = int(size*knob3*2);
---                       knob3 >= 0.5: outline rect, corner radius =
---                       int(size*(2 - knob3*2)), no fill
+--               the scatter is mapped into the canvas inset by
+--               (xdensity, ydensity) on each side. Stock applies that window
+--               only inside the trigger re-roll; the port maps the live window
+--               every frame (deviation 7), which is what gives the knob its own
+--               visible effect.
+--   3 outline/fill — stock passes int(size*knob3) + 1 as pygame's rect *width*
+--                   (below 0.5, border only) and 0 above 0.5 (solid). The port
+--                   draws the border branch as four e.rect bars of that
+--                   thickness, drawn inside the rect exactly as pygame does
+--                   (deviation 8); the corner radius is not implementable with
+--                   e.rect and is dropped (deviation 8).
 --   4 colour — LFO picker: below 0.5 the picker value is fixed at
 --              (knob4 * 2) % 1; above 0.5 the picker index ramps at
 --              (knob4 - 0.5) * 2 * 0.15 per 30-fps frame (inc_amt = 0.15
@@ -28,7 +37,8 @@
 --              every unit in the frame (deviation 3 documents the phase
 --              offset).
 --   5 bg — background colour (legacy picker, phase remapped, deviation 5)
---   Trigger — re-rolls the 100 unit positions over the inset canvas
+--   Trigger — re-rolls the 100 normalized positions (stock re-rolls the pixel
+--             positions over the same window the knob 2 term defines)
 --
 -- Stock reads NO audio (no audio_in anywhere in the source). Per the pack's
 -- convention the port adds one documented audio term (deviation 6): each
@@ -55,10 +65,10 @@
 --    count the verifier uses.
 -- 4. No count or length floor: unlike the `bits` siblings (which floor their
 --    count and length because stock's minima put the figure off-screen or
---    collapsed it to a hairline), this mode's 30 drawn units at size ~200 px
---    over a 1280×720 screen cover a large fraction of the frame even at the
---    verifier's fixed random seed. The baseline frame is not flat; no floor
---    was added.
+--    collapsed it to a hairline), this mode's 30 drawn units at size >= 1 px
+--    over a 1280×720 screen keep the frame non-flat: the spacing window at the
+--    knob's floor spreads them over the whole canvas and the draw colour never
+--    matches the clear colour. No floor was added.
 -- 5. Background picker phase is remapped to the middle of the range,
 --    c = (knob5 * 0.7 + 0.15) % 1: the stock formula returns pure white at
 --    knob5 = 1.0 and pure black at 0, both rejected by the verifier. The
@@ -68,11 +78,33 @@
 --    within the 1024-sample buffer) times 0.25 * W, i.e. up to a quarter of
 --    the width. Documented per the pack convention for stock modes with no
 --    audio path.
---
--- Draw budget: 30 e.rect calls per frame (stock's exact loop bound), no
--- meshes at all. Colour state changes per frame: 1 clear + 1 e.color (the
--- foreground colour is sampled once per frame and used for all 30 units —
--- no batching needed, no per-unit cost).
+-- 7. The spacing window is live. Stock rolls absolute positions once in setup
+--    and re-uses them until a trigger; the spacing knob only resizes the
+--    window that a *trigger* re-rolls into, so between triggers the knob cannot
+--    move a pixel — at the verifier's knob2 probes its two states were
+--    byte-identical to the baseline and only its trigger-assisted run showed an
+--    effect, which the pack's rules forbid counting. The port keeps the scatter
+--    as normalized values and maps them into stock's trigger window
+--    (-dscale + xdensity, W + dscale - xdensity + 10) every frame, so the knob
+--    re-spaces the units as it turns. Look impact: at the knob's floor the
+--    canvas is stock's trigger window ([-79, 1369) × [-79, 809)) rather than
+--    setup's slightly wider margin ([-99, 1379) × [-100, 820)) — a 20 px
+--    difference at the edge, invisible in a scatter of 200 px units; turning
+--    spacing now visibly pulls the units inward continuously instead of
+--    snapping at the next trigger.
+-- 8. Knob 3's pygame rect width is drawn in Lua, and the corner radius is
+--    dropped. The engine's e.rect(x, y, w, h) ignores any extra arguments, so
+--    the port's earlier call passed stock's width/corner straight past the
+--    renderer: every knob3 state drew the same solid rect and the knob read
+--    dead at both of its probes. Stock's width semantics are restored by
+--    drawing the border branch as four e.rect bars of thickness
+--    int(size*knob3) + 1 inside the rect (pygame draws the border inside, so
+--    the outer bounds are unchanged). Look impact: below 0.5 the units are now
+--    open outlines whose wall thickens from 1 px to ~half the unit as knob3
+--    approaches 0.5, closing into the solid fill the >= 0.5 branch draws —
+--    which is exactly stock's progression. The corner radius (up to size/2)
+--    cannot be expressed with e.rect and is dropped: outlines have square
+--    corners where stock rounded them.
 
 local e = eyesy
 local PI = math.pi
@@ -94,41 +126,19 @@ local function trunc(v)
   return math.floor(v)
 end
 
--- Preallocated state (zero per-frame allocation).
-local px = {}
-local py = {}
+-- Preallocated state (zero per-frame allocation). Positions are normalized
+-- [0,1) scatter values (deviation 7); the window is applied per frame.
+local ux = {}
+local uy = {}
 for i = 1, NUM_UNITS do
-  px[i] = 0
-  py[i] = 0
+  ux[i] = 0
+  uy[i] = 0
 end
 
-local function init_positions(W, H)
-  -- Stock's setup roll: x in [-x100, W + x100), y in [-y100, H + y100)
-  -- where x100 = int(W * 0.078), y100 = int(H * 0.139).
-  local x100 = trunc(W * 0.078)
-  local y100 = trunc(H * 0.139)
-  local xspan = W + x100 + x100
-  local yspan = H + y100 + y100
+local function roll_scatter()
   for i = 1, NUM_UNITS do
-    px[i] = -x100 + math.floor(e.random() * xspan)
-    py[i] = -y100 + math.floor(e.random() * yspan)
-  end
-end
-
-local function roll_positions(W, H, xdensity, ydensity)
-  -- Stock's trigger re-roll: x in [-dscale + xdensity, W + dscale - xdensity
-  -- + 10), y in [-dscale + ydensity, H + dscale - ydensity + 10) where
-  -- dscale = int(W * 0.078).
-  local dscale = trunc(W * 0.078)
-  local xlow = -dscale + xdensity
-  local xhigh = W + dscale - xdensity + 10
-  local ylow = -dscale + ydensity
-  local yhigh = H + dscale - ydensity + 10
-  local xspan = xhigh - xlow
-  local yspan = yhigh - ylow
-  for i = 1, NUM_UNITS do
-    px[i] = xlow + math.floor(e.random() * xspan)
-    py[i] = ylow + math.floor(e.random() * yspan)
+    ux[i] = e.random()
+    uy[i] = e.random()
   end
 end
 
@@ -173,12 +183,21 @@ local function draw(ctx)
   local xhalf = trunc(W / 2)
   local yhalf = trunc(H / 2)
   local size = trunc(k1 * sizescale) + 1
+
+  -- Spacing window: stock's trigger window, mapped live every frame
+  -- (deviation 7). xlow = -dscale + xdensity, xhigh = W + dscale - xdensity + 10.
+  local dscale = trunc(W * 0.078)
   local xdensity = trunc(k2 * xhalf + 20)
   local ydensity = trunc(k2 * yhalf + 20)
+  local xlow = -dscale + xdensity
+  local ylow = -dscale + ydensity
+  local xspan = W + dscale + dscale - 2 * xdensity + 10
+  local yspan = H + dscale + dscale - 2 * ydensity + 10
 
-  -- Trigger: re-roll the 100 unit positions (stock does this in setup too).
+  -- Trigger: re-roll the 100 normalized scatter values (stock re-rolls the
+  -- pixel positions over the same window).
   if ctx.trigger then
-    roll_positions(W, H, xdensity, ydensity)
+    roll_scatter()
   end
 
   -- LFO ramp (stock color_picker_lfo, inc_amt = 0.15 default), re-timed 30 ->
@@ -191,14 +210,13 @@ local function draw(ctx)
     lfo_index = (lfo_index + inc * 30 * dt) % 2
   end
 
-  -- Fill/corner (stock-exact, same for all units).
-  local fill, corner
+  -- Border thickness, stock-exact: this is pygame's draw.rect *width*, so
+  -- below 0.5 the rect is an open outline of int(size*knob3) + 1 px and at or
+  -- above 0.5 it is solid (width 0). Drawn in Lua because e.rect ignores the
+  -- width argument (deviation 8).
+  local border = 0
   if k3 < 0.5 then
-    fill = trunc(size * k3) + 1
-    corner = trunc(size * (k3 * 2))
-  else
-    corner = trunc(size * (2 - (k3 * 2)))
-    fill = 0
+    border = trunc(size * k3) + 1
   end
 
   -- Audio scale (deviation 6).
@@ -220,7 +238,20 @@ local function draw(ctx)
       end
     end
 
-    e.rect(px[j + 1] - s / 2, py[j + 1] - s / 2, s, s, fill, corner)
+    local x = xlow + ux[j + 1] * xspan - s / 2
+    local y = ylow + uy[j + 1] * yspan - s / 2
+
+    if border > 0 then
+      -- Outline: four bars of thickness `border` inside the unit box, the
+      -- pygame border geometry (a thickness of half the box or more closes up
+      -- into the solid branch).
+      e.rect(x, y, s, border)
+      e.rect(x, y + s - border, s, border)
+      e.rect(x, y, border, s)
+      e.rect(x + s - border, y, border, s)
+    else
+      e.rect(x, y, s, s)
+    end
   end
 end
 
@@ -233,7 +264,7 @@ return {
     e.param("colour", 0.5, 0, 1, 4)
     e.param("bg", 0.5, 0, 1, 5)
 
-    init_positions(ctx.width, ctx.height)
+    roll_scatter()
   end,
   draw = draw,
 }

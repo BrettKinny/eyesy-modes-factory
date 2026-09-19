@@ -12,43 +12,54 @@
 
 Thirty "density units" laid out across the frame, sized by a knob and coloured by an LFO.
 
-## Verification — 2026-09-18
+## Verification — 2026-09-18 (after the knob fix)
 
 `python3 tools/verify_port.py t-density-units --frames 300` → `"verdict": "pass"`, `failures: []`.
 
-Per-probe A/B at 300 frames — **this is the table that matters**:
+Per-probe A/B at 300 frames:
 
 | Knob | mid | max | trig |
 | --- | --- | --- | --- |
-| 1 | 0.37167 | 0.68894 | — |
-| 2 | **0.00000** | **0.00000** | 0.25942 |
-| 3 | **0.00000** | **0.00000** | 0.35362 |
-| 4 | **0.00000** | 0.18860 | — |
-| 5 | 0.81140 | 0.81140 | — |
+| 1 | 0.02351 | 0.03076 | — |
+| 2 | **0.01924** | **0.01887** | — |
+| 3 | **0.19361** | **0.19361** | — |
+| 4 | 0.00000 | 0.00788 | — |
+| 5 | 0.99212 | 0.99212 | — |
+
+**The `trig` column is empty for every knob** — the verifier only generates a second-chance run
+when a knob's mid *and* max both read zero, so no `knob2-trig`/`knob3-trig` run exists at all.
+Every non-zero number for knobs 2 and 3 is now their **own** probe.
 
 | Check | Result |
 | --- | --- |
 | determinism | mean 0.0, frac 0.0 |
-| audio | quiet 0.18785, loud 0.77891, freq 0.11093 — **pass** |
-| trigger | `trigger_pass: true`, frac 0.35362 |
-| luma bounds | 28.07–123.78, min stddev 2.70 |
-| `p50_ms` (software GL) | 16.64 / 16.66 |
+| audio | quiet 0.00829, loud 0.03218, freq 0.01623 — **pass** |
+| trigger | standalone variant frac 0.01656, pass |
+| luma bounds | 28.04–64.50, min stddev 1.99 |
+| `p50_ms` (software GL) | 16.58 / 16.64 |
 
-## The false liveness — two knobs, not one
+Visual confirmation from the grabs: at `knob3 = 0` the units are thin 1 px outlines (stock's
+`width = int(size*0)+1`); at mid/max they are solid (stock's `width 0` = filled), 0.79 % → 20.1 %
+bright pixels. At `knob2` mid/max the scatter is visibly pulled inward from the frame edges and
+then into a centre band.
 
-**`knob 2` and `knob 3` read `0.00000` at BOTH probe points**, and the only non-zero figures for
-them in the whole table are under `trig`. So the verdict rests entirely on the verifier's
-MIDI-trigger second chance for those two knobs — the pattern ladder §3.4 forbids banking.
+## The false liveness, and its root cause
 
-Worse, the implementing agent reported them as live: the wrapper's summary `knob_frac` surfaces
-the **trigger** value when a knob's own probes are dead, so `knob2: 0.25942` and
-`knob3: 0.35362` in its report are the trigger's numbers, not the knobs'. The per-probe table is
-the only place the distinction is visible.
+Before the fix, knobs 2 and 3 read `0.00000` at **both** of their own probe points, with their
+only non-zero figures under `trig` — the verifier's MIDI-trigger second chance, which ladder §3.4
+forbids banking.
 
-**Fix queued.** This is the **third** mode this session to pass on a trigger fallback after the
-`T -` tranche began, and the first where the agent's own summary masked it — which is worth
-carrying into the briefs: *report the per-probe table, and treat a `trig` column as evidence the
-knob is dead, not as the knob's number.*
+**The root cause is a genuine stock subtlety**: stock computes `xdensity`/`ydensity` from `knob2`
+but consumes them **only inside the trigger re-roll** (`if trigger: pList = [...randrange(-dscale
++ xdensity, ...)]`). The port rolled absolute pixel positions once in `setup()` and never re-mapped
+them, so **between triggers `knob2` had no consumer in the draw path at all** — its probes were
+byte-identical to the baseline. Stock behaves the same way; the knob only acts when a trigger
+fires.
+
+**The trap in the tooling**, worth carrying forward: the verifier wrapper's summary `knob_frac`
+surfaces the **trigger** value when a knob's own probes are dead, so the implementing agent
+reported `knob2: 0.25942` and `knob3: 0.35362` as live numbers. **The per-probe table is the only
+place the distinction is visible**, and every brief now requires it.
 
 ## Deviations
 

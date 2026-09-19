@@ -1472,7 +1472,7 @@
    "tranche": "P3",
    "kind": "pure",
    "needs": [],
-   "status": "verified-300 (false liveness on knobs 2,3)",
+   "status": "verified-300",
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/t-density-units.md",
