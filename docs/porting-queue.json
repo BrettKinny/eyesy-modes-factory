@@ -1377,7 +1377,7 @@
    "tranche": "P3",
    "kind": "pure",
    "needs": [],
-   "status": "verified-60",
+   "status": "verified-300 (false liveness on knob1)",
    "verdict": "pass",
    "verified_at": "2026-09-18",
    "evidence": "docs/ports/t-bezier-cousins-trails.md",

@@ -46,27 +46,40 @@ no audio path needs a documented coupling added, not a workaround.
 
 ## Verification — 2026-09-18
 
-`python3 tools/verify_port.py t-bezier-cousins-trails --frames 60` → `"verdict": "pass"`, `failures: []`.
+`python3 tools/verify_port.py t-bezier-cousins-trails --frames 300` → `"verdict": "pass"`, `failures: []`.
 
-| Knob | fraction |
-| --- | --- |
-| 1 | 0.09928 |
-| 2 | 0.15248 |
-| 3 | **1.00000** |
-| 4 | 0.05482 |
-| 5 | 0.96327 |
+Per-probe A/B, fraction of pixels changed:
 
-| Check | Result |
-| --- | --- |
-| determinism | mean 0.0, frac 0.0 |
-| audio | quiet 0.10066, loud 0.08677, freq 0.01491 — **pass**, comfortably live |
-| `p50_ms` (software GL) | 16.6 |
+| Knob | mid | max |
+| --- | --- | --- |
+| 1 `complexity` | **0.00000** | **0.00000** |
+| 2 `cousins` | 0.09360 | 0.15250 |
+| 3 `spacing` | 1.00000 | 1.00000 |
+| 4 `fg` | 0.00000 | 0.05480 |
+| 5 `bg` | 0.96330 | 0.01220 |
 
-Knob 3's full-frame fraction (1.00000) means that knob changes every pixel — it is the trail
-control, so its states differ from the baseline by construction.
+| Check | 300 frames | 60 frames |
+| --- | --- | --- |
+| determinism | mean 0.0, frac 0.0 | mean 0.0, frac 0.0 |
+| audio | quiet 0.10070, loud 0.08680, freq 0.01490 — **pass** | 0.10066 / 0.08677 / 0.01491 |
+| trigger | **True** — a trigger run was performed | — |
+| luma bounds | 9.41–23.58, min stddev 5.77 | — |
+| `p50_ms` (software GL) | 16.7 (resources 3) | 16.6 |
+
+Knob 3's full-frame fraction (1.00000) means it changes every pixel — it is the spacing control,
+so its states differ from the baseline by construction.
 
 ## Residual risk
 
+- **`knob 1` is dead at 300 frames and the pass rests on the trigger fallback.** Both of its probe
+  points read `0.00000` there, while the same knob read **0.09928** at 60 frames — so its liveness
+  is run-length dependent, and the gate's second chance (a MIDI trigger, which this mode does
+  reference) is what carries the verdict. `docs/PORTING-LADDER.md` §3.4 forbids banking that:
+  *"a mode whose trigger re-randomises geometry can then 'pass' on the trigger's effect rather
+  than the knob's. That is a false liveness — fix the knob's own visibility instead of relying on
+  it."* **Fix queued.** Note this is the *second* mode in this session to show the pattern at 300
+  frames after passing at 60 (`s-amp-color-5gon-filled` was the first), which suggests it is worth
+  checking every future port's 300-frame per-probe table rather than only the verdict.
 - **The audio term is an addition to stock**, not a port of it: the mode's reactivity is the
   port's design, not the original's behaviour.
 - **The trail is half resolution**, so it reads softer than stock's.
