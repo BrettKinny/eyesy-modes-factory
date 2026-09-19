@@ -257,6 +257,15 @@ this pack has settled on:
    already varies the sampled colour, but a mode whose per-element step is tiny
    (e.g. `inc_amt = 0.003` over 6 calls) does.
 
+   **`lfo_offset.py` models the ramp at 60 fps, but the verifier does not run at
+   60.** `t-line-rotate-trails` measured the actual rate at **~66.8 fps**, so a
+   modelled offset can land the sampled colour on the background's own luma and
+   the frame comes back flat. When the offset matters finely, **solve it
+   empirically**: run the gate, read the sampled colour and the background luma
+   from the grabs, and pick the offset that clears both at every supported frame
+   count. That is how this mode's 0.70 was found — no tool derivation, just the
+   rendered numbers.
+
    Beware the verifier's second chance: when both probe points read dead it
    retries with a MIDI trigger, and a mode whose trigger re-randomises geometry
    can then "pass" on the trigger's effect rather than the knob's. That is a

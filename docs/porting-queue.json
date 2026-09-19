@@ -1567,11 +1567,13 @@
    "tranche": "P3",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-60",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/t-line-rotate-trails.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "trail bridge (2 half-res targets); offset SOLVED EMPIRICALLY because the verifier runs at ~66.8 fps, not the 60 the tool models"
   },
   {
    "stock_name": "T - Magnify Cloud - LFO",
