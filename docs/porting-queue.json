@@ -1453,11 +1453,13 @@
    "tranche": "P3",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/t-bits-v-uniform-color.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "0 meshes, <=208 e.rect, 3 colour changes/frame; phase offset DERIVED (0.01 for inc 0.15, not the sibling 0.21)"
   },
   {
    "stock_name": "T - Density Units",
