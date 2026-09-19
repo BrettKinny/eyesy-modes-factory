@@ -19,7 +19,7 @@
 -- below keeps in its -place form).
 --
 -- Knob roles (stock-exact):
---   1 shape complexity — point count on trigger = int(knob1*16)+4
+--   1 shape complexity — point count = int(knob1*16)+4, live every frame (dev. 13)
 --   2 number of cousins — number = int(knob2*5); cousins 2..5 when > 1..4
 --   3 spacing & veil — place = int(knob3*xr*0.14)+10 (floored, dev. 5) and
 --     trail veil alpha = int(knob3*20) (floored, dev. 6)
@@ -69,9 +69,9 @@
 --    (PORTING-LADDER §3.2, sibling t-ball-of-mirrors-trails deviation 7).
 --    Above knob3 ≈ 0.044 the alpha is stock-exact (0..20 of 255). Look
 --    impact: the baseline shows a faint trail where stock shows none.
--- 7. Point count floor: stock's setup rolls 20 points; on trigger the count
---    is int(knob1*16)+4, which is 4 at knob1 = 0. A 4-point closed bezier is
---    a 3-segment diamond — still a figure, kept stock-exact (no floor needed;
+-- 7. Point count floor: stock's setup rolls 20 points; the count is
+--    int(knob1*16)+4, which is 4 at knob1 = 0. A 4-point closed bezier is a
+--    3-segment diamond — still a figure, kept stock-exact (no floor needed;
 --    the minimum is 4, never degenerate).
 -- 8. Baseline: stock's setup() rolls the 20 points once at load; the port does
 --    the same in setup (e.random() in stock's exact order: primary x, y per
@@ -121,6 +121,19 @@
 --     past the target edge. Look impact: at the verifier's default level
 --     (rms_left ~ 0.35) the figure sits ~9% smaller than stock; quiet and loud
 --     inputs swing it between ~0.4% and 25% contraction.
+-- 13. Complexity is a draw-path consumer (no stock counterpart): stock
+--     computes the point count int(knob1*16)+4 only inside its trigger branch,
+--     so between triggers its own probes are byte-identical to the baseline —
+--     at the verifier's 300-frame grab the trail bridge has faded to stock's
+--     20-point setup figure and the knob's 4-point shape is gone, leaving the
+--     verdict to the trigger's re-roll (the false liveness §3.4 forbids
+--     banking). The port re-derives pointNumber = trunc(k1*16)+4 live every
+--     frame — stock's exact formula, same floor (4 at k1 = 0, a 3-segment
+--     diamond, never degenerate) — while stock's trigger behaviour (re-roll
+--     the positions) is kept intact. Look impact: turning complexity now
+--     re-shapes the closed curve continuously (4..20 points) instead of
+--     snapping at the next trigger; the baseline and the post-trigger figure
+--     are unchanged.
 local e = eyesy
 local PI = math.pi
 
@@ -369,9 +382,18 @@ local function draw(ctx)
   if place < 10 then place = 10 end          -- floor (deviation 5)
   local number = trunc(k2 * 5) + 1           -- stock int(knob2*5), +1 for the primary
 
-  -- Trigger re-roll (deviations 4, 7): stock's exact order and ranges.
+  -- Complexity (deviation 13): point count is stock's live formula
+  -- int(knob1*16)+4, re-derived every frame so the knob has a consumer in the
+  -- draw path. Stock computes it only inside its trigger branch (line 52), so
+  -- between triggers its own probes are byte-identical to the baseline — the
+  -- false liveness §3.4 forbids banking. The floor of 4 at k1 = 0 is stock's
+  -- own minimum (a 3-segment diamond, never degenerate; no floor added).
+  pointNumber = trunc(k1 * 16) + 4
+
+  -- Trigger re-roll (deviations 4, 7): stock's exact order and ranges. Stock
+  -- re-rolls only the first `pointNumber` points; the per-frame fill below
+  -- reads exactly that many, so the rest of the row is stale but unused.
   if ctx.trigger then
-    pointNumber = trunc(k1 * 16) + 4
     for i = 0, pointNumber - 1 do
       local i2 = i * 2
       local rx = e.random()

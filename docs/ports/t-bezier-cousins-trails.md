@@ -44,45 +44,48 @@ no audio path needs a documented coupling added, not a workaround.
 5. The deterministic middle-branch picker, the background phase fold, the 30 → 60 fps re-timing,
    and the stock audio mapping with its own divisor.
 
-## Verification — 2026-09-18
+## Verification — 2026-09-18 (after the knob-1 fix)
 
 `python3 tools/verify_port.py t-bezier-cousins-trails --frames 300` → `"verdict": "pass"`, `failures: []`.
 
-Per-probe A/B, fraction of pixels changed:
+Per-probe A/B at 300 frames:
 
-| Knob | mid | max |
-| --- | --- | --- |
-| 1 `complexity` | **0.00000** | **0.00000** |
-| 2 `cousins` | 0.09360 | 0.15250 |
-| 3 `spacing` | 1.00000 | 1.00000 |
-| 4 `fg` | 0.00000 | 0.05480 |
-| 5 `bg` | 0.96330 | 0.01220 |
+| Knob | mid | max | trig |
+| --- | --- | --- | --- |
+| 1 `complexity` | **0.03104** | **0.05340** | — |
+| 2 `cousins` | 0.01426 | 0.02406 | — |
+| 3 `spacing` | 1.00000 | 1.00000 | — |
+| 4 `fg` | 0.00000 | 0.00854 | — |
+| 5 `bg` | 0.99293 | 0.00314 | — |
 
-| Check | 300 frames | 60 frames |
-| --- | --- | --- |
-| determinism | mean 0.0, frac 0.0 | mean 0.0, frac 0.0 |
-| audio | quiet 0.10070, loud 0.08680, freq 0.01490 — **pass** | 0.10066 / 0.08677 / 0.01491 |
-| trigger | **True** — a trigger run was performed | — |
-| luma bounds | 9.41–23.58, min stddev 5.77 | — |
-| `p50_ms` (software GL) | 16.7 (resources 3) | 16.6 |
+**The `trig` column is empty for every knob** — no second-chance run was generated, so knob 1's
+figures are its own probes. The table is identical at 60 and 300 frames.
 
-Knob 3's full-frame fraction (1.00000) means it changes every pixel — it is the spacing control,
-so its states differ from the baseline by construction.
+| Check | Result |
+| --- | --- |
+| determinism | mean 0.0, frac 0.0 |
+| audio | quiet 0.01624, loud 0.01487, freq 0.00343 — **pass** |
+| trigger | standalone variant frac 0.01539, pass |
+| luma bounds | 9.26–21.46, min stddev 3.23 |
+| `p50_ms` (software GL) | 15.29 / 15.75 |
 
-## Residual risk
+## The knob-1 defect: the same class as `t-density-units`
 
-- **`knob 1` is dead at 300 frames and the pass rests on the trigger fallback.** Both of its probe
-  points read `0.00000` there, while the same knob read **0.09928** at 60 frames — so its liveness
-  is run-length dependent, and the gate's second chance (a MIDI trigger, which this mode does
-  reference) is what carries the verdict. `docs/PORTING-LADDER.md` §3.4 forbids banking that:
-  *"a mode whose trigger re-randomises geometry can then 'pass' on the trigger's effect rather
-  than the knob's. That is a false liveness — fix the knob's own visibility instead of relying on
-  it."* **Fix queued.** Note this is the *second* mode in this session to show the pattern at 300
-  frames after passing at 60 (`s-amp-color-5gon-filled` was the first), which suggests it is worth
-  checking every future port's 300-frame per-probe table rather than only the verdict.
-- **The audio term is an addition to stock**, not a port of it: the mode's reactivity is the
-  port's design, not the original's behaviour.
-- **The trail is half resolution**, so it reads softer than stock's.
-- **The veil-alpha floor** means the baseline trail decays where stock's would persist.
-- **The mesh batching** collapses the spans' individual geometry into batched draws; the look is
-  the same (solid 1 px quads), but the construction differs.
+Stock computes its point count `int(knob1*16)+4` **only inside its trigger branch**, so between
+triggers `pointNumber` stays pinned at the setup roll of 20 and the knob's own probes drew a
+byte-identical figure — the ladder §4 class *"a knob whose only consumer is trigger-scoped"*.
+
+The **run-length dependence** explains why it passed at 60 frames and failed at 300: the trail
+bridge's fade leaves the 20-point setup figure ~62 % covered at 60 frames (the knob's 4-point
+shape partly visible → 0.09928) but ~95 % covered by 300, so the setup figure fully dominates and
+the knob's own pixels are gone. Only the trigger's re-roll moved the frame.
+
+**The fix** gives the knob a consumer in the draw path — re-deriving `pointNumber` live each frame
+with stock's exact formula (floor of 4, a 3-segment diamond, never degenerate) while keeping
+stock's trigger behaviour intact. Documented as deviation 13. Look impact: turning the complexity
+knob now re-shapes the closed curve continuously (4..20 points) instead of snapping at the next
+trigger; the baseline and the post-trigger figure are unchanged.
+
+Determinism stayed byte-identical despite the per-frame count change, because the engine seeds its
+RNG identically for every replay and the trigger — the only per-frame `e.random()` source — does
+not fire on the knob probes.
