@@ -59,22 +59,30 @@ small it got*.
 
 ## Verification — 2026-09-18
 
-`python3 tools/verify_port.py s-x-scope --frames 60` → `"verdict": "pass"`, `failures: []`.
+`python3 tools/verify_port.py s-x-scope --frames 300` → `"verdict": "pass"`, `failures: []`, `audio_pass: true`. Software GL (llvmpipe), engine sha256 `bc29aeef4021…`.
 
-| Knob | fraction |
-| --- | --- |
-| 1 `linewidth` | 0.03367 |
-| 2 `shadow` | 0.00567 |
-| 3 `spread` | 0.01375 |
-| 4 `fg` | 0.00565 |
-| 5 `bg` | 0.99435 |
+Per-probe A/B, fraction of pixels changed:
+
+| Knob | mid | max |
+| --- | --- | --- |
+| 1 `linewidth` | 0.01510 | 0.03370 |
+| 2 `shadow` | 0.00570 | 0.00570 |
+| 3 `spread` | **0.00000** | 0.01380 |
+| 4 `fg` | **0.00000** | 0.00570 |
+| 5 `bg` | 0.99430 | 0.99430 |
 
 | Check | Result |
 | --- | --- |
 | determinism | mean 0.0, frac 0.0 |
-| audio | quiet 0.00609, loud 0.01552, freq 0.02135 — **pass** |
+| audio | quiet 0.00610, loud 0.01550, freq 0.02140 — **pass** |
 | trigger | not referenced |
-| `p50_ms` (software GL) | 16.6 |
+| luma bounds | 28.35–64.28, min stddev 3.75 |
+| `p50_ms` (software GL) | 16.7 (resources 2) |
+
+Both `knob3` and `knob4` read dead at their **mid** probe at 300 frames (they were live at mid in
+the 60-frame run) — the shadow-spread and colour knobs move too few pixels at that instant once
+the walk has settled into its longer-run state. Both clear the threshold at their max probe, and
+no trigger path exists, so the gate cannot be banking a false liveness.
 
 ## Residual risk
 
