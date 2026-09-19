@@ -1510,11 +1510,13 @@
    "tranche": "P3",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/t-draws-hashmarks-angled-uniform-color.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "0 meshes, <=178 e.line, 3 colour changes/frame (the Uniform rule needs no batching concession); six degenerate floors"
   },
   {
    "stock_name": "T - Draws Hashmarks - Stepped Color",
