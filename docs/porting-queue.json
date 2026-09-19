@@ -1339,11 +1339,13 @@
    "tranche": "P3",
    "kind": "pure",
    "needs": [],
-   "status": "queued",
-   "verdict": null,
-   "verified_at": null,
-   "evidence": null,
-   "device_p50_ms": null
+   "status": "verified-300",
+   "verdict": "pass",
+   "verified_at": "2026-09-18",
+   "evidence": "docs/ports/t-ball-of-mirrors.md",
+   "device_p50_ms": null,
+   "device_tier": "retired (repo-only)",
+   "device_note": "2 half-res targets, 0 meshes; the echo is composited at presentation (stock copies the screen before the blit)"
   },
   {
    "stock_name": "T - Ball of Mirrors - Trails",
