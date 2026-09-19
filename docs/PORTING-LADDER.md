@@ -289,6 +289,12 @@ this pack has settled on:
    by colour class *and* draw each class in one call — the grouping alone buys nothing
    if the draw loop still changes colour per element.
 
+   **`e.line` takes its width literally — a width of 0 draws NOTHING**, where pygame treats
+   `width <= 0` as 1 px. So a stock `int(knob*span) + 1` must keep its `+ 1`, and any path that
+   can compute a 0 width needs a floor, or the whole figure vanishes and the frame comes back a
+   single flat colour. (`e.line` itself is fine and well used — `s-googly-eyes` draws 100 strokes
+   per frame with it.) The same trap as the `e.rect` note below, in the other primitive.
+
    **`e.rect` has no border width.** pygame's `pygame.draw.rect(screen, color, rect,
    linew)` outline must be drawn as **four `e.rect` bars** — top, bottom, left, right —
    of thickness `linew` forming a perimeter band around the stock rect, with the bounding
