@@ -4,3 +4,5 @@ __pycache__/
 # machine-local inventory: lists the private packs on this workstation
 docs/research/inventory/local.json
 docs/research/inventory/local.md
+# gig exclusion markers, written by eyesy-gig-lim1 (private)
+.eyesy-no-ship
