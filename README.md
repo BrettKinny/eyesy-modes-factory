@@ -1,18 +1,20 @@
 # eyesy-modes-factory
 
 Ports of the stock Critter & Guitari EYESY mode library to this platform's
-Lua/GLES2 engine. Sibling repos: `eyesy` (engine/OS), `eyesy-modes-bespoke`
-(original scenes), `eyesy-modes-milkdrop` (MilkDrop engine and presets).
+Lua/GLES2 engine. Sibling repos:
+[`eyesy-platform`](https://github.com/BrettKinny/eyesy-platform) (engine/OS),
+[`eyesy-modes-milkdrop`](https://github.com/BrettKinny/eyesy-modes-milkdrop)
+(MilkDrop engine and presets), and `eyesy-modes-bespoke` (original scenes, kept
+private).
 
-**Three modes are ported so far** — the P0 pilot tranche of the stock OSv3 set:
-`s-concentric`, `s-gradient-friend` and `s-cone-scope`. Each passed the 300-frame
+**87 of the 108 stock OSv3 modes are ported so far.** Each passed the 300-frame
 contract run, and each records its upstream citation and the deviations the
 verifier forced in its own header and in `docs/ports/<slug>.md`. The remaining
-105 OSv3 modes and all 14 `EYESY_oFLua_Examples` are still owed; the contract they
-must be ported *into* is below, the live inventory of what is out there — 406
-distinct modes, 398 of them not covered — is `docs/research/CoverageMatrix.md`,
-and the plan for the rest is `docs/PORTING-LADDER.md` with its machine-readable
-queue `docs/porting-queue.json`.
+OSv3 modes and all 14 `EYESY_oFLua_Examples` are still owed; the contract they
+must be ported *into* is below, the inventory of what is out there is
+`docs/research/CoverageMatrix.md` (a dated snapshot), and the plan for the rest
+is `docs/PORTING-LADDER.md` with its machine-readable queue
+`docs/porting-queue.json`.
 
 ## Coverage goal
 
@@ -23,7 +25,7 @@ it should never be blocked on engine work or confuse the engine's history.
 
 | Source | Generation | Scale | Status |
 | --- | --- | --- | --- |
-| `critterandguitari/EYESY_Modes_OSv3` | OS v3, Python/pygame | 108 modes (BSD-2-Clause) | 3 ported (P0 pilot) |
+| `critterandguitari/EYESY_Modes_OSv3` | OS v3, Python/pygame | 108 modes (BSD-2-Clause) | 87 ported |
 | `critterandguitari/EYESY_Modes_Pygame` | OS v2-era, Python/pygame | 66 modes; 37 carried into OSv3, 29 v2-only (**no licence file**) | 0 ported |
 | `critterandguitari/EYESY_oFLua_Examples` | v1, Lua/openFrameworks | 14 examples (**no licence file**) | 0 ported |
 | PatchStorage EYESY platform | all of the above + community | 209 entries (live-verified) | 0 ported |
@@ -189,3 +191,19 @@ positions that leave the frame), the deviation classes the verifier forces and
 why, and the acceptance gate. Implementation is delegated to `local-agent`, one
 mode per task, against a prescriptive brief; the session verifies, fixes and
 integrates, and each landed port gets a `docs/ports/<slug>.md` report.
+
+## Licensing
+
+Every mode here is a port of a stock Critter & Guitari mode from
+[`critterandguitari/EYESY_Modes_OSv3`](https://github.com/critterandguitari/EYESY_Modes_OSv3),
+which is under the BSD 2-Clause License. The ports and this repo's tools are
+released under the same licence: see [LICENSE](LICENSE), which carries Critter &
+Guitari's copyright alongside this project's. Each mode's header names the
+upstream file and revision it was ported from.
+
+Only BSD-2 OSv3 sources are ported. `EYESY_Modes_Pygame`, `EYESY_oFLua_Examples`
+and most community modes carry no licence, so they are studied for technique and
+never copied or adapted.
+
+EYESY is a trademark of Critter & Guitari, Inc. This project is independent. It
+is not affiliated with, endorsed by, or supported by Critter & Guitari.

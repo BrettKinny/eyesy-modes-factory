@@ -2,7 +2,8 @@
 """Merge the per-source inventory files into one coverage matrix.
 
 Inputs (docs/research/inventory/): patchstorage.json, github-stock.json,
-pysey.json, community.json, local.json — plus this repo's own mode folders,
+pysey.json, community.json, and optionally local.json (machine-local, not
+committed) — plus this repo's own mode folders,
 scanned for the upstream citation a port must carry. Outputs: coverage.json
 (full merged rows) and coverage.csv (spreadsheet view, gap list first).
 
@@ -88,9 +89,11 @@ def load_ports():
     return ports
 
 
-def load(name):
+def load(name, optional=False):
     path = INVENTORY / f'{name}.json'
     if not path.is_file():
+        if optional:
+            return {'items': []}
         raise SystemExit(f'missing inventory file: {path}')
     data = json.loads(path.read_text())
     data.setdefault('items', [])
@@ -99,7 +102,7 @@ def load(name):
 
 def main():
     sources = {name: load(name) for name in SOURCES}
-    local = load(LOCAL)
+    local = load(LOCAL, optional=True)
     ports = load_ports()
 
     have, have_engine = {}, {}

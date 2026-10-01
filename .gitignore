@@ -1,3 +1,6 @@
 local/
 __pycache__/
 *.pyc
+# machine-local inventory: lists the private packs on this workstation
+docs/research/inventory/local.json
+docs/research/inventory/local.md

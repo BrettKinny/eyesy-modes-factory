@@ -11,7 +11,7 @@ not hand-edited — regenerate them from the live sources instead.
 | `github-stock.json` | critterandguitari GitHub account | `tools/inventory/fetch_github_stock.py` |
 | `pysey.json` | `martindefatte/pysey` community patch set | `tools/inventory/fetch_pysey.py` |
 | `community.json` | community repos + repo discovery (GitHub, Codeberg) | `tools/inventory/fetch_community.py` |
-| `local.json` | the packs on this machine | filesystem walk (see `local.md`); the pack's *ports* are scanned live by `build_coverage.py` |
+| `local.json` | the packs on this machine | filesystem walk (see `local.md`); machine-local and gitignored, because it lists private packs. Optional: without it the merge still scans this pack's *ports* live |
 | `verdicts.json` | curated portability verdicts (technique triage, licence facts) | hand-maintained; consumed by the merge |
 | `coverage.csv`, `coverage.json` | merged matrix | `tools/inventory/build_coverage.py` |
 
@@ -63,7 +63,7 @@ python3 tools/inventory/fetch_patchstorage.py
 python3 tools/inventory/fetch_github_stock.py
 python3 tools/inventory/fetch_pysey.py
 python3 tools/inventory/fetch_community.py
-python3 tools/inventory/build_coverage.py   # offline; merges the four above + local.json
+python3 tools/inventory/build_coverage.py   # offline; merges the four above + local.json if present
 ```
 
 Raw HTTP responses are cached under `/tmp/eyesy-inventory/` and are never
