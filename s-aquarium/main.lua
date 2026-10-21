@@ -136,10 +136,13 @@ return {
     -- Background: stock color_picker_bg with the pack's phase safeguard
     -- (deviation 3).
     local c = (bg * 0.7 + 0.15) % 1
-    e.clear(
-      (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
-      (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
-      (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+    -- Persist: stock's host paints the background only while auto_clear is on.
+    if ctx.auto_clear then
+      e.clear(
+        (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
+        (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
+        (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+    end
 
     local sel = fg * 2
     local increment = math.abs(sel - 1) * 0.05

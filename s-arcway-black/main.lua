@@ -86,7 +86,10 @@ local function draw(ctx)
   local r = (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c
   local g = (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c
   local b = (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c
-  e.clear(r, g, b)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(r, g, b)
+  end
 
   -- Rotation: stock signed rate, re-timed against dt (rate*30 per second).
   local rate = (knob2 <= 0.5) and (knob2 * 2) or (-(knob2 * 2 - 1))

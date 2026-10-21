@@ -130,10 +130,13 @@ local function draw(ctx)
   -- Background: stock color_picker_bg exact formula with the pack's phase
   -- safeguard (deviation 6).
   local c = (bg * 0.7 + 0.15) % 1
-  e.clear(
-    (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
-    (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
-    (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(
+      (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
+      (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
+      (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+  end
 
   -- LFO: evaluated ONCE per frame, hoisted above the loops as in stock
   -- (deviations 4-5).

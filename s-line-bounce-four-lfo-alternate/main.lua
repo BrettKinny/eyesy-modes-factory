@@ -162,7 +162,10 @@ local function draw(ctx)
   local br = (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c
   local bgc = (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c
   local bb = (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c
-  e.clear(br, bgc, bb)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(br, bgc, bb)
+  end
 
   -- Audio (deviation 3): stock abs(audio_in[50] / 85), divisor stock-exact.
   local s = (left and left[1 + 50 * 10]) or 0

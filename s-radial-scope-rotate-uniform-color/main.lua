@@ -194,7 +194,10 @@ local function draw(ctx)
   local br = (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c
   local bgc = (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c
   local bb = (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c
-  e.clear(br, bgc, bb)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(br, bgc, bb)
+  end
 
   -- Rotation (deviation 4): stock's per-30-fps-frame increment, dt-scaled.
   local inc

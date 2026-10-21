@@ -183,7 +183,10 @@ local function draw(ctx)
   local br = (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c
   local bgc = (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c
   local bb = (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c
-  e.clear(br, bgc, bb)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(br, bgc, bb)
+  end
 
   -- Stock design units are 1920 x 1080; scale to the surface.
   local sx = W / 1920

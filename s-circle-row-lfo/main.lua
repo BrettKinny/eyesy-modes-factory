@@ -81,10 +81,13 @@ local function draw(ctx)
 
   -- Background: stock color_picker_bg with phase remap (deviation 2).
   local c = (bg * 0.7 + 0.15) % 1
-  e.clear(
-    (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
-    (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
-    (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(
+      (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
+      (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
+      (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+  end
 
   -- Foreground: stock color_picker_lfo semantics, once per frame (deviations 1, 4).
   if fg > 0.5 then lfoInc = (fg - 0.5) * 0.2 end

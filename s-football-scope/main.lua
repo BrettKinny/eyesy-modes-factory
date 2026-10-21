@@ -79,10 +79,13 @@ local function draw(ctx)
   -- Background: stock color_picker_bg with the phase remapped to the middle
   -- of the picker's range (see header, deviation 2).
   local c = (bg * 0.7 + 0.15) % 1
-  e.clear(
-    (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
-    (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
-    (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(
+      (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
+      (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
+      (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+  end
 
   -- Colour accumulator: stock advanced per circle call; here once per frame
   -- at the stock per-second rate (100 calls/frame * 30 fps re-timed).

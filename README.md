@@ -132,10 +132,15 @@ shader/mesh upgrades.
    positional or floor deviation. `docs/PORTING-LADDER.md` §3.6 and §4 carry the
    conventions and the P0 tranche's three worked examples.
 
-Open engine item a port may hit: `ctx.auto_clear` is not yet exposed to Lua and
-the toggle is inert across the fleet, so a persist-dependent mode cannot be
-ported faithfully until that lands. Status and the pilot plan:
-`docs/EYESY-OS-V3-PARITY-PLAN.md` in the engine repo.
+**Persist.** Stock's host paints the background only while `auto_clear` is on,
+so with Persist on a stock mode draws over its previous frames. Ports do the
+same by wrapping their background clear in `if ctx.auto_clear then ... end`;
+79 modes do. Eight do not: the six veil-trail ports (`s-bezier-h-scope`,
+`s-bezier-v-scope`, `s-folia-angles`, `s-folia-curves`,
+`t-bezier-cousins-trails`, `t-line-rotate-trails`) show their trails at all
+times through the persistence bridge, and the two `t-ball-of-mirrors` modes
+rebuild every frame inside a render target. The engine repo's
+`tools/scene_verify.py` checks Persist and warns on a mode it does not change.
 
 ## Port specifications
 

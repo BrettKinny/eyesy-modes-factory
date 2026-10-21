@@ -323,7 +323,10 @@ local function draw(ctx)
 
   -- Background fill: stock's color_picker_bg (knob5) paints the whole screen
   -- at the top of every frame.
-  e.clear(br, bgc, bb)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(br, bgc, bb)
+  end
 
   if alpha > 0 then
     -- Stock composition (deviation 4): screen = bg + this frame's strokes,

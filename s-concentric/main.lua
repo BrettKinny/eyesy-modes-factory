@@ -108,7 +108,10 @@ return {
     local r = (1 - (math.cos(3 * PI * bg) * 0.5 + 0.5)) * bg
     local g = (1 - (math.cos(7 * PI * bg) * 0.5 + 0.5)) * bg
     local b = (1 - (math.cos(11 * PI * bg) * 0.5 + 0.5)) * bg
-    e.clear(r, g, b)
+    -- Persist: stock's host paints the background only while auto_clear is on.
+    if ctx.auto_clear then
+      e.clear(r, g, b)
+    end
 
     local scale = ctx.params.scale
     local fg = ctx.params.fg

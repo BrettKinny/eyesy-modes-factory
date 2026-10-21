@@ -69,7 +69,10 @@ local function draw(ctx)
   local r = (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c
   local g = (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c
   local b = (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c
-  e.clear(r, g, b)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(r, g, b)
+  end
 
   -- LFO: stock color_picker_lfo semantics (deviation 3). fg <= 0.5 returns a
   -- static colour, picker((fg*2) % 1); above 0.5 the ramp advances by

@@ -100,10 +100,13 @@ return {
     -- Background: stock color_picker_bg, exact formula, with the documented
     -- phase remap (pure white at c = 1 / pure black at c = 0 are rejected).
     local c = (bg * 0.7 + 0.15) % 1
-    e.clear(
-      (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
-      (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
-      (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+    -- Persist: stock's host paints the background only while auto_clear is on.
+    if ctx.auto_clear then
+      e.clear(
+        (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c,
+        (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c,
+        (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c)
+    end
 
     -- Thickness: stock int(knob1*yhalf) + 1 (1..361 px on the 720 canvas),
     -- floored at 4 px (deviation 6) so the baseline stroke is legible.

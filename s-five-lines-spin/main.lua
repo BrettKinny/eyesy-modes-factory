@@ -83,7 +83,10 @@ local function draw(ctx)
   local r = (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c
   local g = (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c
   local b = (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c
-  e.clear(r, g, b)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(r, g, b)
+  end
 
   -- Thickness: stock int(knob3 * (1280 * 0.078)) + 1 (1..100 px), floored at
   -- 4 px (deviation 6) so the baseline strokes are legible.

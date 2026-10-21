@@ -162,10 +162,13 @@ local function draw(ctx)
 
   -- Background: stock color_picker_bg with the phase remapped (deviation 2).
   local c = (k5 * 0.7 + 0.15) % 1
-  e.clear(
-    (1 - (cos(3 * PI * c) * 0.5 + 0.5)) * c,
-    (1 - (cos(7 * PI * c) * 0.5 + 0.5)) * c,
-    (1 - (cos(11 * PI * c) * 0.5 + 0.5)) * c)
+  -- Persist: stock's host paints the background only while auto_clear is on.
+  if ctx.auto_clear then
+    e.clear(
+      (1 - (cos(3 * PI * c) * 0.5 + 0.5)) * c,
+      (1 - (cos(7 * PI * c) * 0.5 + 0.5)) * c,
+      (1 - (cos(11 * PI * c) * 0.5 + 0.5)) * c)
+  end
 
   -- History length and ellipse count (deviations 4 and 5).
   local N = trunc(k1 * 20) + 1
