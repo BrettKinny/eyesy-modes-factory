@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ENGINE = ROOT.parent / 'eyesy'
+ENGINE = ROOT.parent / 'eyesy-platform'
 IMAGE = 'localhost/eyesy-build:bookworm'
 KNOBS = (1, 2, 3, 4, 5)
 
