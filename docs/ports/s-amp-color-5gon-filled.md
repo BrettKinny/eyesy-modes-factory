@@ -91,3 +91,10 @@ the same fix is being applied there.
 - **The 32-handle count cap** (above) is the mode's largest deviation from stock.
 - **Up to 32 `e.color` calls per frame** — one per polygon, below the 70-call measurement
   that took a mode outside tier C, so within the known budget.
+
+## Device tier re-check — 2026-10-22
+
+Headless offscreen on the CM3+ (300 frames; `starter` floor 24.16 ms): **25.48 ms p50 /
+25.67 p95**, +1.3 over the floor, well inside tier C. The live-service 28.6 fps reading
+is the service's own overhead, not this mode. No change made; verifier pass, grabs
+identical to the unmodified source.

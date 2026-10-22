@@ -72,10 +72,13 @@
 --    3 px outline (int(xr*0.0027) = 3); the mesh strip is 1 px. If the 1 px
 --    strip reads too thin at the gate, the strips would be drawn twice at ±1 px offsets.
 --    Per-frame cost: 3 e.color calls (one per class, set immediately
---    before that class's draw) + 3 update_mesh calls (one per class,
---    uploading only the filled vertex prefix). The vertex order within
---    each mesh is static (i, j) order, so each cell always lands in the
---    same slot and the prefix is contiguous.
+--    before that class's draw) + 3 update_mesh calls (one per class, after
+--    all cells are written). Each class's vertex table is sized to exactly
+--    its cells (the engine uploads and draws every vertex of the table it
+--    is given, so there is no unused tail that would draw lines to the
+--    origin). The vertex order within each mesh is static (i, j) order.
+--    An earlier revision called update_mesh once per cell (70 uploads of
+--    the full table each frame) and measured 37.8 ms p50 on the device.
 -- 7. No positional deviation: the stock grid fits inside the 1280x720 frame
 --    at all knob values (odd rows shift by <= 160 px, odd columns by <= 144 px;
 --    the largest polygon spans w*raNr + rad <= 4.5*20 + 128.3 ≈ 218 px from its
@@ -95,6 +98,7 @@ local TEN = 10.24 -- 1280 * 0.008
 local HTEN = TEN / 2 -- 5.12
 local HUNDERT = 99.84 -- 1280 * 0.078
 local NCOLORS = 3
+local classR, classG, classB = {0, 0, 0}, {0, 0, 0}, {0, 0, 0}
 
 -- Deterministic middle branch of the stock legacy color_picker (see header 1).
 local function picker(c)
@@ -118,10 +122,8 @@ local function cellColor(i, j)
 end
 
 -- Preallocated per-colour-class polygon meshes: three handles, one per
--- phase. Each holds the closed 7-point line strips of its cells; the vertex
--- budget (70 cells × 7 points = 490) covers the worst case, and only the
--- filled prefix is uploaded per frame (the static occupancy per class is
--- ~23-24 cells, i.e. 161-168 vertices).
+-- phase. Each holds the closed 7-point line strips of its cells (~23-24
+-- cells, 161-168 vertices); the vertex tables are sized in setup.
 local meshes = {}
 
 -- Preallocated pList: [70][6][2], filled in setup, mutated in place on trigger.
@@ -187,7 +189,6 @@ local function draw(ctx)
   -- state: the colour a cell gets depends only on its class, so one
   -- e.color per class (set immediately before that class's draw) replaces
   -- one per cell.
-  local classColor = {}
   for k = 1, NCOLORS do
     local phase
     if k == 1 then
@@ -197,7 +198,7 @@ local function draw(ctx)
     else
       phase = (0.8 + fg) % 1
     end
-    classColor[k] = picker(phase)
+    classR[k], classG[k], classB[k] = picker(phase)
   end
 
   for i = 0, ROWS - 1 do
@@ -243,14 +244,14 @@ local function draw(ctx)
       v[b0 + 6][1] = p5x; v[b0 + 6][2] = p5y
       v[b0 + 7][1] = p0x; v[b0 + 7][2] = p0y
 
-      e.update_mesh(m.handle, v, nil, m.n)
     end
   end
 
   for k = 1, NCOLORS do
-    local r, g, b = classColor[k]
-    e.color(r, g, b)
-    e.draw_mesh(meshes[k].handle)
+    local m = meshes[k]
+    e.update_mesh(m.handle, m.v)
+    e.color(classR[k], classG[k], classB[k])
+    e.draw_mesh(m.handle)
   end
 end
 
@@ -266,9 +267,18 @@ return {
     -- Three preallocated per-colour-class polygon meshes (deviation 6):
     -- each cell is a closed 7-point line strip (7 vertices), grouped by
     -- phase class; mutated in place per frame. Line strips (no index table).
+    -- Each table is sized to exactly its class's cells (the engine draws
+    -- every vertex of the table it is given, so no unused tail).
+    local cells = {0, 0, 0}
+    for i = 0, ROWS - 1 do
+      for j = 0, COLS - 1 do
+        local cc = cellColor(i, j)
+        cells[cc] = cells[cc] + 1
+      end
+    end
     for k = 1, NCOLORS do
       local verts = {}
-      for n = 1, PLIST_CELLS * CELL_V do
+      for n = 1, cells[k] * CELL_V do
         verts[n] = {0, 0, 0}
       end
       meshes[k] = { handle = e.new_mesh(), v = verts, n = 0 }

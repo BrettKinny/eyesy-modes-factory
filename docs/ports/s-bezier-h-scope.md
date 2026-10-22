@@ -112,3 +112,20 @@ the two meshes plus the two half-resolution trail targets.
 - **The trail is softer than stock's** because the feedback targets are half resolution.
 - **`min stddev 2.94`** belongs to the `knob3`-mid trail frame, where the dark veil dominates
   — unchanged by the fix and by design.
+
+## Device tier re-tune — 2026-10-22
+
+Headless offscreen on the CM3+ (`headless-test`, 300 frames, same session; `starter`
+floor 24.16 ms): **49.45 ms p50 / 50.29 p95 before, 30.85 / 31.11 after** (+6.7 over the
+floor; tier C passes). Live-service 25.5 fps before.
+
+Same changes as `s-bezier-v-scope` (see its report): one 277-vertex **line-strip mesh per
+curve** instead of 3312 quads (49.4 → 35.1 ms; substeps 12 → 6 gave no further gain), the
+bridge rebuilt as `clear(bg)` + alpha-`(1 - a/255)` blit of the previous target with the
+screen-sized white rectangle dropped (35.1 → ~32.1; this fixes the old bridge, whose
+opaque rectangle meant no trail carried over), and 480×270 targets (→ 30.9). Header
+deviations 5, 8, 9 updated (pointInterval 24, margin 48, yhalf 135 in-target).
+
+A/B vs the unmodified port (final grabs): trails off 0.8 % of pixels differ; trails on
+all pixels differ (the trail/background fix). Desktop: pass (persist warning expected).
+The "Batched into meshes" description above is superseded by the strip form.

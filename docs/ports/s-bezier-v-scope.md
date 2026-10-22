@@ -98,3 +98,31 @@ Per-probe A/B, fraction of pixels changed:
   (0.01549), and with no trigger path the gate cannot be banking a false liveness.
 - **The trail is softer than stock's** because the feedback targets are half resolution.
 - **`min stddev 3.77`** belongs to the dark-veil trail frame, unchanged by the fix.
+
+## Device tier re-tune — 2026-10-22
+
+Headless offscreen on the CM3+ (`headless-test`, 300 frames, same session; `starter`
+floor 24.16 ms): **49.41 ms p50 / 50.21 p95 before, 30.88 / 31.12 after** (+6.7 over the
+floor; tier C ≤ 33.3 passes). Live-service 25.4 fps before.
+
+What was slow: the two-mesh quad batching (13248 vertices filled and uploaded per frame)
+and the persistence bridge. The 4e665cf rewrite had not changed the draw-call count but
+the quad form is the expensive part. Changes (header deviations 5, 8, 9):
+
+- Each curve is now one **line-strip mesh** (277 vertices, 12 meshes, 3324 vertices per
+  frame) instead of 3312 quads. 49.4 → 35.2 ms. Reducing substeps 12 → 6 measured no
+  further gain (35.06), so the 12 substeps stay.
+- The bridge's **screen-sized white a/255 rectangle** was dropped and the back target is
+  built as `clear(bg)` + previous frame blitted at alpha `1 - a/255` instead of blit +
+  rectangle: 35.2 → 32.1 ms. **This also fixes a bug**: the old rectangle was an
+  opaque near-black fill over the blitted previous frame, so no trail ever carried over
+  (the knob 3 trails were effectively off) and the screen got a white tint. The trail now
+  works as stock's veil, and the background shows at full strength with trails on (a
+  large, intended visual change for `knob3 > 0`).
+- Targets 640×360 → **480×270** (geometry derives from `TW`/`TH`): 32.1 → 30.9 ms; the
+  curves and trail read softer.
+
+A/B vs the unmodified port (`scene_verify --frames 300`, final grab, luma diff): trails
+off (base, knob1-mid) 1.2 % of pixels differ (line strip vs quad); trails on (knob3-mid)
+all pixels differ because of the background/trail fix above. Desktop: pass
+(persist warning expected).

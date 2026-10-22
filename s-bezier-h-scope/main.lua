@@ -19,7 +19,7 @@
 -- points at x = i*64 - 128, y = audio + 360 - 6*voffset + i*voffset, with
 -- the x of every point additionally offset by i*100 (deviation 6).
 -- Coordinates are the presentation surface's (screen when knob3 = 0, the
--- 640x360 target when trails are on; deviation 9).
+-- 480x270 target when trails are on; deviation 9).
 --
 -- Documented deviations from stock:
 -- 1. Foreground palette: stock color_picker_lfo uses the legacy picker,
@@ -56,15 +56,20 @@
 --    alpha = int(knob3*20) (0..20 of 255) blitted over the previous frame.
 --    The scene API has no previous-frame buffer, so the veil is emulated
 --    by the pack's standard persistence bridge (PORTING-LADDER 3.2): two
---    ping-pong targets fade toward the background colour by
---    (1 - a/255), the scene is drawn into the back target at full
---    strength, the result is blitted to the screen, and an a/255 bg
---    rectangle over the screen darkens the previous frame's screen
---    content. Targets are allocated at half resolution (TW x TH,
---    640x360, drawn upscaled to 1280x720) per the pack's documented
---    cost lever, so the trail reads slightly softer than stock's. At
+--    ping-pong targets; each frame the back target is cleared to the
+--    background colour, the previous target is blitted over it at alpha
+--    (1 - a/255) (i.e. old * (1 - a/255) + bg * a/255, the veil), the
+--    scene is drawn on top at full strength, and the result is blitted
+--    opaque to the screen. Targets are allocated at 480x270 (TW x TH,
+--    drawn upscaled to 1280x720) per the pack's documented cost lever,
+--    so the trail and the 1 px curves read softer than stock's. At
 --    knob3 = 0 the targets are untouched (no feedback), matching
---    stock's transparent veil.
+--    stock's transparent veil. (The first port's bridge painted an
+--    opaque near-black rectangle over the blitted previous frame, so
+--    no trail ever carried over, and added a white a/255 rectangle over
+--    the screen; this replaces both with the veil above, which also
+--    removed two full-screen passes. The background now shows at full
+--    strength with trails on.)
 -- 6. Positions: stock's spot = i*64 - 128 starts two intervals off-screen
 --    to the left, and curve i shifts every point by i*100, so the
 --    rightmost point of the top curve leaves the right edge at xoff > 0.
@@ -82,37 +87,31 @@
 --    points past the 24-point table and drew a comb that left the frame
 --    blank at high input gain) — drawn with a single shared foreground colour
 --    per frame: one e.color per frame, inside the colour-change budget of
---    PORTING-LADDER 3.5. Every stroke is one width-1-pixel quad (4
---    vertices, 2 triangles, 6 indices) batched into indexed triangle
---    meshes per frame (header deviation 8): two e.update_mesh + two
---    e.draw_mesh calls replace the 3312 per-frame e.line calls. The 1 px
---    line width matches gfxdraw's raster output.
+--    PORTING-LADDER 3.5. Each curve is one 1 px line strip of 277
+--    vertices (deviation 8). The 1 px line width matches gfxdraw's raster
+--    output.
 -- 8. Mesh batching: the unbatched port issued 3312 e.line strokes per
 --    frame (12 curves x 23 cubic segments x 12 substeps). This mode
---    batches the frame into indexed triangle meshes: each stroke becomes
---    one width-1-pixel quad (4 vertices, two triangles, 6 static 1-based
---    indices), preallocated at the exact worst case in setup and mutated
---    in place (house idiom: s-folia-curves deviation 10 /
---    flow-field-drift / kalachakra-stupa). The frame needs 3312 x 4 =
---    13248 vertices, over the engine's hard 8192-vertex mesh cap, so it
---    is split across the fewest meshes that fit: MESHES = 2, six curves
---    each — exactly QUADS_PER_MESH = 1656 quads -> 6624 vertices / 9936
---    indices per mesh, inside the 8192 / 49152 caps (limit 32 handles: 2
---    here). Because each stroke is its own quad, the 12 separate curves
---    and their segments never gain spurious joining segments (a single
---    line strip would connect them). Zero-length strokes (possible when
---    audio collapses a bezier) are emitted degenerate (zero-area), which
---    the GPU rasterises to nothing.
+--    batches each curve into one line-strip mesh (update_mesh without
+--    indices): 12 meshes of 277 vertices (23 x 12 + 1), preallocated in
+--    setup and mutated in place, so a frame uploads 3324 vertices and
+--    issues 12 update_mesh + 12 draw_mesh calls (limit 32 handles: 12
+--    here). One strip per curve means the separate curves never gain
+--    joining segments. An earlier revision drew each stroke as a
+--    width-1-pixel triangle quad (13248 vertices over two indexed
+--    meshes); on the device (VC4) that tier-failed at 49 ms p50, mostly
+--    the per-frame vertex fill and upload, and the strip form is not
+--    visibly different at 1 px.
 -- 9. Presentation coordinates: the scene is drawn either to the screen
---    or into the 640x360 target, and the engine uses the target's
+--    or into the 480x270 target, and the engine uses the target's
 --    dimensions for the in-target coordinate space (docs/API.md:
 --    "Drawing inside a target uses that target's dimensions"), so the
 --    geometry is computed from the presentation surface's dimensions:
 --    the target's (TW x TH) when trails are on, the screen's (W x H) at
 --    knob3 = 0. Every length that stock derives from xres/yres is
 --    derived from the same surface here, so the framing is
---    stock-proportional at the target's resolution (pointInterval 32,
---    margin 64, yhalf 180 in-target vs 64/128/360 on screen) and the
+--    stock-proportional at the target's resolution (pointInterval 24,
+--    margin 48, yhalf 135 in-target vs 64/128/360 on screen) and the
 --    curves fill the frame instead of being clipped to a corner by a
 --    screen-sized geometry drawn into a half-size target.
 local e = eyesy
@@ -123,18 +122,15 @@ local STEPS = 12        -- cubic substeps per segment
 local SEGMENTS = POINTS - 1
 
 -- Feedback target size (deviation 5): the scene is drawn into the target
--- and blit upscaled to the screen, so in-target lengths are half-res.
-local TW = 640
-local TH = 360
+-- and blit upscaled to the screen, so in-target lengths are reduced-res.
+local TW = 480
+local TH = 270
 
--- Batching budget (deviation 8): the frame emits
--- CURVES * SEGMENTS * STEPS = 3312 strokes, i.e. 13248 quad vertices —
--- over the engine's hard 8192-vertex mesh cap, so the frame takes the
--- fewest meshes that fit. CURVES / MESHES is exact, so every mesh is
--- exactly full every frame.
-local MESHES = 2
-local CURVES_PER_MESH = CURVES / MESHES                    -- 6
-local QUADS_PER_MESH = CURVES_PER_MESH * SEGMENTS * STEPS  -- 1656
+-- Batching budget (deviation 8): one line-strip mesh per curve, each
+-- holding SEGMENTS * STEPS + 1 vertices (the curve's samples in order), so
+-- the frame uploads CURVES * (SEGMENTS * STEPS + 1) vertices and issues
+-- CURVES update_mesh + draw_mesh pairs (inside the 32-handle limit).
+local VERTS = SEGMENTS * STEPS + 1
 
 -- Deterministic middle branch of the stock legacy color_picker (deviation 1).
 local function picker(c)
@@ -155,7 +151,7 @@ end
 local lfoPhase = 0.21
 local lfoInc = 0
 
--- Persistence state (deviation 5): half-resolution ping-pong targets,
+-- Persistence state (deviation 5): 480x270 ping-pong targets,
 -- created on first use; prev_alpha is the last non-zero veil alpha (0..20).
 local targets
 local flip = false
@@ -172,36 +168,18 @@ for i = 1, CURVES do
   pts[i] = row
 end
 
--- Batched triangle-mesh buffers (header deviation 8). One width-1-pixel
--- quad (4 vertices, 6 static indices) per stroke, preallocated per mesh
--- at the exact worst case and mutated in place; draw never allocates.
--- Every frame fills every slot of every mesh, so each table passed to
--- update_mesh is always fully populated (the engine validates the whole
--- table).
+-- Line-strip vertex buffers (deviation 8): one preallocated table per
+-- curve, mutated in place; draw never allocates. Every frame fills every
+-- slot, so each table passed to update_mesh is always fully populated (the
+-- engine validates the whole table and draws every vertex it is given).
 local mesh = {}
-for m = 1, MESHES do
+for m = 1, CURVES do
   local verts = {}
-  for i = 1, QUADS_PER_MESH * 4 do
+  for i = 1, VERTS do
     verts[i] = { 0, 0, 0 }
   end
-  local idx = {}
-  for q = 0, QUADS_PER_MESH - 1 do
-    local b6 = q * 6
-    local b4 = q * 4
-    idx[b6 + 1] = b4 + 1
-    idx[b6 + 2] = b4 + 2
-    idx[b6 + 3] = b4 + 3
-    idx[b6 + 4] = b4 + 1
-    idx[b6 + 5] = b4 + 3
-    idx[b6 + 6] = b4 + 4
-  end
-  mesh[m] = { verts = verts, idx = idx, handle = nil }
+  mesh[m] = { verts = verts, handle = nil }
 end
-
--- The mesh's vertex table and the slot currently being written; draw
--- selects them per mesh before emitting that mesh's curves.
-local cur_verts
-local cur_n = 0
 
 local function clear_targets()
   local t1, t2 = targets[1], targets[2]
@@ -213,46 +191,14 @@ local function clear_targets()
   e.end_target()
 end
 
--- Append one stroke as its quad: perpendicular offset of half a pixel
--- on each side, matching the width-1 e.line it replaces. A zero-length
--- stroke emits a degenerate (zero-area) quad, which the GPU rasterises
--- to nothing.
-local function push_seg(x1, y1, x2, y2)
-  cur_n = cur_n + 1
-  local b4 = (cur_n - 1) * 4
-  local dx = x2 - x1
-  local dy = y2 - y1
-  local len2 = dx * dx + dy * dy
-  if len2 < 1e-9 then
-    for k = 1, 4 do
-      local v = cur_verts[b4 + k]
-      v[1] = x1
-      v[2] = y1
-    end
-    return
-  end
-  local half = 0.5 / math.sqrt(len2)
-  local nx = -dy * half
-  local ny = dx * half
-  local v1 = cur_verts[b4 + 1]
-  v1[1] = x1 + nx
-  v1[2] = y1 + ny
-  local v2 = cur_verts[b4 + 2]
-  v2[1] = x1 - nx
-  v2[2] = y1 - ny
-  local v3 = cur_verts[b4 + 3]
-  v3[1] = x2 + nx
-  v3[2] = y2 + ny
-  local v4 = cur_verts[b4 + 4]
-  v4[1] = x2 - nx
-  v4[2] = y2 - ny
-end
-
--- Emit one curve (row = flat x,y pair table of POINTS control points) into
--- the batched mesh: one cubic per point gap (Catmull-Rom handles, ends
--- clamped), 23 segments x 12 substeps = 276 quads, each stroke joining
--- consecutive samples of the same cubic.
-local function emit_curve(row)
+-- Fill one curve's strip (row = flat x,y pair table of POINTS control
+-- points): one cubic per point gap (Catmull-Rom handles, ends clamped),
+-- 23 segments x STEPS substeps, each strip vertex a sample of its cubic.
+local function emit_curve(row, verts)
+  local v = verts[1]
+  v[1] = row[1]
+  v[2] = row[2]
+  local n = 1
   for seg = 0, SEGMENTS - 1 do
     local a = seg > 0 and seg - 1 or 0
     local d = seg + 2 < POINTS and seg + 2 or POINTS - 1
@@ -262,7 +208,6 @@ local function emit_curve(row)
     local y1 = y0 + (y3 - row[a * 2 + 2]) / 6
     local x2 = x3 - (row[d * 2 + 1] - x0) / 6
     local y2 = y3 - (row[d * 2 + 2] - y0) / 6
-    local px, py = x0, y0
     for s = 1, STEPS do
       local t = s / STEPS
       local u = 1 - t
@@ -270,27 +215,21 @@ local function emit_curve(row)
       local b1 = 3 * u * u * t
       local b2 = 3 * u * t * t
       local b3 = t * t * t
-      local qx = b0 * x0 + b1 * x1 + b2 * x2 + b3 * x3
-      local qy = b0 * y0 + b1 * y1 + b2 * y2 + b3 * y3
-      push_seg(px, py, qx, qy)
-      px, py = qx, qy
+      n = n + 1
+      v = verts[n]
+      v[1] = b0 * x0 + b1 * x1 + b2 * x2 + b3 * x3
+      v[2] = b0 * y0 + b1 * y1 + b2 * y2 + b3 * y3
     end
   end
 end
 
--- Emit the frame's 3312 strokes and draw them (deviation 8): curves 1..6
--- go into mesh 1, curves 7..12 into mesh 2. Two update_mesh + draw_mesh
--- pairs replace the 3312 e.line calls the unbatched port issued.
+-- Fill and draw the frame's 12 strips (deviation 8): one update_mesh +
+-- draw_mesh pair per curve.
 local function draw_meshes()
-  for m = 1, MESHES do
+  for m = 1, CURVES do
     local entry = mesh[m]
-    cur_verts = entry.verts
-    cur_n = 0
-    local i0 = (m - 1) * CURVES_PER_MESH + 1
-    for i = i0, i0 + CURVES_PER_MESH - 1 do
-      emit_curve(pts[i])
-    end
-    e.update_mesh(entry.handle, entry.verts, entry.idx)
+    emit_curve(pts[m], entry.verts)
+    e.update_mesh(entry.handle, entry.verts)
     e.draw_mesh(entry.handle)
   end
 end
@@ -312,7 +251,6 @@ local function draw(ctx)
   local br = (1 - (math.cos(3 * PI * c) * 0.5 + 0.5)) * c
   local bgc = (1 - (math.cos(7 * PI * c) * 0.5 + 0.5)) * c
   local bb = (1 - (math.cos(11 * PI * c) * 0.5 + 0.5)) * c
-  e.clear(br, bgc, bb)
 
   -- LFO: stock color_picker_lfo(knob4, 0.1), re-timed 30 -> 60 fps (deviation 2).
   if k4 > 0.5 then
@@ -365,27 +303,24 @@ local function draw(ctx)
   if alpha > 0 then
     -- Persistence bridge (deviation 5).
     if not targets then
-      targets = { e.target(640, 360), e.target(640, 360) }
+      targets = { e.target(TW, TH), e.target(TW, TH) }
       clear_targets()
     end
     local a = flip and 2 or 1
     local b = flip and 1 or 2
     local tA, tB = targets[a], targets[b]
 
-    local f = 1 - prev_alpha / 255
+    local f = 1 - alpha / 255
     e.begin_target(tA)
-    e.color(1, 1, 1)
-    e.draw_target(tB, 0, 0, 640, 360)
-    e.color(br * (1 - f), bgc * (1 - f), bb * (1 - f))
-    e.rect(0, 0, 640, 360)
+    e.clear(br, bgc, bb)
+    e.color(1, 1, 1, f)
+    e.draw_target(tB, 0, 0, TW, TH)
     e.color(fr, fg, fb)
     draw_meshes()
     e.end_target()
 
     e.color(1, 1, 1)
     e.draw_target(tA, 0, 0, W, H)
-    e.color(1, 1, 1, alpha / 255)
-    e.rect(0, 0, W, H)
 
     flip = not flip
     prev_alpha = alpha
@@ -393,6 +328,7 @@ local function draw(ctx)
     if targets and prev_alpha > 0 then
       clear_targets()
     end
+    e.clear(br, bgc, bb)
     draw_meshes()
   end
 end
@@ -405,7 +341,7 @@ return {
     e.param("trails", 0.5, 0, 1, 3)
     e.param("fg", 0.5, 0, 1, 4)
     e.param("bg", 0.5, 0, 1, 5)
-    for m = 1, MESHES do
+    for m = 1, CURVES do
       mesh[m].handle = e.new_mesh()
     end
   end,

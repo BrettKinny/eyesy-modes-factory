@@ -101,3 +101,25 @@ cause cleanly:
 
 Fix queued: draw each colour-class mesh in one call with a single `e.color` before it,
 keeping the class grouping the port already computes. Recorded in ladder §3.5.
+
+
+## Device tier re-tune — 2026-10-22
+
+Headless offscreen on the CM3+ (300 frames; `starter` floor 24.16 ms): **37.80 ms p50 /
+43.77 p95 before, 24.35 / 24.58 after** (at the floor; tier C passes).
+
+**The 2026-09-18 diagnosis above was wrong.** The 70 `e.color` calls were already down
+to 3; the cost was `e.update_mesh` sitting **inside the cell loop** — 70 uploads of the
+whole vertex table per frame. It now runs once per class after the loop (3 calls).
+Two latent defects found and fixed on the way (both visible in the A/B):
+
+- Each class mesh was allocated at 490 vertices and the unused tail of origin vertices was
+  drawn (the engine draws every vertex of the table; the "count argument" is ignored), so
+  a line ran from each class's last cell to the top-left corner. Tables are now sized to
+  the class's exact cell count in setup.
+- `classColor[k] = picker(phase)` kept only the red component, so `e.color` received
+  `(r, nil, nil)` and the patchwork's palette was lost. The three components are now kept,
+  so the cells show the intended three-phase colours (header deviation 6 updated).
+
+A/B vs the unmodified port (final grabs): 5.1 % of pixels differ at base (3.4 % by more
+than 32 luma), from the colour and stray-line fixes. Desktop: pass.

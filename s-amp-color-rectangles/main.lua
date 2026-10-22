@@ -93,6 +93,15 @@
 --    frame at all knob values (the outermost rectangle is exactly the frame
 --    size, and rotation about the screen centre keeps it inside; inner
 --    rectangles are smaller). No wrap or scale is applied.
+-- 10. Half-resolution render: up to 32 full-frame filled rectangles stacked
+--    on one another are fill-rate bound on the device GPU (about 42 ms p50
+--    at the default knobs; tier C is 33.3). The rectangles are therefore
+--    drawn into a 400x225 target (geometry derived from the target's
+--    dimensions, so the framing is identical) which is blitted to the
+--    screen upscaled; hard rectangle edges come out slightly softer
+--    (bilinear) than stock's. The target keeps the previous frame while
+--    Persist is on (it is cleared to the background only while auto_clear
+--    is on), so Persist behaves as before.
 
 local e = eyesy
 local PI = math.pi
@@ -129,9 +138,16 @@ end
 
 local current_rotation = 0
 
+-- Half-resolution target (deviation 10), created on first draw.
+local TW, TH = 400, 225
+local target
+
 local function draw(ctx)
-  local W = ctx.width
-  local H = ctx.height
+  local SW = ctx.width
+  local SH = ctx.height
+  -- Geometry is computed in the target's dimensions (deviation 10).
+  local W = TW
+  local H = TH
   local dt = ctx.dt
   local left = ctx.audio and ctx.audio.left
 
@@ -140,6 +156,9 @@ local function draw(ctx)
   local k3 = ctx.params.count
   local k4 = ctx.params.offset
   local k5 = ctx.params.bg
+
+  if not target then target = e.target(TW, TH) end
+  e.begin_target(target)
 
   -- Background: stock color_picker_bg with phase remapped (deviation 2).
   local c = (k5 * 0.7 + 0.15) % 1
@@ -222,6 +241,10 @@ local function draw(ctx)
     e.rect(-rect_width / 2, -rect_height / 2, rect_width, rect_height)
     e.pop()
   end
+
+  e.end_target()
+  e.color(1, 1, 1)
+  e.draw_target(target, 0, 0, SW, SH)
 end
 
 return {

@@ -79,3 +79,19 @@ probes, and stably so across both run lengths.
   the reactivity.
 - **The count floor (2)** means the all-knobs-zero baseline is not stock's single level.
 - **No 32-handle cap applies** (no meshes), so stock's up-to-50 levels are not truncated.
+
+## Device tier re-tune — 2026-10-22
+
+Headless offscreen on the CM3+ (300 frames, same session; `starter` floor 24.16 ms):
+**42.47 ms p50 / 42.72 p95 before, 31.19 / 31.42 after.** Live-service 26.1 fps before.
+
+What was slow: fill rate. Up to 32 stacked full-frame filled rectangles at 1280×720
+(about 12 screens of overdraw at the default knobs). Changed: the rectangles are drawn into
+a **400×225 target** and blitted upscaled (header deviation 10); geometry derives from
+the target's dimensions, Persist semantics unchanged. Measured by target size:
+640×360 → 34.74, 480×270 → 32.12, 400×225 → 31.19, 320×180 → 30.16 ms. Draw-call
+count was not the cost (collapsing push/translate/pop into one gave no change).
+Hard rectangle edges are slightly softer than stock's.
+
+A/B vs the unmodified port (final grabs): 1.6 % of pixels differ at base, 12.9 % at
+knob3-mid (edge pixels only; 0.3 % differ by more than 32 luma). Desktop: pass.
