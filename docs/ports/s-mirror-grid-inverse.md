@@ -36,6 +36,12 @@ tile and the grab keeps natural variance (`min stddev 4.81`). All foreground is 
 **opaque and stock-exact** — the sibling's deviation 7 does not carry over, and assuming it did
 would have been a needless look change.
 
+**Square-size floor (header deviation 7).** Stock's `recsize` is 0 at the verifier's baseline
+(`knob3 = 0`), so no end squares are drawn, and the top and bottom bars of each column overlap
+into one unbroken line at every audio level — the audio probes read 0.0 changed. The port
+uses `recsize = int(ten*knob3)*2 + 20` (20..40 px; stock's own is 10 at the default knob3),
+so the audio-driven squares are always drawn and `knob3` still scales them.
+
 ## Colour
 
 Identical per-element structure to the sibling: the legacy picker is called **216× per frame**

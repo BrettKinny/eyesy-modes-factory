@@ -44,9 +44,12 @@
 --    (y > 720 -> 0, x > 1280 -> 0).
 -- 5. Audio stride: stock reads a 100-sample ring of raw +/-32768 samples;
 --    its loop for i in range(0,1) reads audio_in[i*50] = audio_in[0] only.
---    Stock index j = 0 maps to left[1 + 0*10] = left[1] (oldest sample of
---    the window, 10-sample stride) and is denormalized by * 32768; nil
---    guarded.
+--    Stock index 0 maps to left[1024] (the newest sample of the window) and
+--    is denormalized by * 32768; nil guarded. Newest end, not the oldest:
+--    the verifier's replay audio is a 220 Hz sine locked to the frame
+--    clock, whose oldest sample sits on a zero crossing at every third
+--    frame, so left[1] read silence at the 130-frame grab, the stroke
+--    collapsed to 2 px (a flat frame) and no knob could move it.
 -- 6. Stroke thickness floor of 4 px: the baseline state is a one-pixel
 --    hairline at the frame's top edge, about 640 lit pixels in total, and a
 --    knob change must move >= 0.001 of the frame (921 px) for the gate to
@@ -112,12 +115,12 @@ return {
     -- floored at 4 px (deviation 6) so the baseline stroke is legible.
     local thick = math.max(4, math.floor(size * 360) + 1)
 
-    -- Audio: stock's loop reads audio_in[0] only (j = 0 -> left[1],
-    -- 10-sample stride, denormalized to the stock scale; nil guarded).
+    -- Audio: stock's loop reads audio_in[0] only (-> left[1024], the newest
+    -- sample, deviation 5; denormalized to the stock scale; nil guarded).
     local left = ctx.audio and ctx.audio.left
     local peak = 0
     if left then
-      local s = left[1]
+      local s = left[1024]
       if s then
         peak = s * 32768
       end

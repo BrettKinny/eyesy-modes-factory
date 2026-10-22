@@ -42,8 +42,9 @@ The slower ramp and the larger count both enter the per-frame ramp rate (`inc * 
 Carried from the sibling where they apply, each verified rather than inherited: the
 deterministic middle-branch picker with the per-element ramp; the background phase fold; the
 **LFO ramp running at every `knob4`** (stock's static branch below 0.5 renders one shape and
-kills `knob2`/`knob3`); the **count floor of 2** (stock's `count = 1` makes `knob2`'s index term
-identically zero); the count **cap of 32** by the mesh-handle budget (a larger deviation here,
+kills `knob2`/`knob3`); the **count floor of 12** (stock's `count = 1` makes `knob2`'s index term
+identically zero, and two 1 px outlines light ~700 px, under the gate's 921 px change threshold,
+so `knob4` read dead and the `knob5`-mid grab flat; raised from 2 to 12); the count **cap of 32** by the mesh-handle budget (a larger deviation here,
 100 → 32); the history ring pushing once per 60-fps frame; and **divisor 15000 with `abs`**.
 
 ## Rendering

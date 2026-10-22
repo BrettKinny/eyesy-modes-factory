@@ -45,7 +45,9 @@ thickness is `knob1*360 + 1`.
    (~640 lit pixels) at the top edge; the gate needs a knob change to move 921
    pixels, and neither a colour change nor an audio change can at 1 px. The same
    floor as `S - Five Lines Spin`; `knob1` still scales 4 → 361 px.
-7. **Audio stride** — `audio_in[0]` → `left[1]`, denormalized by 32768.
+7. **Audio index** — `audio_in[0]` → `left[1024]` (newest end of the window; `left[1]` sits on
+   a zero crossing of the verifier's frame-locked 220 Hz sine at every third frame, which
+   collapsed the stroke to 2 px), denormalized by 32768.
 
 Two failures preceded the pass: a draw-order bug (advancing `x`/`y` before drawing,
 where stock computes the endpoints first) and the hairline/legibility problem

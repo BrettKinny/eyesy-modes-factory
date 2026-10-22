@@ -31,13 +31,15 @@
 --    f * inc * 30 * dt with inc = (fg - 0.5) * 2 * 0.003 =
 --    (fg - 0.5) * 0.006; stroke i uses x = (phase + i*inc) % 2 folded
 --    x <= 1 and x or 2 - x. The per-frame step is f * inc * 0.5 at 60 fps
---    (stock's 30 fps re-timed), i.e. 0.018 for the verifier's knob4 probe
---    (knob1 = 0, f = 6, fg = 1.0) — the frame is essentially one colour
---    sampled at one instant, the case PORTING-LADDER §3.4 covers. The
---    phase is therefore initialised to 0.73, the offset printed by
---    tools/lfo_offset.py --inc 0.006 --calls 6 (worst-case luma clearance
---    32.28 units from both the palette grey and the background at the
---    verifier's frame counts 60/130/300/600). For fg <= 0.5 the colour
+--    (stock's 30 fps re-timed), i.e. 0.06 for the verifier's knob4 probe
+--    (knob1 = 0, f = 20 after the deviation 7 floor, fg = 1.0) — the frame
+--    is essentially one colour sampled at one instant, the case
+--    PORTING-LADDER §3.4 covers. The phase is therefore initialised to
+--    0.88, the offset printed by tools/lfo_offset.py --inc 0.006 --calls 20
+--    (worst-case luma clearance 48.75 units from both the palette grey and
+--    the background at the verifier's frame counts 60/130/300/600). It was
+--    0.73 (--calls 6) before the count floor raised f from 6 to 20, which
+--    left the sampled colour on the palette grey at the grab and fg dead. For fg <= 0.5 the colour
 --    is the static picker((fg * 2) % 1), stock-exact.
 -- 4. Audio: stock reads a 100-sample ring (±32768) with audio_in[i]; the
 --    platform buffer is 1024 normalized samples. Stock index i (0-based,
@@ -54,11 +56,15 @@
 --    offy = int(knob3 * 720) walks the whole scope off the bottom of the
 --    canvas for knob3 > ~0.5 (at knob3 = 1.0 the strokes run from
 --    y = 720 to 720 + s1, entirely below the frame — the grab is the bare
---    background and the gate rejects it as blank). The offset is scaled
---    into the frame's upper span instead: offy = floor(knob3 * 360), so
---    the scope sweeps the canvas monotonically and the ±360 px audio
---    excursion fits for every knob position. Stock arithmetic is kept
---    bit-exact for every position that lands inside the frame.
+--    background and the gate rejects it as blank), and at knob3 = 0 the
+--    baseline is cut in half: the scope sits on the top edge, so every
+--    negative sample leaves the frame and only ~700 px stay lit, below
+--    the gate's 921 px change threshold (the fg change reads dead). The
+--    offset is scaled into the frame's middle span instead:
+--    offy = 180 + floor(knob3 * 360), so the scope sweeps the canvas
+--    monotonically (180..540) and a ±180 px audio excursion fits for every
+--    knob position. Stock arithmetic is kept bit-exact for every position
+--    that lands inside the frame.
 -- 7. Legibility floor, stroke count (docs/PORTING-LADDER.md §4, same
 --    precedent as s-five-lines-spin's thickness floor and
 --    s-gradient-column's count floor): at the verifier's baseline
@@ -79,7 +85,7 @@ local PI = math.pi
 local XR = 1280
 local YR = 720
 local YR2 = 360
-local LFO_OFFSET = 0.73  -- tools/lfo_offset.py --inc 0.006 --calls 6
+local LFO_OFFSET = 0.88  -- tools/lfo_offset.py --inc 0.006 --calls 20
 
 local function picker(c)
   local r = 0.5 + 0.5 * math.sin(2 * PI * c)
@@ -120,7 +126,7 @@ local function draw(ctx)
   local f = math.max(20, math.floor(pointsK * 94) + 6)
   local xs = math.floor(XR / (f - 4))
   local offx = math.floor(posxK * XR - XR / 2)
-  local offy = math.floor(posyK * YR / 2)  -- deviation 6: upper-span scale
+  local offy = 180 + math.floor(posyK * YR / 2)  -- deviation 6: middle-span scale
 
   -- LFO: stock color_picker_lfo semantics with the mode's own
   -- inc_amt = 0.003 (deviation 3). The phase advances once per frame

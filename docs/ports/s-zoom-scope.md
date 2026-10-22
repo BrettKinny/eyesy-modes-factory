@@ -20,7 +20,7 @@ A row of `f` (6..100) vertical strokes at `x = i*xs + offx`, each from `offy` to
 | --- | --- |
 | `knob1` scope points | `e.param("points", 0.5, 0, 1, 1)` → `max(20, floor(knob1*94)+6)` (deviation 8) |
 | `knob2` x position | `e.param("posx", 0.5, 0, 1, 2)` → `offx = floor(knob2*1280 - 640)` |
-| `knob3` y position | `e.param("posy", 0.5, 0, 1, 3)` → `offy = floor(knob3*360)` (deviation 7) |
+| `knob3` y position | `e.param("posy", 0.5, 0, 1, 3)` → `offy = 180 + floor(knob3*360)` (deviation 7) |
 | `knob4` fg colour | `e.param("fg", 0.5, 0, 1, 4)` → `color_picker_lfo(fg, inc_amt = 0.003)` |
 | `knob5` background | `e.param("bg", 0.5, 0, 1, 5)` |
 | `audio_in[i]*0.00003058*360` | `trunc(left[1 + i*10] * 32768 * 0.00003058 * 360)` |
@@ -33,19 +33,22 @@ A row of `f` (6..100) vertical strokes at `x = i*xs + offx`, each from `offy` to
 3. **LFO re-timed with the mode's own `inc_amt = 0.003`** — `inc = (fg-0.5)*0.006`,
    the phase advancing `f * inc * 30 * ctx.dt` per frame with the stock per-stroke
    `i*inc` step.
-4. **LFO phase offset 0.73** — at the verifier's probe runs `f = 6`, so the
-   per-frame step is only 0.018 and the frame is essentially one colour sampled at
-   one instant: exactly the case `tools/lfo_offset.py --inc 0.006 --calls 6`
-   exists for. It reports a 46.9-luma-unit worst-case clearance; **0.25 would have
-   landed on a palette grey crossing**.
+4. **LFO phase offset 0.88** — at the verifier's probe runs `f = 20` (the count floor,
+   deviation 7), so the per-frame step is 0.06 and the frame is essentially one colour
+   sampled at one instant: exactly the case `tools/lfo_offset.py --inc 0.006 --calls 20`
+   exists for. It reports a 48.75-luma-unit worst-case clearance. The offset was 0.73
+   (`--calls 6`, the unfloored `f`); once the floor raised `f` to 20 that value landed on
+   the palette grey at the grab and `knob4` read dead, so it was re-derived.
 5. **Audio stride** — stock index `i` → `left[1 + i*10]`, denormalized by 32768.
 6. **Line-width clamp** (`max(1, …)`) — `e.line` is literal where pygame clamps ≤ 0.
-7. **Positional deviation (§3.6): the y offset is scaled into the frame's upper
-   span**, `offy = floor(knob3*360)` instead of stock's `floor(knob3*720)`. At
+7. **Positional deviation (§3.6): the y offset is scaled into the frame's middle
+   span**, `offy = 180 + floor(knob3*360)` instead of stock's `floor(knob3*720)`. At
    `knob3 = 1.0` stock's offset is 720, so every stroke runs from `y = 720`
    downward — entirely below the canvas — and the grab was the bare background
    (stddev 0.0). The scaled offset keeps the strokes on canvas across the whole
-   knob range and stays monotone.
+   knob range and stays monotone. The 180 px base (originally 0) keeps the scope off the
+   top edge at the baseline: with `offy = 0` every negative sample left the frame, only ~713
+   px stayed lit and the `knob4` colour change could not clear the 921 px threshold.
 8. **Legibility floors: stroke count ≥ 20, stroke width ≥ 3 px.** Stock's baseline
    is 6 strokes of 1 px width at `xs = 640`, of which about three land on canvas
    (~400 lit pixels) — below the 921 pixels the metric needs, so `knob2` read dead
@@ -74,6 +77,6 @@ A row of `f` (6..100) vertical strokes at `x = i*xs + offx`, each from `offy` to
   0.002–0.012 and the audio 0.0022–0.0049, against `min stddev 2.03`. Three
   deviations (positional scale, count floor, width floor) were needed to get there,
   which is the honest cost of a mode whose stock baseline draws ~400 lit pixels.
-- **`knob4` needs its 0.73 offset**; without it the sampled colour lands on a
+- **`knob4` needs its 0.88 offset**; without it the sampled colour lands on a
   palette crossing at both probe points.
 - Device tier gate owed (100 strokes at the floor).

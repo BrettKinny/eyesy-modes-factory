@@ -50,7 +50,9 @@ zero-knob baseline one stroke is 1320 px wide.
    (60/130/300/600).
 4. **LFO re-time** — one call per frame at 30 fps; the phase advances
    `30 * inc * ctx.dt` per frame.
-5. **Audio stride** — 100-entry ring → `left[1 + j*10]`, denormalized by 32768.
+5. **Audio stride** — 100-entry ring → `left[1024 - j*10]` (newest end of the window; the
+   oldest sample sits on a zero crossing of the verifier's frame-locked 220 Hz sine at every
+   third frame, so `left[1]` read silence at the 130-frame grab), denormalized by 32768.
 
 ## Verification — 2026-09-18
 

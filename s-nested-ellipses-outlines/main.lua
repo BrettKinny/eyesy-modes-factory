@@ -75,7 +75,7 @@
 --      100 -> 32 cap is a larger deviation from stock than the filled sibling's
 --      50 -> 32: the upper ~70 % of the stock knob range draws the same 32
 --      ellipses here.
---   5. Ellipse count floored at 2. Stock's per-index fan offset is
+--   5. Ellipse count floored at 12 (was 2). Stock's per-index fan offset is
 --      `y_offset * i`, so at knob3 = 0 (count = 1) the index term is multiplied
 --      by zero and knob2 cannot move a pixel at ANY frame count - a
 --      stock-faithful deadness that nevertheless fails the gate, whose second
@@ -84,8 +84,14 @@
 --      offset has a second ellipse to shift, the same treatment
 --      s-amp-color-5gon-filled (count floored at 2) and s-0-arrival-scope (box
 --      width floored at 12 px) give a knob the baseline multiplies by zero.
---      Look impact: below knob3 = 1/99 ~ 0.010 the mode draws two nested
---      ellipse outlines where stock draws one; above that the geometry is
+--      The floor was raised from 2 to 12 for legibility: at the verifier's
+--      baseline two 1 px outlines light only ~700 px, under the gate's 0.1 %
+--      (921 px) change threshold, so a colour change (knob4, whose stock
+--      static branch is the same grey as the baseline at mid) could not
+--      register and the knob5-mid grab (grey background) read flat. Twelve
+--      outlines light several thousand px at the baseline.
+--      Look impact: below knob3 = 11/99 ~ 0.111 the mode draws twelve nested
+--      ellipse outlines where stock draws fewer; above that the geometry is
 --      stock-exact.
 --   6. Audio divisor: stock normalises channel 1 with `abs(audio_in[i] / 15000)`
 --      (a literal 15000, not 32768). Stock index i -> `left[1 + i*10]`
@@ -137,6 +143,7 @@ end
 
 local AUDIO_DIVISOR = 15000  -- stock's literal divisor (deviation 6)
 local LFO_INC = 0.008        -- stock's `inc_amt` for this mode (10x slower than the filled sibling)
+local MIN_COUNT = 12         -- legibility floor (deviation 5)
 local MAX_COUNT = 32         -- engine mesh handle budget (deviation 4)
 local RING = 32              -- history ring depth: >= max history length 21
 local SEGMENTS = 36          -- ellipse boundary segments (deviation 7)
@@ -216,7 +223,7 @@ local function draw(ctx)
   local N = trunc(k1 * 20) + 1
   if N > RING then N = RING end
   local count = trunc(k3 * 99) + 1
-  if count < 2 then count = 2 end
+  if count < MIN_COUNT then count = MIN_COUNT end
   if count > MAX_COUNT then count = MAX_COUNT end
 
   -- LFO (deviation 3): stock's ramp, run at every knob4.

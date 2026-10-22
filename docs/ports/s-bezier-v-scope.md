@@ -36,6 +36,11 @@ curves each: 1656 quads → **6624 vertices / 9936 indices per mesh**, 2 of 32 h
 mesh exactly full every frame. Each stroke is a 4-vertex quad with static 1-based indices;
 no continuous line strip (which would join the separate curves).
 
+Tessellation: each curve is 23 cubic segments with Catmull-Rom control handles from the
+neighbouring points (ends clamped); each stroke joins consecutive samples of its own cubic.
+An earlier tessellation indexed past the 24-point table (comb artefact, blank frame at the
+verifier's loud-audio state) and was fixed (same fix as the H sibling).
+
 This is the sibling's deviation 8, carried in the brief rather than rediscovered — the
 lesson from the H scope's batching task, where the count had to be corrected mid-flight.
 

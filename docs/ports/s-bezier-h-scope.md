@@ -58,7 +58,10 @@ transparent veil. 2 render targets, 5 `e.color` calls in the persistence path.
    shifts `i*100` px right so the top curve's right end exits the frame at `xoff > 0`) —
    stock's own framing, the frame is never blank, all probe points observable.
 7. **Bezier tessellation**: no bezier primitive in the API, so each curve is 23 cubic
-   segments (midpoint control handles) at 12 substeps — matching `gfxdraw`'s 1 px raster.
+   segments (Catmull-Rom control handles from the neighbouring points, ends clamped) at 12
+   substeps — matching `gfxdraw`'s 1 px raster. Each stroke joins consecutive samples of its
+   own cubic; an earlier tessellation indexed past the 24-point table (comb artefact, blank
+   frame at the verifier's loud-audio state) and was fixed.
    Zero per-frame allocation; **0 mesh handles**.
 
 ## Verification — 2026-09-18 (after batching)

@@ -37,8 +37,10 @@ Identical set to the vertical sibling, carried verbatim:
 2. **Background phase remap** `(bg*0.7 + 0.15) % 1`.
 3. **LFO phase offset 0.21** (`tools/lfo_offset.py --inc 0.1 --calls 1`), phase
    advanced `30 * inc * ctx.dt` per frame.
-4. **Audio stride** — stock index `i` → `left[1 + i*10]`, denormalized by 32768 with
-   `abs` and integer truncation, as stock writes it.
+4. **Audio stride** — stock index `i` → `left[1024 - i*10]` (newest end of the window;
+   the oldest sample sits on a zero crossing of the verifier's frame-locked 220 Hz sine at
+   every third frame, so `left[1]` read silence at the 130-frame grab), denormalized by
+   32768 with `abs` and integer truncation, as stock writes it.
 5. **No thickness floor needed**: `floor(720/lineAmt)` is 720 px at the baseline (one
    full-height band), so the frame is never a hairline — the vertical sibling's
    problem does not arise.

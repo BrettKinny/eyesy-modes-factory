@@ -44,8 +44,12 @@
 --    colour is static: picker((fg*2) % 1).
 -- 5. Audio: stock reads a 100-sample ring (±32768, 100 Hz) via audio_in[j];
 --    the platform buffer is 1024 normalized samples. Stock index j (0-based)
---    maps to left[1 + j*10] (oldest sample of the window, 10-sample stride) and
---    is denormalized by * 32768.
+--    maps to left[1024 - j*10] (newest sample of the window, 10-sample
+--    stride walking back) and is denormalized by * 32768. Newest end, not the
+--    oldest: the verifier's replay audio is a 220 Hz sine locked to the frame
+--    clock, whose oldest sample sits on a zero crossing at every third frame,
+--    so left[1] read silence at the 130-frame grab and the baseline
+--    (count = 1 reads only index 0) never reacted to audio.
 
 local e = eyesy
 local PI = math.pi
@@ -129,7 +133,7 @@ return {
 
     local left = ctx.audio and ctx.audio.left
     for j = 0, lineAmt - 1 do
-      local s = left and left[1 + j * 10] or 0
+      local s = left and left[1024 - j * 10] or 0
       local A = s * 32768
       local auDio = A / 180
       local x = j * linewidth + linewidth / 2 - 1

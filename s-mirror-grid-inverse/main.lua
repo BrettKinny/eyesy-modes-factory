@@ -75,6 +75,15 @@
 --    past the middle for negative samples, bottom bar above the middle for
 --    positive ones, squares likewise) — pygame and the engine both clip.
 --    The bottom square's stock guard (auDio < 0) is preserved exactly.
+-- 7. Legibility floor, square size (docs/PORTING-LADDER.md section 4, same
+--    class as s-zoom-scope's stroke floors): stock's recsize =
+--    int(ten * knob3) * 2 is 0 at the verifier's baseline (knob3 = 0), so
+--    no end squares are drawn, and the audio only moves the end points of
+--    bars whose top and bottom halves overlap into one unbroken column --
+--    the picture is identical at every audio level (changed fraction 0.0).
+--    Here recsize = int(ten * knob3) * 2 + 20 (20..40 px, stock's own 10 at
+--    the default knob3 = 0.5), so the audio-driven squares are always drawn
+--    and knob3 still scales them.
 
 local e = eyesy
 local PI = math.pi
@@ -129,7 +138,7 @@ local function draw(ctx)
   local lines = math.floor(39 * k2 + 1) + 4
   local spacehoriz = math.floor(W / (lines - 2))
   local spacevert = math.floor(H / (lines - 2))
-  local recsize = math.floor(TEN * k3) * 2
+  local recsize = math.floor(TEN * k3) * 2 + 20  -- deviation 7
   local sel = k4 * 2
   local half_lines = lines * 0.5
   local rsize = math.floor(recsize * 0.5)

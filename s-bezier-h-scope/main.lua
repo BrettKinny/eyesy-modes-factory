@@ -74,9 +74,13 @@
 -- 7. Bezier rendering: pygame.gfxdraw.bezier(smooth=2) rasterises the
 --    curve as a run of 1 px lines through its control-point chain; the
 --    engine API has no bezier primitive, so each curve is tessellated as
---    23 cubic-bezier segments (one per point gap, each with its midpoint
---    chain as the two control handles) at 12 substeps — 276 strokes per
---    curve, 3312 per frame — drawn with a single shared foreground colour
+--    23 cubic-bezier segments (one per point gap, Catmull-Rom control
+--    handles from the neighbouring points, ends clamped) at 12 substeps —
+--    276 strokes per curve, 3312 per frame, each joining consecutive
+--    samples of its own cubic so the curve follows the scope points
+--    through any audio amplitude (an earlier tessellation read control
+--    points past the 24-point table and drew a comb that left the frame
+--    blank at high input gain) — drawn with a single shared foreground colour
 --    per frame: one e.color per frame, inside the colour-change budget of
 --    PORTING-LADDER 3.5. Every stroke is one width-1-pixel quad (4
 --    vertices, 2 triangles, 6 indices) batched into indexed triangle
@@ -117,7 +121,6 @@ local CURVES = 12
 local POINTS = 24
 local STEPS = 12        -- cubic substeps per segment
 local SEGMENTS = POINTS - 1
-local STRIDES = SEGMENTS * STEPS + 1  -- points per curve (277)
 
 -- Feedback target size (deviation 5): the scene is drawn into the target
 -- and blit upscaled to the screen, so in-target lengths are half-res.
@@ -163,7 +166,7 @@ local prev_alpha = 0
 local pts = {}
 for i = 1, CURVES do
   local row = {}
-  for n = 1, STRIDES * 2 do
+  for n = 1, POINTS * 2 do
     row[n] = 0
   end
   pts[i] = row
@@ -245,34 +248,32 @@ local function push_seg(x1, y1, x2, y2)
   v4[2] = y2 - ny
 end
 
--- Emit one curve (row = flat x,y pair table of STRIDES points) into the
--- batched mesh: 23 cubic segments x 12 substeps = 276 quads.
+-- Emit one curve (row = flat x,y pair table of POINTS control points) into
+-- the batched mesh: one cubic per point gap (Catmull-Rom handles, ends
+-- clamped), 23 segments x 12 substeps = 276 quads, each stroke joining
+-- consecutive samples of the same cubic.
 local function emit_curve(row)
-  local j0 = 1
-  for seg = 1, SEGMENTS do
-    local x0, y0 = row[j0], row[j0 + 1]
-    local x1, y1 = row[j0 + 2], row[j0 + 3]
-    local x2, y2 = row[j0 + 4], row[j0 + 5]
-    local x3, y3 = row[j0 + 6], row[j0 + 7]
-    local mx01 = (x0 + x1) / 2
-    local my01 = (y0 + y1) / 2
-    local mx12 = (x1 + x2) / 2
-    local my12 = (y1 + y2) / 2
-    local mx23 = (x2 + x3) / 2
-    local my23 = (y2 + y3) / 2
-    for s = 0, STEPS - 1 do
+  for seg = 0, SEGMENTS - 1 do
+    local a = seg > 0 and seg - 1 or 0
+    local d = seg + 2 < POINTS and seg + 2 or POINTS - 1
+    local x0, y0 = row[seg * 2 + 1], row[seg * 2 + 2]
+    local x3, y3 = row[seg * 2 + 3], row[seg * 2 + 4]
+    local x1 = x0 + (x3 - row[a * 2 + 1]) / 6
+    local y1 = y0 + (y3 - row[a * 2 + 2]) / 6
+    local x2 = x3 - (row[d * 2 + 1] - x0) / 6
+    local y2 = y3 - (row[d * 2 + 2] - y0) / 6
+    local px, py = x0, y0
+    for s = 1, STEPS do
       local t = s / STEPS
       local u = 1 - t
       local b0 = u * u * u
       local b1 = 3 * u * u * t
       local b2 = 3 * u * t * t
       local b3 = t * t * t
-      local px = b0 * x0 + b1 * mx01 + b2 * mx23 + b3 * x3
-      local py = b0 * y0 + b1 * my01 + b2 * my23 + b3 * y3
-      j0 = j0 + 2
-      local qx = b0 * mx01 + b1 * mx12 + b2 * mx23 + b3 * x3
-      local qy = b0 * my01 + b1 * my12 + b2 * my23 + b3 * y3
+      local qx = b0 * x0 + b1 * x1 + b2 * x2 + b3 * x3
+      local qy = b0 * y0 + b1 * y1 + b2 * y2 + b3 * y3
       push_seg(px, py, qx, qy)
+      px, py = qx, qy
     end
   end
 end
